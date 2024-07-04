@@ -1,0 +1,164 @@
+import { useContext, useEffect, useState } from "react"
+import imgLogo from "../../assets/images/logoConexao.png"
+import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
+import Botao from "../Botao/Botao"
+import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
+import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
+import { useNavigate } from "react-router-dom"
+
+
+export default function ModalTempo(){
+
+    const {setTemAviso, setTextoAviso, setAbrirModalTempo, valorMinModal} = useContext(ContextoAviso)
+    const {usuario, setSalaAtual, idMeuAtendente, setPrecoTotalConsulta, setTempoConsulta} = useContext(ContextoUsuario)
+    const {setUsuarioLogado} = useContext(ContextoLogin)
+
+    const [temErro, setTemErro] = useState<boolean>(false)
+    const [textoErro, setTextoErro] = useState<string>("")
+    const [tempoConsultaVar, setTempoConsultaVar] = useState<number>(5)
+    const [precoConsultaVar, setPrecoConsultaVar] = useState<number>(tempoConsultaVar * valorMinModal)
+
+
+    const navigate = useNavigate()
+
+
+    function aoCancelar(){
+        setAbrirModalTempo(false)
+    }
+
+
+    
+    function criarSala(){
+        fetch("http://localhost:8080/criarSala", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                idCliente: usuario.id,
+                idProfissional: Number(idMeuAtendente),
+                precoConsultaVar,
+                tempoConsultaVar
+            })
+        }).then(res => res.json()).then(data => {
+            if(data[0] == "sucesso" && data[1].idSala){
+                setSalaAtual(data[1].idSala)
+                setPrecoTotalConsulta(precoConsultaVar)
+                setTempoConsulta(tempoConsultaVar)
+                navigate("/Chat")
+            }else{
+                setTemAviso(true)
+                if(data[1] && typeof data[1] == "string"){
+                    setTextoAviso(data[1])
+                }else{
+                    setTextoAviso("Ocorreu um erro não esperado no servidor")
+                }
+            }
+        }).catch(err => {
+            setTemAviso(true)
+            setTextoAviso("Ocorreu um erro, por favor tente novamnete. Erro: " + err)
+        })
+    }
+
+    function efetivarPedido(){
+        if(usuario.saldo >= precoConsultaVar){
+            //criar sala e enviar o preco consultaVar pra setar os cronômetros
+                console.log("saldo suficiente")
+                fetch("http://localhost:8080/mudarSaldo", {
+                    method: "POST" ,
+                    headers: {
+                        "Content-Type": "application/json",
+                        "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
+                    },
+                    body: JSON.stringify({
+                        previsaoSaldo: usuario.saldo - precoConsultaVar
+                    })
+                }).then(res => res.json()).then(data => {
+                    if(data[0] == "erro"){
+                        setTemAviso(true)
+                        if(data[1]){
+                            setTextoAviso(data[1])
+                        }else{
+                            setTextoAviso("Ocorreu um erro, por favor tente novamente")
+                        }
+                    }else if(data[0] == "sucesso"){
+                                fetch("http://localhost:8080/confereSalas", {
+                                    method: "POST",
+                                    headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
+                                    body: JSON.stringify({
+                                        idProfissional: idMeuAtendente
+                                    })
+                                }).then(res => res.json()).then(data => {
+                                if(data[0] == "erro"){
+                                    setTemAviso(true)
+                                    if(data[1]){
+                                        setTextoAviso(data[1])
+                                    }else{
+                                        setTextoAviso("Ocorreu um erro, por favor tente novamente")
+                                    }
+                                }else if(data[0] == "sucesso"){
+                                    switch(data[1]){
+                                        case "criar sala":
+                                            console.log("caiu no criar sala")
+                                            setUsuarioLogado(true)
+                                            criarSala()
+                                            break
+                
+                                        case "sala existente":
+                                            console.log("caiu no sala existente")
+                                            setSalaAtual(Number(data[2]))
+                                            navigate("/Chat")
+                                            break
+                                    }
+                                }else{
+                                    setTemAviso(true)
+                                    setTextoAviso("Ocorreu um erro, por favor tente novamente")
+                                }
+                            }).catch(() => {
+                                setTemAviso(true)
+                                setTextoAviso("ocorreu algum erro, por favor, tente novamente")
+                            })
+                    }else{
+                        setTemAviso(true)
+                        setTextoAviso("Ocorreu um erro, por favor tente novamente")
+                    }
+                }).catch(() => {
+                    setTemAviso(true)
+                    setTextoAviso("ocorreu algum erro, por favor, tente novamente")
+                })
+
+        }else{
+            //dar opção para ele adicionar saldo ou fazer a consultaVar com o tempo sugerido que ele consegue
+            console.log("saldo INNNNsuficiente")
+        }
+    }
+
+
+    useEffect(() => {
+        setPrecoConsultaVar(tempoConsultaVar * valorMinModal)
+    }, [tempoConsultaVar])
+
+    return(
+        <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
+            <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white">
+                <div className="w-1/4 self-center">
+                    <img src={imgLogo} alt="logo" className="w-full h-auto" />
+                </div>
+                <div className="self-center text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
+                <div className="flex flex-col gap-2">
+                    <label htmlFor="tempoConsulta">Tempo (mínimo 5 minutos):</label>
+                    <input className="p-2 flex-1 outline-none text-black rounded-md" type="number" min={5} id="tempoConsulta" value={tempoConsultaVar} onChange={e => setTempoConsultaVar(Number(e.target.value))}/>
+                </div>
+                <div>
+                    valor consulta: {precoConsultaVar}
+                </div>
+                {
+                    temErro &&
+                    <div className="self-center text-red-600 font-bold text-xl">{textoErro}</div>
+                }
+                <div className="flex gap-4 self-center mt-5">
+                    <Botao onClickFn={efetivarPedido} texto="Ir para consulta"/>
+                    <Botao onClickFn={aoCancelar} texto="Cancelar"/>
+                </div>
+            </div>
+        </div>
+    )
+}

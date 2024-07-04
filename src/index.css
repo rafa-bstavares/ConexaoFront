@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  margin: 0;
+  padding: 0;
+  /*color: #ea71ff;*/
+}
+
+:root{
+  --paddingXGeral: 250px;
+  --paddingYGeral: 80px;
+}
