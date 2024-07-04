@@ -15,9 +15,20 @@ export default function AdmChat(){
     const {atendenteLogado, setAtendenteLogado} = useContext(ContextoLogin)
     const {setTemAviso, setTextoAviso, temAviso} = useContext(ContextoAviso)
     const {precoTotalConsulta, tempoConsulta, setPrecoTotalConsulta, setTempoConsulta} = useContext(ContextoUsuario)
+    const {perfilProAtual} = useContext(ContextoProfissionais)
     const {setAbrirModalHistorico, abrirModalHistorico} = useContext(ContextoProfissionais)
     const [minutos, setMinutos] = useState<number>(0)
     const [segundos, setSegundos] = useState<number>(60)
+    const [toOn, setToOn] =  useState<boolean>(true)
+    const [saldoTotalCliente, setSaldoTotalCliente] = useState<number>(0)
+
+
+
+
+    const arrStatus = [
+      {status: "online", cor: "bg-green-600"},
+      {status: "ocupado", cor: "bg-yellow-500"}
+    ] 
   
 
 
@@ -82,7 +93,11 @@ export default function AdmChat(){
     }, [infoSalas, segundos])
 
 
-    
+    useEffect(() => {
+      if(infoSalas.length > 0){
+        setSaldoTotalCliente(infoSalas[0].saldo)
+      }
+    }, [infoSalas])
 
 
 
@@ -107,6 +122,27 @@ export default function AdmChat(){
       setAbrirModalHistorico(true)
     }
 
+    function setarStatus(status: string){
+      fetch("http://localhost:8080/setarStatus", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
+        body: JSON.stringify({
+          status
+        })
+      }).then(res => res.json()).then(data => {
+        if(data[0] == "status atualizado"){
+          if(status == "online"){
+            setToOn(true)
+          }else{
+            setToOn(false)
+          }
+        }else{
+          setTemAviso(true)
+          setTextoAviso("ocorreu um erro ao atualizar o status")
+        }
+      })
+    }
+
     return(
         <div className="min-h-screen relative bg-roxoPrincipal text-white">
             {
@@ -114,7 +150,27 @@ export default function AdmChat(){
                       <>
                         <div className="fixed top-0 left-0 w-screen h-screen bg-fundoChat bg-cover"></div>
                         <div className="flex flex-col relative ">
-                          <div className="flex justify-center gap-8 pt-4">
+                          <div className="flex justify-center items-center gap-8 pt-4 flex-wrap">
+                            <div className="flex flex-col items-center">
+                              <div className="px-4 py-2 rounded-t-md bg-white/30 backdrop-blur-md">
+                                Meu status:
+                              </div>
+                              <div className="p-4 rounded-md flex bg-white/30 backdrop-blur-md">
+                                {
+                                  arrStatus.map((item, index) => (
+                                    <div onClick={() => setarStatus(item.status)} className={`text-white px-6 py-2 cursor-pointer ${toOn? (item.status == "online"? item.cor : "bg-gray-400") : (item.status == "online"? "bg-gray-400" : item.cor)} ${index == 0? "rounded-l-md": ""} ${index == (arrStatus.length - 1)? "rounded-r-md" : ""} transition-colors`}>
+                                      {item.status}
+                                    </div>
+                                  ))
+                                }
+                                {/*<div className={`bg-green-600 text-white px-6 py-2 rounded-l-md cursor-pointer`}>
+                                  Online
+                                </div>
+                                <div className={`bg-gray-400 text-white px-6 py-2 rounded-r-md cursor-pointer`}>
+                                  Offline
+                                </div>*/}
+                              </div>
+                            </div>
                             <div onClick={abrirModalHistoricos} className="p-4 bg-gray-500 rounded-md cursor-pointer">
                               meus históricos
                             </div>
@@ -127,6 +183,14 @@ export default function AdmChat(){
                             </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4 font-bold text-xl">
                               {minutos}:{segundos}
+                            </div>
+                            <div className="flex flex-col rounded-md bg-roxoPrincipal items-center justify-center p-4 text-lg">
+                              <div className="text-center">
+                                Tempo Total Cliente:
+                              </div>
+                              <div>  
+                                {Math.floor(saldoTotalCliente / perfilProAtual.valorMin)} minutos
+                              </div>
                             </div>
                           </div>
                         </div>

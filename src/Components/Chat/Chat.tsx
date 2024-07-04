@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent, useContext, ChangeEvent, useInsertionEffect, Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, FormEvent, useContext, ChangeEvent, useInsertionEffect, Dispatch, SetStateAction, useRef } from 'react';
 import { socket } from "../../socket"
 import { ContextoUsuario } from '../../Contexts/ContextoUsuario/ContextoUsuario';
 import { ContextoLogin } from '../../Contexts/ContextoLogin/ContextoLogin';
@@ -11,6 +11,7 @@ import { ContextoAtendimento } from '../../Contexts/ContextoAtendimento/Contexto
 import ModalRecarregar from '../ModalRecarregar/ModalRecarregar';
 import { ContextoProfissionais } from '../../Contexts/ContextoProfissionais/ContextoProfissionais';
 import imgEnviar from "../../assets/images/enviarChat.svg"
+import campainha from "../../assets/sounds/old-style-phone-ringer-37761.mp3"
 
 type Props = {
   atendente: boolean,
@@ -24,7 +25,8 @@ type TipoInfoSala = {
   id_profissional: number,
   nome: string,
   tempoConsulta: number,
-  precoConsulta: number
+  precoConsulta: number,
+  saldo: number
 }
 
 type objBaralho = {
@@ -32,7 +34,7 @@ type objBaralho = {
   urls: string[]
 }
 
-export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn}: Props){
+export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, }: Props){
 
   const {infoSalas, setInfoSalas} = useContext(ContextoAtendimento)
 
@@ -54,6 +56,8 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
   const [minutos, setMinutos] = useState<number>(0)
   const [segundos, setSegundos] = useState<number>(60)
   const [minutosRestantes, setMinutosRestantes] = useState<number>(0)
+
+  const audio = useRef<HTMLAudioElement>(null)
 
 
   const {setPerfilProAtual, perfilProAtual} = useContext(ContextoProfissionais)
@@ -143,7 +147,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               idCliente: createdById.toString()
             })
           }).then(res => res.json()).then(data => {
-            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0}
+            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0}
             console.log(data)
             if(data[0] == "erro" || data[0] == "sucesso"){
               if(data[1]){
@@ -152,13 +156,16 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }
             if(infoSalas){
               const infoSalasClone: TipoInfoSala[] = [...infoSalas]
-              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta})
+              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo})
               setInfoSalas(infoSalasClone)
+              audio.current?.play()
             }
           }).catch(() => {
             return {nome: "Usuário", email: ""}
           })
+  
         }
+        
       })
 
 
@@ -553,6 +560,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                   </div>
                 }
               </div>
+              <audio ref={audio} src={campainha}></audio>
             </div>
           }
           {

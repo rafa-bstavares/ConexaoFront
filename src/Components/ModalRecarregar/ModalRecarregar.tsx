@@ -7,6 +7,7 @@ import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 import { useNavigate } from "react-router-dom"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 
+
 type Props= {
     minutosRestantes: number,
     atualizarCronFn: () => void

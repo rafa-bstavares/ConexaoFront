@@ -7,7 +7,8 @@ type TipoInfoSala = {
     id_profissional: number,
     nome: string,
     tempoConsulta: number,
-    precoConsulta: number
+    precoConsulta: number,
+    saldo: number
   }
 
 type TiposContextoAtendimento = {   
