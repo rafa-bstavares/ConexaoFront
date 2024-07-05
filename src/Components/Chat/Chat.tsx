@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Carta from '../Carta/Carta';
 import { ContextoAtendimento } from '../../Contexts/ContextoAtendimento/ContextoAtendimento';
 import ModalRecarregar from '../ModalRecarregar/ModalRecarregar';
+import ModalChamandoAtendente from '../ModalChamandoAtendente/ModalChamandoAtendente';
 import { ContextoProfissionais } from '../../Contexts/ContextoProfissionais/ContextoProfissionais';
 import imgEnviar from "../../assets/images/enviarChat.svg"
 import campainha from "../../assets/sounds/old-style-phone-ringer-37761.mp3"
@@ -36,7 +37,7 @@ type objBaralho = {
 
 export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, }: Props){
 
-  const {infoSalas, setInfoSalas} = useContext(ContextoAtendimento)
+  const {infoSalas, setInfoSalas, abrirModalChamandoAtendente, setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
 
 
   /*const [infoSalas, setInfoSalas] = useState<TipoInfoSala[]>()*/
@@ -50,12 +51,14 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
   const [opSelecionada, setOpSelecionada] = useState<number>(0)
   const [cartasSelecionadas, setCartasSelecionadas] = useState<string[]>([])
   const [historico, setHistorico] = useState<string[]>([""])
-  const {salaAtual, setSalaAtual, precoTotalConsulta, tempoConsulta, setPrecoTotalConsulta, setTempoConsulta, usuario, setUsuario} = useContext(ContextoUsuario)
+  const {salaAtual, setSalaAtual, precoTotalConsulta, tempoConsulta, setPrecoTotalConsulta, setTempoConsulta, usuario, setUsuario, loading, setLoading} = useContext(ContextoUsuario)
   const {setUsuarioLogado} = useContext(ContextoLogin)
   const {setTemAviso, setTextoAviso, temAviso, abrirModalRecarregar, setAbrirModalRecarregar} = useContext(ContextoAviso)
   const [minutos, setMinutos] = useState<number>(0)
   const [segundos, setSegundos] = useState<number>(60)
   const [minutosRestantes, setMinutosRestantes] = useState<number>(0)
+  const [usuarioChamando, setUsuarioChamando] = useState<string>("")
+  const [idUsuarioChamando, setIdUsuarioChamando] = useState<number>(0)
 
   const audio = useRef<HTMLAudioElement>(null)
 
@@ -70,6 +73,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
     setMsg("")
     console.log("você está na sala: " + salaAtualAdm) 
   }
+
 
     socket.on("connect", () => {
 
@@ -158,7 +162,6 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               const infoSalasClone: TipoInfoSala[] = [...infoSalas]
               infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo})
               setInfoSalas(infoSalasClone)
-              audio.current?.play()
             }
           }).catch(() => {
             return {nome: "Usuário", email: ""}
@@ -197,6 +200,8 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }).then(res => res.json()).then(data => {
             console.log(data)
             if(data[0] !== "erro"){
+              console.log("BUSCAR ASALAS DPS DE ENCERRARRRRR")
+              console.log(data)
               setInfoSalas(data[1])
               setHistorico([""])
             }
@@ -217,6 +222,26 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         setTemAviso(true)
         setTextoAviso(data.erroMsg)
       })
+
+
+      socket.on("clienteChamando", (data) => {
+        if(atendente){
+          if(data.idProfissional == idAtendenteAtual){
+            //abrir modal tocando
+            setUsuarioChamando(data.nomeCliente)
+            setIdUsuarioChamando(data.idCliente)
+            setAbrirModalChamandoAtendente(true)
+          }
+        }
+      })
+
+      if(atendente){
+        socket.on("respostaAtendente", (data) => {
+          if(atendente && data.idProfissional == perfilProAtual.id){
+            setAbrirModalChamandoAtendente(false)
+          }
+        })
+      }
 
 
     }, [socket, messages, atendente, infoSalas, salaAtual, tempoConsulta])
@@ -382,6 +407,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           setPrecoTotalConsulta(infoSalas[0].precoConsulta)
           setTempoConsulta(infoSalas[0].tempoConsulta)
           /*setMinutos(infoSalas[0].precoConsulta)*/
+        }else{
+          setPrecoTotalConsulta(0)
+          setTempoConsulta(0)
         }
       }
     }, [infoSalas])
@@ -639,6 +667,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           {
             abrirModalRecarregar &&
             <ModalRecarregar atualizarCronFn={atualizarCronometro} minutosRestantes={minutosRestantes}/>
+          }
+          {
+            abrirModalChamandoAtendente &&
+            <ModalChamandoAtendente idUsuario={idUsuarioChamando} usuario={usuarioChamando}/>
           }
         </div>
     )

@@ -17,7 +17,9 @@ type TiposContextoUsuario = {
     precoTotalConsulta: number,
     setPrecoTotalConsulta: Dispatch<SetStateAction<number>>,
     tempoConsulta: number,
-    setTempoConsulta: Dispatch<SetStateAction<number>>
+    setTempoConsulta: Dispatch<SetStateAction<number>>,
+    loading: boolean,
+    setLoading: Dispatch<SetStateAction<boolean>>
 }
 
 export const ContextoUsuario = createContext<TiposContextoUsuario>({
@@ -30,7 +32,9 @@ export const ContextoUsuario = createContext<TiposContextoUsuario>({
     precoTotalConsulta: 0,
     setPrecoTotalConsulta: () => {},
     tempoConsulta: 0,
-    setTempoConsulta: () => {}
+    setTempoConsulta: () => {},
+    loading: false,
+    setLoading: () => {}
 } as TiposContextoUsuario)
 
 
@@ -41,6 +45,7 @@ export const UsuarioProvider = ({children}: {children: React.ReactNode}) => {
     const [idMeuAtendente, setIdMeuAtendente] = useState<number>(0)
     const [precoTotalConsulta, setPrecoTotalConsulta] = useState<number>(0)
     const [tempoConsulta, setTempoConsulta] = useState<number>(0)
+    const [loading, setLoading] = useState<boolean>(false)
 
 
 
@@ -55,7 +60,9 @@ export const UsuarioProvider = ({children}: {children: React.ReactNode}) => {
             precoTotalConsulta,
             setPrecoTotalConsulta,
             tempoConsulta,
-            setTempoConsulta
+            setTempoConsulta,
+            loading,
+            setLoading
         }}>
             {children}
         </ContextoUsuario.Provider>

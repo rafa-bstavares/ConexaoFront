@@ -5,18 +5,21 @@ import Botao from "../Botao/Botao"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 import { useNavigate } from "react-router-dom"
+import ModalChamando from "../ModalChamando/ModalChamando"
+import { socket } from "../../socket"
 
 
 export default function ModalTempo(){
 
     const {setTemAviso, setTextoAviso, setAbrirModalTempo, valorMinModal} = useContext(ContextoAviso)
-    const {usuario, setSalaAtual, idMeuAtendente, setPrecoTotalConsulta, setTempoConsulta} = useContext(ContextoUsuario)
+    const {usuario, setSalaAtual, idMeuAtendente, setPrecoTotalConsulta, setTempoConsulta, loading, setLoading} = useContext(ContextoUsuario)
     const {setUsuarioLogado} = useContext(ContextoLogin)
 
     const [temErro, setTemErro] = useState<boolean>(false)
     const [textoErro, setTextoErro] = useState<string>("")
     const [tempoConsultaVar, setTempoConsultaVar] = useState<number>(5)
     const [precoConsultaVar, setPrecoConsultaVar] = useState<number>(tempoConsultaVar * valorMinModal)
+    const [respAtendente, setRespAtendente] = useState<string>("")
 
 
     const navigate = useNavigate()
@@ -25,6 +28,28 @@ export default function ModalTempo(){
     function aoCancelar(){
         setAbrirModalTempo(false)
     }
+
+    useEffect(() => {
+        //aqui só usuário tem acesso
+        socket.on("respostaAtendente", (data) => {
+            setRespAtendente(data.msg)
+        })
+    }, [socket])
+
+
+    useEffect(() => {
+        if(loading && respAtendente){
+            console.log("TA VINDO PRA DENTRO DO IF LOADING")
+            setLoading(false)
+            if(respAtendente == "Aceitar"){
+                console.log("ta crianddo a sala")
+                criarSala()
+            }else if(respAtendente == "Rejeitado"){
+                setTemAviso(true)
+                setTextoAviso("O profissional não pode te atendente no momento. Por favor, tente novamente mais tarde.")
+            }
+        }
+    }, [respAtendente])
 
 
     
@@ -99,13 +124,28 @@ export default function ModalTempo(){
                                         case "criar sala":
                                             console.log("caiu no criar sala")
                                             setUsuarioLogado(true)
-                                            criarSala()
+                                            //ENVIAR PARA MODAL "CHAMANDO ATENDENTE....."
+                                            /*criarSala()*/
+                                            socket.emit("chamarAtendente", {idProfissional: idMeuAtendente, nomeCliente: usuario.nome, idCliente: usuario.id})
+                                            setLoading(true)
                                             break
                 
                                         case "sala existente":
                                             console.log("caiu no sala existente")
                                             setSalaAtual(Number(data[2]))
                                             navigate("/Chat")
+                                            break
+
+                                        case "profissional ocupado":
+                                            console.log("profissional ocupado")
+                                            setTemAviso(true)
+                                            setTextoAviso("O profissional se encontra ocupado no momento. Por favor, tente novamente mais tarde.")
+                                            break
+
+                                        case "profissional não disponível":
+                                            console.log("profissional não disponivel")
+                                            setTemAviso(true)
+                                            setTextoAviso("O profissional não se encontra disponível. Por favor, tente novamente mais tarde.")
                                             break
                                     }
                                 }else{
@@ -153,6 +193,10 @@ export default function ModalTempo(){
                 {
                     temErro &&
                     <div className="self-center text-red-600 font-bold text-xl">{textoErro}</div>
+                }
+                {
+                    loading && 
+                    <ModalChamando/>
                 }
                 <div className="flex gap-4 self-center mt-5">
                     <Botao onClickFn={efetivarPedido} texto="Ir para consulta"/>

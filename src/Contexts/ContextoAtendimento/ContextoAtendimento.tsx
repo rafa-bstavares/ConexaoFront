@@ -13,25 +13,32 @@ type TipoInfoSala = {
 
 type TiposContextoAtendimento = {   
     setInfoSalas: Dispatch<SetStateAction<TipoInfoSala[]>>,
-    infoSalas: TipoInfoSala[]
+    infoSalas: TipoInfoSala[],
+    abrirModalChamandoAtendente: boolean,
+    setAbrirModalChamandoAtendente: Dispatch<SetStateAction<boolean>>
 }
 
 export const ContextoAtendimento = createContext<TiposContextoAtendimento>({
     setInfoSalas: () => {},
-    infoSalas: []
+    infoSalas: [],
+    abrirModalChamandoAtendente: false,
+    setAbrirModalChamandoAtendente: () => {}
 } as TiposContextoAtendimento)
 
 
 export const AtendimentoProvider = ({children}: {children: React.ReactNode}) => {
 
     const [infoSalas, setInfoSalas] = useState<TipoInfoSala[]>([])
+    const [abrirModalChamandoAtendente, setAbrirModalChamandoAtendente] = useState<boolean>(false)
 
 
 
     return (
         <ContextoAtendimento.Provider value={{
             infoSalas,
-            setInfoSalas
+            setInfoSalas,
+            abrirModalChamandoAtendente,
+            setAbrirModalChamandoAtendente
         }}>
             {children}
         </ContextoAtendimento.Provider>

@@ -55,7 +55,6 @@ export default function AdmChat(){
         
 
 
-
     }, [])
 
 
@@ -70,7 +69,7 @@ export default function AdmChat(){
 
 
     useEffect(() => {
-      if(infoSalas.length > 0){
+      if(infoSalas.length > 0 && infoSalas[0].idSala !== 0){
 
 
 
@@ -94,8 +93,12 @@ export default function AdmChat(){
 
 
     useEffect(() => {
-      if(infoSalas.length > 0){
-        setSaldoTotalCliente(infoSalas[0].saldo)
+      if(infoSalas){
+        if(infoSalas.length > 0){
+          setSaldoTotalCliente(infoSalas[0].saldo)
+        }else{
+          setSaldoTotalCliente(0)
+        }
       }
     }, [infoSalas])
 

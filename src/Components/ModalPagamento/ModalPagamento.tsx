@@ -183,6 +183,7 @@ export default function ModalPagamento(){
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
                         <Botao onClickFn={() => setAbrirModalPagamento(false)} texto="Cancelar"/>
                     </div>
+                    
                     <div className="flex justify-center">
                         <Botao onClickFn={statusPagamento} texto="Checar status último pagamento"/>
                     </div>
