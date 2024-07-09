@@ -71,11 +71,11 @@ export default function Banner(){
 
 
     return (
-        <div className="h-[70vh] bg-bannerImg px-[var(--paddingXGeral)] flex flex-col text-white relative">
+        <div className="min-h-[70vh] bg-bannerImg lg:px-[var(--paddingXGeral)] px-[var(--paddingXGeralCel)] py-4 flex flex-col text-white relative">
             <Menu/>
-            <div className="flex-1 flex flex-col justify-center pr-80">
-                <div className="text-7xl font-bold">Bem-vindo(a) à Conexão Mística</div>
-                <div className="text-xl">
+            <div className="flex-1 flex flex-col justify-center lg:pr-80">
+                <div className="lg:text-7xl text-4xl font-bold">Bem-vindo(a) à Conexão Mística</div>
+                <div className="lg:text-xl text-lg">
                     Onde o universo se encontra com a sabedoria ancestral. Orientação espiritual para ajudá-lo a encontrar clareza, paz interior e prosperidade. Inicie sua jornada de auto conhecimento e crescimento espiritual.
                 </div>
                 <div className="flex gap-3 mt-10">

@@ -11,7 +11,7 @@ export default function Menu(){
 
     const {usuarioLogado, setAbrirModalLogUsuario, setAbrirModalCadastroUsuario, setUsuarioLogado} = useContext(ContextoLogin)
     const {usuario} = useContext(ContextoUsuario)
-    const {setAbrirModalPagamento} = useContext(ContextoPagamento)
+    const {setAbrirModalEscolher} = useContext(ContextoPagamento)
 
     const arrItensMenu = [
         {nome: "Home", link: "/"},
@@ -39,19 +39,19 @@ export default function Menu(){
 
 
     function abrirModalPagar(){
-        setAbrirModalPagamento(true)
+        setAbrirModalEscolher(true)
     }
 
     
 
 
     return (
-        <div className="h-1/6 flex gap-5 justify-between">
-            <img src={logo} alt="logo" className="h-full w-auto" />
+        <div className="h-1/6 flex flex-col lg:flex-row items-center lg:gap-5 justify-between">
+            <img src={logo} alt="logo" className="h-full md:w-auto w-1/2" />
             <div className="h-full flex">
                 {arrItensMenu.map(item => (
                     <Link to={item.link}>
-                        <div className="px-4 h-full flex justify-center items-center text-white text-xl">
+                        <div className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden">
                             {item.nome}
                         </div>
                     </Link>
@@ -60,12 +60,14 @@ export default function Menu(){
             <div className="flex gap-5">
                 {
                     usuarioLogado?
-                        <div className="flex gap-4 items-center">
+                        <div className="flex flex-col md:flex-row gap-4 items-center">
                             <Botao onClickFn={abrirModalPagar} texto="Comprar saldo" />
-                            <div className="text-center text-xl">
-                                Seja bem vindo, {usuario.nome}<br/>Você têm R${usuario.saldo} de saldo
+                            <div className="flex gap-4 items-center">
+                                <div className="text-center text-xl my-10">
+                                    Seja bem vindo, {usuario.nome}<br/>Você têm R${usuario.saldo} de saldo
+                                </div>
+                                <div className="px-4 py-2 bg-red-600 font-bold rounded-md cursor-pointer" onClick={sair}>sair</div>
                             </div>
-                            <div className="px-4 py-2 bg-red-600 font-bold rounded-md cursor-pointer" onClick={sair}>sair</div>
                         </div>
                         :
                         <>

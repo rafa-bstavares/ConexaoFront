@@ -78,7 +78,7 @@ useEffect(() => {
 
 
     return(
-        <div className="flex flex-col py-4 px-14 w-4/5 rounded-md border-white border-solid border-2 items-center gap-4 text-white bg-fundoProfissionais">
+        <div className="flex flex-col py-4 lg:px-14 px-4 w-4/5 rounded-md border-white border-solid border-2 items-center gap-4 text-white bg-fundoProfissionais">
             <div className="w-full h-52 rounded-md overflow-hidden flex justify-center items-center">
                 <img className="object-cover h-full" src={`http://localhost:8080/images/${img}`} alt="imagem-profissional"/>
             </div>

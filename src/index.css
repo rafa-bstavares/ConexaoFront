@@ -11,4 +11,6 @@ body{
 :root{
   --paddingXGeral: 250px;
   --paddingYGeral: 80px;
+  --paddingXGeralCel: 30px;
+  --paddingYGeralCel: 20px;
 }

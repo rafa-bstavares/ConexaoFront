@@ -3,7 +3,6 @@ import imgLogo from "../../assets/images/logoConexao.png"
 import Botao from "../Botao/Botao"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
-import { StatusScreen } from "@mercadopago/sdk-react"
 import { createCardToken } from '@mercadopago/sdk-react/coreMethods'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,6 +21,7 @@ export default function ModalPagamento(){
     const {setAbrirModalPagamento, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode, idUltimoPix} = useContext(ContextoPagamento)
     const {usuario} = useContext(ContextoUsuario)
     const [numeroCartao, setNumeroCartao] = useState<string>("")
+    const [pagarCartao, setPagarCartao] = useState<boolean>(false)
 
 
     function confereCpf(cpf: string): "inválido" | "válido"{
@@ -156,7 +156,7 @@ export default function ModalPagamento(){
     return (
         <div>
             <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-                <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white overflow-scroll">
+                <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white overflow-y-scroll">
                     <div className="w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>

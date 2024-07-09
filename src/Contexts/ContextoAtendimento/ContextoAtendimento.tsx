@@ -8,7 +8,8 @@ type TipoInfoSala = {
     nome: string,
     tempoConsulta: number,
     precoConsulta: number,
-    saldo: number
+    saldo: number,
+    dataNas: string
   }
 
 type TiposContextoAtendimento = {   

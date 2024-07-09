@@ -32,7 +32,7 @@ export default function Perfil(){
     })
 
     return (
-        <div className="min-h-screen bg-roxoPrincipal flex flex-col items-center text-white px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] gap-8 relative">
+        <div className="min-h-screen bg-roxoPrincipal flex flex-col items-center text-white px-[var(--paddingXGeralCel)] lg:px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] gap-8 relative">
             <div className="text-4xl font-bold text-center mb-10">
                 Perfil detalhado do profissional
             </div>

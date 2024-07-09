@@ -18,9 +18,9 @@ export default function Servicos(){
     ]
 
     return (
-        <div className="px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] bg-roxoPrincipal">
+        <div className="px-[var(--paddingXGeralCel)] lg:px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] bg-roxoPrincipal">
             <TituloDesc titulo="Serviços" desc="Guiando você rumo à paz interior e iluminação espiritual." />
-            <div className="grid grid-cols-3 gap-2">
+            <div className="lg:grid lg:grid-cols-3 lg:gap-2 flex flex-col">
                 {arrImgsServicos.map(item => <img className="w-full h-auto" src={item.img} />)}
             </div>
         </div>

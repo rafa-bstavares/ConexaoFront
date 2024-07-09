@@ -4,12 +4,22 @@ type TipoUsuario = {
     id: number,
     nome: string,
     email: string,
-    saldo: number
+    saldo: number,
+    dataNas: string
+}
+
+type UsuarioAdm = {
+    id: number,
+    nome: string,
+    email: string,
+    saldo: number,
 }
 
 type TiposContextoUsuario = {   
     setUsuario: Dispatch<SetStateAction<TipoUsuario>>,
+    setArrUsuarios: Dispatch<SetStateAction<UsuarioAdm[]>>,
     usuario: TipoUsuario,
+    arrUsuarios: UsuarioAdm[],
     salaAtual: number,
     setSalaAtual: Dispatch<SetStateAction<number>>,
     idMeuAtendente: number,
@@ -24,7 +34,9 @@ type TiposContextoUsuario = {
 
 export const ContextoUsuario = createContext<TiposContextoUsuario>({
     setUsuario: () => {},
-    usuario: {id: 0, nome: "", email: "", saldo: 0},
+    setArrUsuarios: () => {},
+    usuario: {id: 0, nome: "", email: "", saldo: 0, dataNas: ""},
+    arrUsuarios: [{id: 0, nome: "", email: "", saldo: 0}],
     salaAtual: 0,
     setSalaAtual: () => {},
     idMeuAtendente: 0,
@@ -40,7 +52,8 @@ export const ContextoUsuario = createContext<TiposContextoUsuario>({
 
 export const UsuarioProvider = ({children}: {children: React.ReactNode}) => {
 
-    const [usuario, setUsuario] = useState<TipoUsuario>({id: 0, nome: "", email: "", saldo: 0})
+    const [usuario, setUsuario] = useState<TipoUsuario>({id: 0, nome: "", email: "", saldo: 0, dataNas: ""})
+    const [arrUsuarios, setArrUsuarios] = useState<UsuarioAdm[]>([{id: 0, nome: "", email: "", saldo: 0}])
     const [salaAtual, setSalaAtual] = useState<number>(0)
     const [idMeuAtendente, setIdMeuAtendente] = useState<number>(0)
     const [precoTotalConsulta, setPrecoTotalConsulta] = useState<number>(0)
@@ -52,7 +65,9 @@ export const UsuarioProvider = ({children}: {children: React.ReactNode}) => {
     return (
         <ContextoUsuario.Provider value={{
             usuario,
+            arrUsuarios,
             setUsuario,
+            setArrUsuarios,
             salaAtual,
             setSalaAtual,
             idMeuAtendente,

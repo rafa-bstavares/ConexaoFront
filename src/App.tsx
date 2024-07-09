@@ -12,6 +12,8 @@ import ModalPagamento from './Components/ModalPagamento/ModalPagamento'
 import { ContextoUsuario } from './Contexts/ContextoUsuario/ContextoUsuario'
 import { ContextoPagamento } from './Contexts/ContextoPagamento/ContextoPagamento'
 import { initMercadoPago } from '@mercadopago/sdk-react'
+import ModalCartao from './Components/ModalCartao/ModalCartao'
+import ModalEscolherPag from './Components/ModalEscolherPag/ModalEscolherPag'
 
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
   const {temAviso, setTemAviso, setTextoAviso, abrirModalTempo} = useContext(ContextoAviso)
   const {abrirModalLogUsuario, abrirModalCadastroUsuario, setUsuarioLogado} = useContext(ContextoLogin)
   const {setUsuario} = useContext(ContextoUsuario)
-  const {abrirModalPagamento} = useContext(ContextoPagamento)
+  const {abrirModalPagamento, abrirModalCartao, abrirModalEscolher} = useContext(ContextoPagamento)
 
 
   
@@ -51,7 +53,7 @@ function App() {
 
   useEffect(() => {
 
-    initMercadoPago("APP_USR-1bbc7fc7-82fb-4893-b5d4-e809413360cb")
+    initMercadoPago("TEST-22c8f531-7cc0-46c1-acd2-7c1ea1bf5f45")
 
 
     fetch("http://localhost:8080/confereTokenUsuario", {
@@ -96,6 +98,14 @@ function App() {
       {
         abrirModalPagamento &&
         <ModalPagamento/>
+      }
+      {
+        abrirModalCartao &&
+        <ModalCartao/>
+      }
+      {
+        abrirModalEscolher &&
+        <ModalEscolherPag/>
       }
     </div>
   )

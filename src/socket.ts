@@ -14,6 +14,7 @@ interface ServerToClientEvents {
 }
 
 interface ClientToServerEvents {
+    acionaMudStatus: (data: {status: string, id: number}) => void,
     clientMsg: (data: {msg: string, room: string}) => void,
     adicionarNaSala: (data: {room: string}) => void,
     tempoPreco: (data: {tempo: number, preco: number, room: string}) => void,

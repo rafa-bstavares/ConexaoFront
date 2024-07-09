@@ -7,6 +7,7 @@ import Chat from './Components/Chat/Chat.tsx'
 import AdmBlog from './Components/AdmBlog/AdmBlog.tsx'
 import AdmChat from './Components/AdmChat/AdmChat.tsx'
 import ControleAdm from './Components/ControleAdm/ControleAdm.tsx'
+import MeusDados from './Components/MeusDados/MeusDados.tsx'
 import './index.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CadastrarProfissional from './Components/CadastrarProfissional/CadastrarProfissional.tsx'
@@ -36,6 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path='/adm/postarBlog' element={<AdmBlog/>}></Route>
             <Route path='/adm/cadastrarProfissional' element={<CadastrarProfissional/>}></Route>
             <Route path='/adm/controleAdm' element={<ControleAdm/>}></Route>
+            <Route path='/adm/meusDadosAdm' element={<MeusDados tipo='AdmGeral'/>}></Route>
           </Route>
           <Route path='/Chat' element={<Chat atendente={false}/>}></Route>
           <Route path='/AdmChat' element={<AdmChat/>}></Route>

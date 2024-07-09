@@ -19,8 +19,8 @@ export default function ModalDetalhes(){
 
 
     return (
-        <div className="fixed inset-0 bg-white/80 flex items-center justify-center">
-            <div className="h-5/6 bg-roxoPrincipal rounded-xl flex flex-col px-12 py-8 gap-4 justify-center items-center overflow-y-scroll ">
+        <div className="  bg-roxoPrincipal flex items-center justify-center">
+            <div className="h-full bg-roxoPrincipal rounded-xl flex flex-col px-12 py-8 gap-4 justify-center items-center">
         
                 {
                     detalhesProAdm.length > 0 ?

@@ -5,22 +5,27 @@ import Chat from "../Chat/Chat"
 import ModalHistorico from "../ModalHistorico/ModalHistorico"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
-import { socket } from "../../socket"
 import { ContextoAtendimento } from "../../Contexts/ContextoAtendimento/ContextoAtendimento"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import ModalAviso from "../ModalAviso/ModalAviso"
+import configImg from "../../assets/images/configImg.svg"
+import ModalRedefinirSenha from "../ModalRedefinirSenha/ModalRedefinirSenha"
+import { socket } from "../../socket"
 
 export default function AdmChat(){
-    const {infoSalas, setInfoSalas} = useContext(ContextoAtendimento)
-    const {atendenteLogado, setAtendenteLogado} = useContext(ContextoLogin)
+    const {infoSalas} = useContext(ContextoAtendimento)
+    const {atendenteLogado, setAtendenteLogado, abrirModalRedefinir, setAbrirModalRedefinir} = useContext(ContextoLogin)
     const {setTemAviso, setTextoAviso, temAviso} = useContext(ContextoAviso)
-    const {precoTotalConsulta, tempoConsulta, setPrecoTotalConsulta, setTempoConsulta} = useContext(ContextoUsuario)
+    const {precoTotalConsulta, tempoConsulta} = useContext(ContextoUsuario)
     const {perfilProAtual} = useContext(ContextoProfissionais)
     const {setAbrirModalHistorico, abrirModalHistorico} = useContext(ContextoProfissionais)
     const [minutos, setMinutos] = useState<number>(0)
     const [segundos, setSegundos] = useState<number>(60)
     const [toOn, setToOn] =  useState<boolean>(true)
     const [saldoTotalCliente, setSaldoTotalCliente] = useState<number>(0)
+    const [abrirMenu, setAbrirMenu] = useState<boolean>(false)
+    const [dataNascimento, setDataNascimento] = useState<string>("")
+
 
 
 
@@ -51,9 +56,6 @@ export default function AdmChat(){
             setTemAviso(true)
             setTextoAviso("ocorreu algum erro, por favor, tente novamente")
         })
-
-        
-
 
     }, [])
 
@@ -96,10 +98,14 @@ export default function AdmChat(){
       if(infoSalas){
         if(infoSalas.length > 0){
           setSaldoTotalCliente(infoSalas[0].saldo)
+          setDataNascimento(infoSalas[0].dataNas)
         }else{
           setSaldoTotalCliente(0)
+          setDataNascimento("")
         }
       }
+      console.log("infosalaassss")
+      console.log(infoSalas)
     }, [infoSalas])
 
 
@@ -136,8 +142,10 @@ export default function AdmChat(){
         if(data[0] == "status atualizado"){
           if(status == "online"){
             setToOn(true)
+            socket.emit("acionaMudStatus", {status: "online", id: perfilProAtual.id})
           }else{
             setToOn(false)
+            socket.emit("acionaMudStatus", {status: "ocupado", id: perfilProAtual.id})
           }
         }else{
           setTemAviso(true)
@@ -146,11 +154,50 @@ export default function AdmChat(){
       })
     }
 
+    function sairFn(){
+        fetch("http://localhost:8080/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+          console.log(data)
+          if(data[0] == "sucesso"){
+            localStorage.setItem("authToken", "")
+            setAtendenteLogado(false)
+          }else{
+            setTemAviso(true)
+            setTextoAviso("Ocorreu um erro ao tentar deixar o usuário offline")
+          }
+        }).catch(() => {
+          setTemAviso(true)
+          setTextoAviso("Ocorreu um erro ao tentar deixar o usuário offline")
+        })
+
+    }
+
+
+
+    
+
     return(
         <div className="min-h-screen relative bg-roxoPrincipal text-white">
             {
                 atendenteLogado ?
                       <>
+                        {/* Menu lateral */}
+                        <div className={`fixed top-0 left-0 w-96 h-screen z-50 flex transition-all ${abrirMenu? "translate-x-[0]" : "translate-x-[-90%]"}`}>
+                          <div className="w-[90%] h-full bg-white flex flex-col px-4 py-8 gap-4 ">
+                            <div onClick={abrirModalHistoricos} className="px-4 py-2 bg-gray-500 rounded-md cursor-pointer">
+                                Meus históricos
+                            </div>
+                            <div onClick={() => {setAbrirModalRedefinir(true)}} className="px-4 py-2 bg-gray-500 rounded-md cursor-pointer">
+                                Redefinir senha
+                            </div>
+                            <div onClick={sairFn} className="px-4 py-2 bg-red-600 rounded-md cursor-pointer self-start">
+                                Sair
+                            </div>
+                          </div>
+                          <div className=" mt-36 self-start flex-1 bg-white p-1 rounded-r-md cursor-pointer" onClick={() => setAbrirMenu(!abrirMenu)}>
+                            <img className=" w-full h-auto" src={configImg} alt="" />
+                          </div>
+                        </div>
+                        {/* Fim Menu lateral */}
                         <div className="fixed top-0 left-0 w-screen h-screen bg-fundoChat bg-cover"></div>
                         <div className="flex flex-col relative ">
                           <div className="flex justify-center items-center gap-8 pt-4 flex-wrap">
@@ -174,10 +221,10 @@ export default function AdmChat(){
                                 </div>*/}
                               </div>
                             </div>
-                            <div onClick={abrirModalHistoricos} className="p-4 bg-gray-500 rounded-md cursor-pointer">
-                              meus históricos
-                            </div>
                             <button onClick={encerrarAtendimento} className="p-4 rounded-md bg-red-500 ">Encerrar antendimento</button>
+                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
+                              Data de nascimento: {dataNascimento}
+                            </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
                               tempo consulta: {tempoConsulta}
                             </div>
@@ -209,6 +256,10 @@ export default function AdmChat(){
             {
               temAviso && 
               <ModalAviso/>
+            }
+            {
+              abrirModalRedefinir &&
+              <ModalRedefinirSenha tipo="Atendente"/>
             }
 
         </div>

@@ -27,7 +27,8 @@ type TipoInfoSala = {
   nome: string,
   tempoConsulta: number,
   precoConsulta: number,
-  saldo: number
+  saldo: number,
+  dataNas: string
 }
 
 type objBaralho = {
@@ -151,7 +152,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               idCliente: createdById.toString()
             })
           }).then(res => res.json()).then(data => {
-            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0}
+            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0, dataNas: ""}
             console.log(data)
             if(data[0] == "erro" || data[0] == "sucesso"){
               if(data[1]){
@@ -160,7 +161,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }
             if(infoSalas){
               const infoSalasClone: TipoInfoSala[] = [...infoSalas]
-              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo})
+              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo, dataNas: objCliente.dataNas})
               setInfoSalas(infoSalasClone)
             }
           }).catch(() => {
@@ -593,7 +594,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }
           {
             !atendente &&
-            <div className='flex justify-center gap-8 text-white mb-8'>
+            <div className='flex flex-col items-center gap-3 md:justify-center md:gap-8 text-white mb-8'>
               <div  className='flex justify-center items-center text-xl'> 
                 tempo consulta: {tempoConsulta}
               </div >
@@ -603,7 +604,6 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoPrincipal'>
                 {minutos}:{segundos}
               </div>
-              <div onClick={atualizarCronometro} className='p-2 rounded-md bg-roxoPrincipal'>testar sub de tempo</div>
             </div>
           }
           <div className={` ${atendente? "w-1/2 mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex `}>
@@ -658,7 +658,6 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               </div>
             </div>
           </div>
-          <div onClick={sairFn}>sair</div>
 
           {
             temAviso && 
