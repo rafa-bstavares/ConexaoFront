@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import logo from "../../assets/images/logoConexao.png"
 import Botao from "../Botao/Botao"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
@@ -47,7 +47,7 @@ export default function Menu(){
 
     return (
         <div className="h-1/6 flex flex-col lg:flex-row items-center lg:gap-5 justify-between">
-            <img src={logo} alt="logo" className="h-full md:w-auto w-1/2" />
+            <img src={logo} alt="logo" className="h-full lg:w-auto w-1/2" />
             <div className="h-full flex">
                 {arrItensMenu.map(item => (
                     <Link to={item.link}>

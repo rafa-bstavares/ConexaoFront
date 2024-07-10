@@ -15,7 +15,7 @@ export default function Login({tipoLogin}: Props){
     const [senha, setSenha] = useState<string>("")
 
     const {setAtendenteLogado, setAdmGeralLogado, setUsuarioLogado} = useContext(ContextoLogin)
-    const {setTemAviso, setTextoAviso, temAviso, textoAviso} = useContext(ContextoAviso)
+    const {setTemAviso, setTextoAviso, temAviso} = useContext(ContextoAviso)
 
     useEffect(() => {
         setTemAviso(false)

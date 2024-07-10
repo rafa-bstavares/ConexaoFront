@@ -12,8 +12,6 @@ type Props = {
 
 export default function OpcaoChat({nomeCliente, primeiro, ultimoClicadoFn, setSalaAdm, ultimoClicado, index, salaOpcao}: Props){
     const [roxo, setRoxo] = useState<boolean>(primeiro)
-    let euVouMudar: boolean = false
-    let roxoAnterior: number = 0
 
     function aoClicar(){
         ultimoClicadoFn(index)

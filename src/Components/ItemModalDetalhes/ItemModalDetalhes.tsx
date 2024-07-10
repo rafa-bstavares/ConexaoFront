@@ -13,8 +13,6 @@ type Props = {
 export default function ItemModalDetalhes({nome, valor, inicio, final, idHistorico, nomeProfissional}: Props){
     const [historico, setHistorico] = useState<string[]>([""])
     const [mostrarHistorico, setMostrarHistorico] = useState<boolean>(false)
-    const [inicioTela, setInicioTela] = useState<Date>(new Date(inicio))
-    const [finalTela, setFinalTela] = useState<Date>(new Date(final))
 
 
     
@@ -48,10 +46,10 @@ export default function ItemModalDetalhes({nome, valor, inicio, final, idHistori
                                         Valor: {valor}
                                     </div>
                                     <div>
-                                        momento de início: {inicioTela.toLocaleString("pt-br")}
+                                        momento de início: {new Date(inicio).toLocaleString("pt-br")}
                                     </div>
                                     <div>
-                                        momento do final: {finalTela.toLocaleString("pt-br")}
+                                        momento do final: {new Date(final).toLocaleString("pt-br")}
                                     </div>
                                     <div onClick={() => setMostrarHistorico(!mostrarHistorico)} className=" p-2 bg-gray-500 rounded-md cursor-pointer">
                                         {mostrarHistorico? "Esconder histórico": "Mostrar histórico"}

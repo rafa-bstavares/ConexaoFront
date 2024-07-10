@@ -17,7 +17,7 @@ type Props = {
 export default function Profissional({img, nome, descricaoMenor, id, status, valorMin}: Props){
 
     const {setTemAviso, setTextoAviso, setAbrirModalTempo, setValorMinModal} = useContext(ContextoAviso)
-    const {usuarioLogado, setUsuarioLogado, setAbrirModalLogUsuario} = useContext(ContextoLogin)
+    const { setUsuarioLogado, setAbrirModalLogUsuario} = useContext(ContextoLogin)
     const {setPerfilProAtual, perfilProAtual} = useContext(ContextoProfissionais)
     const {setIdMeuAtendente} = useContext(ContextoUsuario)
 

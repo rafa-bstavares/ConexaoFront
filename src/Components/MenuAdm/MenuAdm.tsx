@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import logo from "../../assets/images/logoConexao.png"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 
 

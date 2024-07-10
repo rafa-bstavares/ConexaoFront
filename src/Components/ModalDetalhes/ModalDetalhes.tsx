@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import Botao from "../Botao/Botao"
 import ItemModalDetalhes from "../ItemModalDetalhes/ItemModalDetalhes"

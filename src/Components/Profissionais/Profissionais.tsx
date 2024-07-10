@@ -1,5 +1,4 @@
 import Profissional from "../Profissional/Profissional"
-import fotoExm from "../../assets/images/logoConexao.png"
 import { useContext, useEffect } from "react"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
@@ -36,13 +35,6 @@ export default function Profissionais(){
     }, [])
 
 
-    const Profs = [ 
-        {foto: fotoExm, nome: "Nome 1", desc: ["baralho 1", "baralho 2", "baralho 3"], id: "16", status: "online"},
-        {foto: fotoExm, nome: "Nome 1", desc: ["baralho 1", "baralho 2", "baralho 3"], id: "16", status: "online"},
-        {foto: fotoExm, nome: "Nome 1", desc: ["baralho 1", "baralho 2", "baralho 3"], id: "16", status: "online"},
-        {foto: fotoExm, nome: "Nome 1", desc: ["baralho 1", "baralho 2", "baralho 3"], id: "16", status: "online"},
-        {foto: fotoExm, nome: "Nome 1", desc: ["baralho 1", "baralho 2", "baralho 3"], id: "16", status: "online"},
-    ]
 
     return(
         <div className="lg:grid lg:grid-cols-3 lg:justify-items-center items-center flex flex-col lg:gap-14 gap-4 px-[var(--paddingXGeralCel)] lg:px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] bg-roxoPrincipal">

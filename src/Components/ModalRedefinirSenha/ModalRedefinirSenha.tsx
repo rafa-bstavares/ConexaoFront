@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
-import ItemModalHistorico from "../ItemModalHistorico/ItemModalHistorico"
 import Botao from "../Botao/Botao"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 

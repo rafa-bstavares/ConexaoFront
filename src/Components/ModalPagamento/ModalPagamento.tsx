@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import imgLogo from "../../assets/images/logoConexao.png"
 import Botao from "../Botao/Botao"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
-import { createCardToken } from '@mercadopago/sdk-react/coreMethods'
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -16,12 +15,9 @@ export default function ModalPagamento(){
     const [respostaStatus, setRespostaStatus] = useState<string>("")
     const [saldoAdicionar, setSaldoAdicionar] = useState<number>(1)
     const [cpf, setCpf] = useState<string>("")
-    const [mostrarStatus,setMostrarStatus] = useState<boolean>(false)
 
-    const {setAbrirModalPagamento, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode, idUltimoPix} = useContext(ContextoPagamento)
+    const {setAbrirModalPagamento, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode} = useContext(ContextoPagamento)
     const {usuario} = useContext(ContextoUsuario)
-    const [numeroCartao, setNumeroCartao] = useState<string>("")
-    const [pagarCartao, setPagarCartao] = useState<boolean>(false)
 
 
     function confereCpf(cpf: string): "inválido" | "válido"{

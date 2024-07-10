@@ -1,10 +1,6 @@
 import { useContext, useEffect, useState } from "react"
-import imgLogo from "../../assets/images/logoConexao.png"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 import Botao from "../Botao/Botao"
-import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
-import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
-import { useNavigate } from "react-router-dom"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 
 
@@ -17,7 +13,7 @@ type Props= {
 export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Props){
 
 
-    const {setAbrirModalRecarregar, abrirModalRecarregar} = useContext(ContextoAviso)
+    const {setAbrirModalRecarregar} = useContext(ContextoAviso)
     const {perfilProAtual} = useContext(ContextoProfissionais)
     const [temErro, setTemErro] = useState<boolean>(false)
     const [textoErro, setTextoErro] = useState<string>("")

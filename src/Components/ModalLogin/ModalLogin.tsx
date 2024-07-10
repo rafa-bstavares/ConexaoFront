@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import imgOlho from "../../assets/images/olhoSenha.svg"
 import Botao from "../Botao/Botao"
 import imgLogo from "../../assets/images/logoConexao.png"
@@ -12,7 +12,7 @@ export default function ModalLogin(){
     const [temErro, setTemErro] = useState<boolean>(false)
     const [textoErro, setTextoErro] = useState<string>("")
 
-    const {setAbrirModalLogUsuario, setUsuarioLogado, usuarioLogado} = useContext(ContextoLogin)
+    const {setAbrirModalLogUsuario, setUsuarioLogado} = useContext(ContextoLogin)
     const {setUsuario} = useContext(ContextoUsuario)
     const tipoLogin = "usuario"
 

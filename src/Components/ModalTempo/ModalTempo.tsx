@@ -15,8 +15,8 @@ export default function ModalTempo(){
     const {usuario, setSalaAtual, idMeuAtendente, setPrecoTotalConsulta, setTempoConsulta, loading, setLoading} = useContext(ContextoUsuario)
     const {setUsuarioLogado} = useContext(ContextoLogin)
 
-    const [temErro, setTemErro] = useState<boolean>(false)
-    const [textoErro, setTextoErro] = useState<string>("")
+    /*const [temErro, setTemErro] = useState<boolean>(false)
+    const [textoErro, setTextoErro] = useState<string>("") SE DER RUIM TIRA ESSE COMENTARIO*/
     const [tempoConsultaVar, setTempoConsultaVar] = useState<number>(5)
     const [precoConsultaVar, setPrecoConsultaVar] = useState<number>(tempoConsultaVar * valorMinModal)
     const [respAtendente, setRespAtendente] = useState<string>("")
@@ -190,10 +190,10 @@ export default function ModalTempo(){
                 <div>
                     valor consulta: {precoConsultaVar}
                 </div>
-                {
+                {/*
                     temErro &&
                     <div className="self-center text-red-600 font-bold text-xl">{textoErro}</div>
-                }
+                SE DER RUIM TIRA ESSE COMENTARIO*/}
                 {
                     loading && 
                     <ModalChamando/>

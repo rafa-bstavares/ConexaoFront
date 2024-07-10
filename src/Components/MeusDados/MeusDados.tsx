@@ -9,7 +9,7 @@ type Props = {
 
 export default function MeusDados({tipo}: Props){
 
-    const {temAviso, setTemAviso, setTextoAviso, textoAviso} = useContext(ContextoAviso)
+    const {temAviso, setTemAviso, setTextoAviso } = useContext(ContextoAviso)
 
     const [novaSenha1, setNovaSenha1] = useState<string>("")
     const [novaSenha2, setNovaSenha2] = useState<string>("")

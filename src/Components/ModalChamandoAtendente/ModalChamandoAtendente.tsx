@@ -1,8 +1,6 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef } from "react"
 import loading from "../../assets/images/Design sem nome.gif"
-import Botao from "../Botao/Botao"
 import campainha from "../../assets/sounds/old-style-phone-ringer-37761.mp3"
-import { ContextoAtendimento } from "../../Contexts/ContextoAtendimento/ContextoAtendimento"
 import { socket } from "../../socket"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import logo from "../../assets/images/logoConexao.png"
@@ -14,7 +12,7 @@ type Props = {
 
 export default function ModalChamandoAtendente({usuario, idUsuario}: Props){
 
-    const {setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
+
     const {perfilProAtual} = useContext(ContextoProfissionais)
 
 

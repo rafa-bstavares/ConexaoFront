@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, InputHTMLAttributes, SetStateAction, useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 
 
@@ -17,7 +17,7 @@ export default function CadastrarProfissional(){
     const [novoTrabalho2, setNovoTrabalho2] = useState<string>("")
     const [imgProf, setImgProf] = useState<File>()
     const [arrTrabalhosTotais, setArrTrabalhosTotais] = useState<objTrabalho[]>([])
-    const [arrTrabalho, setArrTrabalho] = useState<string[]>([])
+    /*const [arrTrabalho, setArrTrabalho] = useState<string[]>([])*/
     const [numeroFotos, setNumeroFotos] = useState<number>(1)
     const [arrNumFotos, setArrNumFotos] = useState<string[]>([])
     const [fotos, setFotos] = useState<File[] | []>([])
@@ -161,7 +161,7 @@ export default function CadastrarProfissional(){
         }
     }
 
-    function confereCheckbox(ev: ChangeEvent<HTMLInputElement>, trabalho: string){
+   /* function confereCheckbox(ev: ChangeEvent<HTMLInputElement>, trabalho: string){
         let arrTrabClone = [...arrTrabalho]
         if(ev.target.checked){
             arrTrabClone.push(trabalho)
@@ -169,7 +169,7 @@ export default function CadastrarProfissional(){
             arrTrabClone = arrTrabClone.filter(elem => elem !== trabalho)
         }
         setArrTrabalho(arrTrabClone)
-    }
+    }*/
 
     function inputFn(file: File){
         if(idxUltimaClicada !== undefined){
@@ -180,9 +180,6 @@ export default function CadastrarProfissional(){
         }
     }
 
-    useEffect(()=>{
-        console.log(arrTrabalho)
-    }, [arrTrabalho])
 
     
 

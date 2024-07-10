@@ -1,26 +1,17 @@
 import Menu from "../Menu/Menu"
 import Botao from "../Botao/Botao"
-import { useContext, useEffect } from "react"
-import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
-import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
-import { redirect } from "react-router-dom"
-import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
-import { useNavigate } from "react-router-dom"
+
 
 
 
 
 export default function Banner(){
 
-    const {salaAtual, setSalaAtual, usuario} = useContext(ContextoUsuario)
-    const {setTemAviso, setTextoAviso} = useContext(ContextoAviso)
-    const {usuarioLogado, setUsuarioLogado, setAbrirModalLogUsuario} = useContext(ContextoLogin)
-
-    const navigate = useNavigate()
 
 
 
-    function criarSala(){
+
+  /*  function criarSala(){
         fetch("http://localhost:8080/criarSala", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -66,12 +57,12 @@ export default function Banner(){
               setTemAviso(true)
               setTextoAviso("ocorreu algum erro, por favor, tente novamente")
           })
-    }
+    }*/
 
 
 
     return (
-        <div className="min-h-[70vh] bg-bannerImg lg:px-[var(--paddingXGeral)] px-[var(--paddingXGeralCel)] py-4 flex flex-col text-white relative">
+        <div className="min-h-[70vh] lg:h-[70vh] bg-bannerImg lg:px-[var(--paddingXGeral)] px-[var(--paddingXGeralCel)] py-4 flex flex-col text-white relative">
             <Menu/>
             <div className="flex-1 flex flex-col justify-center lg:pr-80">
                 <div className="lg:text-7xl text-4xl font-bold">Bem-vindo(a) à Conexão Mística</div>

@@ -16,7 +16,6 @@ import { LoginProvider } from './Contexts/ContextoLogin/ContextoLogin.tsx'
 import { UsuarioProvider } from './Contexts/ContextoUsuario/ContextoUsuario.tsx'
 import { ProfissionaisProvider } from './Contexts/ContextoProfissionais/ContextoProfissionais.tsx'
 import Perfil from './Components/Perfil/Perfil.tsx'
-import ModalAviso from './Components/ModalAviso/ModalAviso.tsx'
 import { AtendimentoProvider } from './Contexts/ContextoAtendimento/ContextoAtendimento.tsx'
 import { PagamentoProvider } from './Contexts/ContextoPagamento/ContextoPagamento.tsx'
 

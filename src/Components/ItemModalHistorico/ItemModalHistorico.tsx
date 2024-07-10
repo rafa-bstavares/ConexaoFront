@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 type Props = {
     historico: string,
@@ -10,7 +10,6 @@ type Props = {
 
 export default function ItemModalHistorico({historico, nomeCliente, data, nomeAtendente}:  Props){
     const [mostrarHistorico, setMostrarHistorico] = useState<boolean>(false)
-    const [dataTela,setDataTela] = useState<Date>(new Date(data))
 
 
 
@@ -21,7 +20,7 @@ export default function ItemModalHistorico({historico, nomeCliente, data, nomeAt
                                         Nome: {nomeCliente}
                                     </div>
                                     <div>
-                                        data: {dataTela.toLocaleString("pt-br")}
+                                        data: {new Date(data).toLocaleString("pt-br")}
                                     </div>
                                     <div onClick={() => setMostrarHistorico(!mostrarHistorico)} className=" p-2 bg-gray-500 rounded-md cursor-pointer">
                                         {mostrarHistorico? "Esconder histórico": "Mostrar histórico"}

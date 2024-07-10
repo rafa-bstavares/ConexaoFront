@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent, useContext, ChangeEvent, useInsertionEffect, Dispatch, SetStateAction, useRef } from 'react';
+import { useState, useEffect, useContext, ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import { socket } from "../../socket"
 import { ContextoUsuario } from '../../Contexts/ContextoUsuario/ContextoUsuario';
 import { ContextoLogin } from '../../Contexts/ContextoLogin/ContextoLogin';
@@ -52,7 +52,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
   const [opSelecionada, setOpSelecionada] = useState<number>(0)
   const [cartasSelecionadas, setCartasSelecionadas] = useState<string[]>([])
   const [historico, setHistorico] = useState<string[]>([""])
-  const {salaAtual, setSalaAtual, precoTotalConsulta, tempoConsulta, setPrecoTotalConsulta, setTempoConsulta, usuario, setUsuario, loading, setLoading} = useContext(ContextoUsuario)
+  const {salaAtual, setSalaAtual, precoTotalConsulta, tempoConsulta, setPrecoTotalConsulta, setTempoConsulta, usuario, setUsuario} = useContext(ContextoUsuario)
   const {setUsuarioLogado} = useContext(ContextoLogin)
   const {setTemAviso, setTextoAviso, temAviso, abrirModalRecarregar, setAbrirModalRecarregar} = useContext(ContextoAviso)
   const [minutos, setMinutos] = useState<number>(0)
@@ -69,7 +69,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
   const navigate = useNavigate()
 
-  function enviarFn(e: FormEvent){
+  function enviarFn(){
     socket.emit("clientMsg", {msg: atendente? "|P|" + msg : "|U|" + msg, room: atendente? (infoSalas? salaAtualAdm.toString() : "") : salaAtual.toString()})
     setMsg("")
     console.log("você está na sala: " + salaAtualAdm) 
@@ -80,7 +80,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
     })
 
-    async function pegarInfoCliente(id: string): Promise<{ nome: string; email: string; }> {
+    /*async function pegarInfoCliente(id: string): Promise<{ nome: string; email: string; }> {
       fetch("http://localhost:8080/pegarInfoCliente", {
         method: "POST",
         headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
@@ -103,7 +103,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
       })
       return {nome: "Usuário", email: ""}
     }
-
+*/
 
     function pegarInfoUsuario(){
       fetch("http://localhost:8080/pegarInfoUsuario", {
@@ -191,7 +191,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         setHistorico(data.novoHistorico.split("||n||"))
       })
 
-      socket.on("salaEncerrada", (data) => {
+      socket.on("salaEncerrada", () => {
         if(atendente && infoSalas){
          /* let infoSalasClone = [...infoSalas]
           infoSalasClone = infoSalasClone.filter(item => item.idSala !== Number(data.idSala))
@@ -463,7 +463,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
 
-
+/*
     function setarOffline(){
       fetch("http://localhost:8080/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
         console.log(data)
@@ -503,7 +503,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
       }
     }
 
-
+*/
 
     function onChangeSelect(e: ChangeEvent<HTMLSelectElement>){
       setOpSelecionada(e.target.selectedIndex)

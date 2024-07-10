@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect} from "react"
 import { Outlet } from "react-router-dom"
 import MenuAdm from "../MenuAdm/MenuAdm"
 import ModalAviso from "../ModalAviso/ModalAviso"
@@ -11,7 +11,7 @@ import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 
 export default function Adm(){
 
-    const {temAviso, setTemAviso, textoAviso} = useContext(ContextoAviso)
+    const {temAviso} = useContext(ContextoAviso)
     const {abrirModalDetalhes} = useContext(ContextoProfissionais)
     const {admGeralLogado, setAdmGeralLogado} = useContext(ContextoLogin)
 

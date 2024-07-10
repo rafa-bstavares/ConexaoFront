@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext } from "react"
+import { useContext } from "react"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 
 type Props =  {
