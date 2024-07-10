@@ -1,8 +1,7 @@
 import { useContext } from "react"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 
-type Props =  {
-}
+
 
 export default function ModalAviso(){
 
