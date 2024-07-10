@@ -12,7 +12,7 @@ export default function Banner(){
 
 
   /*  function criarSala(){
-        fetch("http://localhost:8080/criarSala", {
+        fetch("http://167.88.32.149:8080/criarSala", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -41,7 +41,7 @@ export default function Banner(){
     }
 
     function irParaChat(){
-        fetch("http://localhost:8080/confereTokenUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("http://167.88.32.149:8080/confereTokenUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
             if(data[0] == "erro"){
               setUsuarioLogado(false)
               localStorage.setItem("authToken", "")
@@ -83,7 +83,7 @@ export default function Banner(){
 Ao buscar usuario:
 
     function criarSala(){
-        fetch("http://localhost:8080/criarSala", {
+        fetch("http://167.88.32.149:8080/criarSala", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

@@ -20,7 +20,7 @@ export default function ModalCartao(){
                     <CardPayment initialization={{ amount: saldoAdicionar }}
                     onSubmit={async (param) => {
                         console.log(param);
-                        fetch("http://localhost:8080/pagamentoCartao", {
+                        fetch("http://167.88.32.149:8080/pagamentoCartao", {
                             method: "POST",
                             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                             body: JSON.stringify(param)

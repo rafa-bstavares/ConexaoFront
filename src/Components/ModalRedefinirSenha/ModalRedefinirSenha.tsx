@@ -24,7 +24,7 @@ export default function ModalRedefinirSenha({tipo}: Props){
     function redefinirSenha(){
 
         if(novaSenha1 == novaSenha2 && novaSenha1 !== ""){
-            fetch("http://localhost:8080/redefinirSenha" + tipo, {
+            fetch("http://167.88.32.149:8080/redefinirSenha" + tipo, {
                 method: "POST",
                 headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                 body: JSON.stringify({

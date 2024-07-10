@@ -20,7 +20,7 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
 
         console.log(idProfissional)
 
-        fetch("http://localhost:8080/detalheProfissional", {
+        fetch("http://167.88.32.149:8080/detalheProfissional", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -50,7 +50,7 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
     return (
         <div className="px-20 py-10 flex items-center gap-8 rounded-md bg-black">
             <div className="h-40 w-40 overflow-hidden ">
-                <img className="object-cover" src={`http://localhost:8080/images/${img}`} alt="foto perfil profissional" />
+                <img className="object-cover" src={`http://167.88.32.149:8080/images/${img}`} alt="foto perfil profissional" />
             </div>
             <div className="text-xl">{nomeProfissional}</div>
             <div className="px-4 py-2 rounded-md bg-slate-500 cursor-pointer" onClick={maisDetalherProfissional}>

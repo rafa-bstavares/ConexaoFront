@@ -26,7 +26,7 @@ function App() {
 
   
   function pegarInfoUsuario(){
-    fetch("http://localhost:8080/pegarInfoUsuario", {
+    fetch("http://167.88.32.149:8080/pegarInfoUsuario", {
         headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
     }).then(res => res.json()).then(data => {
         if(data[0] && data[0] == "erro"){
@@ -56,7 +56,7 @@ function App() {
     initMercadoPago("TEST-22c8f531-7cc0-46c1-acd2-7c1ea1bf5f45")
 
 
-    fetch("http://localhost:8080/confereTokenUsuario", {
+    fetch("http://167.88.32.149:8080/confereTokenUsuario", {
       headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
     }).then(res => res.json()).then(data => {
       if(data[0] && data[0] == "erro"){

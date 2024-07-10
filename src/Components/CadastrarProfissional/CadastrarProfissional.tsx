@@ -35,7 +35,7 @@ export default function CadastrarProfissional(){
         setTemAviso(false)
         setTextoAviso("")
 
-        fetch("http://localhost:8080/pegarTrabalhos").then(res => res.json()).then(data => {
+        fetch("http://167.88.32.149:8080/pegarTrabalhos").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setArrTrabalhosTotais(data[1])
             }else{
@@ -57,13 +57,13 @@ export default function CadastrarProfissional(){
             if(imgProf){
                 formData.append("imgProf", imgProf)
             }
-            fetch("http://localhost:8080/addFotoProfissional", {
+            fetch("http://167.88.32.149:8080/addFotoProfissional", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
                 if(data[0] == "sucesso" && data[1][0].id){
                     //fazer segundo fetch
-                    fetch("http://localhost:8080/addInfosProfissional", {
+                    fetch("http://167.88.32.149:8080/addInfosProfissional", {
                         method: "POST",
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({
@@ -120,7 +120,7 @@ export default function CadastrarProfissional(){
             formData.append("novoTrabalho", novoTrabalho)
 
 
-            fetch("http://localhost:8080/cadastrarTrabalho", {
+            fetch("http://167.88.32.149:8080/cadastrarTrabalho", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
@@ -128,7 +128,7 @@ export default function CadastrarProfissional(){
                     setTextoAviso(data[1])
                     console.log(data[1])
                     setTemAviso(true)
-                    fetch("http://localhost:8080/pegarTrabalhos").then(res => res.json()).then(data => {
+                    fetch("http://167.88.32.149:8080/pegarTrabalhos").then(res => res.json()).then(data => {
                         if(data[0] == "sucesso"){
                             setArrTrabalhosTotais(data[1])
                         }else{

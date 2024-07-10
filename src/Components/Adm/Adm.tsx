@@ -20,7 +20,7 @@ export default function Adm(){
     }, [temAviso])
 
     useEffect(() => {
-        fetch("http://localhost:8080/confereTokenAdmGeral", {
+        fetch("http://167.88.32.149:8080/confereTokenAdmGeral", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
           if(data[0] && data[0] == "erro"){

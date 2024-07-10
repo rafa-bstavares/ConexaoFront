@@ -44,7 +44,7 @@ export default function AdmChat(){
 
 
 
-        fetch("http://localhost:8080/confereTokenAtendente", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("http://167.88.32.149:8080/confereTokenAtendente", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
           if(data[0] == "erro"){
             setAtendenteLogado(false)
             localStorage.setItem("authToken", "")
@@ -113,7 +113,7 @@ export default function AdmChat(){
 
 
     function encerrarAtendimento(){
-      fetch("http://localhost:8080/encerrarAtendimento", {
+      fetch("http://167.88.32.149:8080/encerrarAtendimento", {
         method: "POST",
     headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
         body: JSON.stringify({
@@ -132,7 +132,7 @@ export default function AdmChat(){
     }
 
     function setarStatus(status: string){
-      fetch("http://localhost:8080/setarStatus", {
+      fetch("http://167.88.32.149:8080/setarStatus", {
         method: "POST",
         headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
         body: JSON.stringify({
@@ -155,7 +155,7 @@ export default function AdmChat(){
     }
 
     function sairFn(){
-        fetch("http://localhost:8080/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("http://167.88.32.149:8080/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
           console.log(data)
           if(data[0] == "sucesso"){
             localStorage.setItem("authToken", "")
