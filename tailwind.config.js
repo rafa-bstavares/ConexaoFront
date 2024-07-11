@@ -7,10 +7,10 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "bannerImg": "url('./src/assets/images/bannerConexao.jpg')",
-        "fundoProfissionais": "url('./src/assets/images/fundoProfissionais.jpg')",
-        "fundoChat": "url('./src/assets/images/fundoChat.jpg')",
-        "fundoTextoChat": "url('./src/assets/images/fundoTextoChat.jpg')"
+        "bannerImg": "url('./assets/images/bannerConexao.jpg')",
+        "fundoProfissionais": "url('./assets/images/fundoProfissionais.jpg')",
+        "fundoChat": "url('./assets/images/fundoChat.jpg')",
+        "fundoTextoChat": "url('./assets/images/fundoTextoChat.jpg')"
       },
       colors:{
         "roxoPrincipal": "#391240",
