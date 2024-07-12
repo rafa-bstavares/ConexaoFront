@@ -229,8 +229,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         console.log("recebi o socket")
         if(atendente){
           console.log("recebi o socket e sou atendente")
-          console.log(data.idProfissional)
-          console.log(idAtendenteAtual)
+
           fetch("http://167.88.32.149:8080/infoAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
           }).then(res => res.json()).then(data => {
@@ -240,6 +239,8 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }else if(data[0] == "sucesso" && data[1].idAtendente && data[1].baralhos){
   
               setIdAtendenteAtual(Number(data[1].idAtendente))
+              console.log(data.idProfissional)
+              console.log(Number(data[1].idAtendente))
               if(data.idProfissional == data[1].idAtendente){
                 //abrir modal tocando
                 setUsuarioChamando(data.nomeCliente)
