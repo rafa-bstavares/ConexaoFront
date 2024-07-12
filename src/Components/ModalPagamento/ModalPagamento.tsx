@@ -101,7 +101,12 @@ export default function ModalPagamento(){
                             setTextoErro("você já tem um pagamento em aberto")
                         }else{
                             setTemErro(true)
-                            setTextoErro("ocorreu um erro ao tentar efetuar seu pagamento")
+                            if(data[1]){
+                                setTextoErro(data[1])
+                            }else{
+                                setTextoErro("ocorreu um erro desconhecido ao tentar efetuar seu pagamento")
+                            }
+
                         }
                     }).catch((err) => console.log(err))
                 }
