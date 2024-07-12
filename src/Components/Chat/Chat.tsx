@@ -226,7 +226,11 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
       socket.on("clienteChamando", (data) => {
+        console.log("recebi o socket")
         if(atendente){
+          console.log("recebi o socket e sou atendente")
+          console.log(data.idProfissional)
+          console.log(idAtendenteAtual)
           if(data.idProfissional == idAtendenteAtual){
             //abrir modal tocando
             setUsuarioChamando(data.nomeCliente)
