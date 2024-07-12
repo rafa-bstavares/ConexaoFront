@@ -67,7 +67,7 @@ export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Pro
                         }else{
                             //mandar pro pagamento ou reduzir o tempo
                             setTemErro(true)
-                            setTextoErro(`Você não tem saldo o suficiente para continuar com o tempo que escolheu. Caso queira comprar mais saldo você pode esperar a consulta acabar ou encerrá-la, comprar mais saldo na página principal e entrar no chat novamente. Como temos que considerar que você utilizará todo o saldo que reservou para a consulta atual (mesmo que ela ainda não tenha terminado) o seu saldo disponível para gosto no momento é de: R$${data[1].previsaoSaldo}`)
+                            setTextoErro(`Você não tem saldo o suficiente para continuar com o tempo que escolheu. Caso queira comprar mais saldo você pode esperar a consulta acabar ou encerrá-la, comprar mais saldo na página principal e entrar no chat novamente (O atendente terá acesso ao histórico da conversa atual, logo, as informações não serão perdidas). Como temos que considerar que você utilizará todo o saldo que reservou para a consulta atual (mesmo que ela ainda não tenha terminado) o seu saldo disponível para gosto no momento é de: R$${data[1].previsaoSaldo}`)
                         }
                     }else{
                         setTemErro(true)
