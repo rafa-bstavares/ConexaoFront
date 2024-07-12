@@ -275,7 +275,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                 console.log(dataFetch[1].idAtendente)
                 if(data.idProfissional == dataFetch[1].idAtendente){
                   setAbrirModalChamandoAtendente(false)
-                  atualizarCronometro()
+                  window.location.reload()
                 }
     
                 setIdAtendenteAtual(Number(dataFetch[1].idAtendente))
