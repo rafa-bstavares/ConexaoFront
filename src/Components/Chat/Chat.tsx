@@ -388,6 +388,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
     }, [])
 
+    useEffect(() => {
+      console.log("Meu id como atendente é: " + idAtendenteAtual)
+    }, [idAtendenteAtual])
+
 
 
     useEffect(() => {
