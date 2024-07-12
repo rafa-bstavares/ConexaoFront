@@ -230,28 +230,31 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         if(atendente){
           console.log("recebi o socket e sou atendente")
 
+
           fetch("http://167.88.32.149:8080/infoAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
-          }).then(res => res.json()).then(data => {
-            if(data[0] == "erro"){
+          }).then(res => res.json()).then(dataFetch => {
+            if(dataFetch[0] == "erro"){
               setTemAviso(true)
               setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
-            }else if(data[0] == "sucesso" && data[1].idAtendente && data[1].baralhos){
-  
-              setIdAtendenteAtual(Number(data[1].idAtendente))
+            }else if(dataFetch[0] == "sucesso" && dataFetch[1].idAtendente && dataFetch[1].baralhos){
+
               console.log(data.idProfissional)
-              console.log(Number(data[1].idAtendente))
-              if(data.idProfissional == data[1].idAtendente){
+              console.log(dataFetch[1].idAtendente)
+              if(data.idProfissional == dataFetch[1].idAtendente){
                 //abrir modal tocando
                 setUsuarioChamando(data.nomeCliente)
                 setIdUsuarioChamando(data.idCliente)
                 setAbrirModalChamandoAtendente(true)
               }
+  
+              setIdAtendenteAtual(Number(dataFetch[1].idAtendente))
             }else{
               setTemAviso(true)
               setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
             }
           })
+
 
         }
       })
