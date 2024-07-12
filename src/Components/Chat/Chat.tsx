@@ -261,9 +261,32 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
       if(atendente){
         socket.on("respostaAtendente", (data) => {
-          if(atendente && data.idProfissional == perfilProAtual.id){
-            setAbrirModalChamandoAtendente(false)
+          if(atendente){
+
+            fetch("http://167.88.32.149:8080/infoAtendente", {
+              headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
+            }).then(res => res.json()).then(dataFetch => {
+              if(dataFetch[0] == "erro"){
+                setTemAviso(true)
+                setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
+              }else if(dataFetch[0] == "sucesso" && dataFetch[1].idAtendente && dataFetch[1].baralhos){
+
+                console.log(data.idProfissional)
+                console.log(dataFetch[1].idAtendente)
+                if(data.idProfissional == dataFetch[1].idAtendente){
+                  setAbrirModalChamandoAtendente(false)
+                  atualizarCronometro()
+                }
+    
+                setIdAtendenteAtual(Number(dataFetch[1].idAtendente))
+              }else{
+                setTemAviso(true)
+                setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
+              }
+            })
+
           }
+
         })
       }
 
