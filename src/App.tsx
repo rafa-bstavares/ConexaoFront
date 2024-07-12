@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
 
-    initMercadoPago("TEST-22c8f531-7cc0-46c1-acd2-7c1ea1bf5f45")
+    initMercadoPago("APP_USR-1bbc7fc7-82fb-4893-b5d4-e809413360cb")
 
 
     fetch("http://167.88.32.149:8080/confereTokenUsuario", {
