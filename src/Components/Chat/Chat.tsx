@@ -240,7 +240,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }else if(data[0] == "sucesso" && data[1].idAtendente && data[1].baralhos){
   
               setIdAtendenteAtual(Number(data[1].idAtendente))
-              if(data.idProfissional == idAtendenteAtual){
+              if(data.idProfissional == data[1].idAtendente){
                 //abrir modal tocando
                 setUsuarioChamando(data.nomeCliente)
                 setIdUsuarioChamando(data.idCliente)
