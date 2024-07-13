@@ -35,7 +35,7 @@ export default function CadastrarProfissional(){
         setTemAviso(false)
         setTextoAviso("")
 
-        fetch("https://167.88.32.149:8080/pegarTrabalhos").then(res => res.json()).then(data => {
+        fetch("api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setArrTrabalhosTotais(data[1])
             }else{
@@ -57,13 +57,13 @@ export default function CadastrarProfissional(){
             if(imgProf){
                 formData.append("imgProf", imgProf)
             }
-            fetch("https://167.88.32.149:8080/addFotoProfissional", {
+            fetch("api.conexaoastralmistica.com.br/addFotoProfissional", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
                 if(data[0] == "sucesso" && data[1][0].id){
                     //fazer segundo fetch
-                    fetch("https://167.88.32.149:8080/addInfosProfissional", {
+                    fetch("api.conexaoastralmistica.com.br/addInfosProfissional", {
                         method: "POST",
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({
@@ -120,7 +120,7 @@ export default function CadastrarProfissional(){
             formData.append("novoTrabalho", novoTrabalho)
 
 
-            fetch("https://167.88.32.149:8080/cadastrarTrabalho", {
+            fetch("api.conexaoastralmistica.com.br/cadastrarTrabalho", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
@@ -128,7 +128,7 @@ export default function CadastrarProfissional(){
                     setTextoAviso(data[1])
                     console.log(data[1])
                     setTemAviso(true)
-                    fetch("https://167.88.32.149:8080/pegarTrabalhos").then(res => res.json()).then(data => {
+                    fetch("api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
                         if(data[0] == "sucesso"){
                             setArrTrabalhosTotais(data[1])
                         }else{

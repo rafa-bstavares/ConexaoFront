@@ -54,7 +54,7 @@ export default function ModalTempo(){
 
     
     function criarSala(){
-        fetch("https://167.88.32.149:8080/criarSala", {
+        fetch("api.conexaoastralmistica.com.br/criarSala", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -87,7 +87,7 @@ export default function ModalTempo(){
         if(usuario.saldo >= precoConsultaVar){
             //criar sala e enviar o preco consultaVar pra setar os cronômetros
                 console.log("saldo suficiente")
-                fetch("https://167.88.32.149:8080/mudarSaldo", {
+                fetch("api.conexaoastralmistica.com.br/mudarSaldo", {
                     method: "POST" ,
                     headers: {
                         "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export default function ModalTempo(){
                             setTextoAviso("Ocorreu um erro, por favor tente novamente")
                         }
                     }else if(data[0] == "sucesso"){
-                                fetch("https://167.88.32.149:8080/confereSalas", {
+                                fetch("api.conexaoastralmistica.com.br/confereSalas", {
                                     method: "POST",
                                     headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                                     body: JSON.stringify({

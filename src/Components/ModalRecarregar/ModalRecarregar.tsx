@@ -37,14 +37,14 @@ export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Pro
 
 
     function confereSaldo(){
-        fetch("https://167.88.32.149:8080/pegarPrevSaldo", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"}}).then(res => res.json()).then(data => {
+        fetch("api.conexaoastralmistica.com.br/pegarPrevSaldo", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"}}).then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 if(data[1]){
                     if(data[1].previsaoSaldo){
                         if(data[1].previsaoSaldo >= precoAdicionalConsulta){
                             //mudar o previsao saldo e continuar consulta (tem saldo)
                             console.log("salda exxtra suficienteeeeeeeeee")
-                            fetch("https://167.88.32.149:8080/atualizarTempoConsulta", {
+                            fetch("api.conexaoastralmistica.com.br/atualizarTempoConsulta", {
                                 method: "POST",
                                 headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                                 body: JSON.stringify({

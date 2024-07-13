@@ -9,7 +9,7 @@ export default function AdmBlog(){
     const [desc, setDesc] = useState<string>("")
 
     useEffect(() => {
-        fetch("https://167.88.32.149:8080/").then(res => res.json()).then(data => console.log(data)).catch(() => console.log("deu algo errado no fetch"))
+        fetch("api.conexaoastralmistica.com.br/").then(res => res.json()).then(data => console.log(data)).catch(() => console.log("deu algo errado no fetch"))
     }, [])
 
     function postarFn(){
@@ -19,7 +19,7 @@ export default function AdmBlog(){
         }
         formData.append("titulo", titulo)
         formData.append("desc", desc)
-        fetch("https://167.88.32.149:8080/postarBlog", {
+        fetch("api.conexaoastralmistica.com.br/postarBlog", {
             method: "POST",
             body: formData
         }).then(res => res.json()).then(data => console.log(data)).catch(() => console.log("deu algo errado no fetch"))

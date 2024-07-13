@@ -72,7 +72,7 @@ export default function ModalPagamento(){
                 setTextoErro("")
                 const statusCpf = confereCpf(cpf)
                 if(statusCpf == "válido"){
-                    fetch("https://167.88.32.149:8080/pagamentoPix", {
+                    fetch("api.conexaoastralmistica.com.br/pagamentoPix", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -124,7 +124,7 @@ export default function ModalPagamento(){
 
 
     function statusPagamento(){
-        fetch("https://167.88.32.149:8080/statusPagamento", {
+        fetch("api.conexaoastralmistica.com.br/statusPagamento", {
             headers: {
                 "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
             }

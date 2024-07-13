@@ -26,7 +26,7 @@ function App() {
 
   
   function pegarInfoUsuario(){
-    fetch("https://167.88.32.149:8080/pegarInfoUsuario", {
+    fetch("api.conexaoastralmistica.com.br/pegarInfoUsuario", {
         headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
     }).then(res => res.json()).then(data => {
         if(data[0] && data[0] == "erro"){
@@ -56,7 +56,7 @@ function App() {
     initMercadoPago("APP_USR-1bbc7fc7-82fb-4893-b5d4-e809413360cb")
 
 
-    fetch("https://167.88.32.149:8080/confereTokenUsuario", {
+    fetch("api.conexaoastralmistica.com.br/confereTokenUsuario", {
       headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
     }).then(res => res.json()).then(data => {
       if(data[0] && data[0] == "erro"){
