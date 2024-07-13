@@ -89,8 +89,8 @@ export default function Login({tipoLogin}: Props){
 
     return(
         <div className="min-h-screen bg-roxoPrincipal flex flex-col justify-center items-center relative">
-            <form className="p-3 backdrop-blur-xl bg-white/30 rounded-md flex flex-col gap-3 w-1/3 text-black">
-                <div className="font-bold text-white text-3xl flex justify-center">Login {tipoLogin == "atendente"? "Atendentes": (tipoLogin == "admGeral"? "Administração" : "Usuários")}</div>
+            <form className="p-3 backdrop-blur-xl bg-white/30 rounded-md flex flex-col gap-3 lg:w-1/3 w-4/5 text-black">
+                <div className="font-bold text-white lg:text-3xl text-xl flex justify-center">Login {tipoLogin == "atendente"? "Atendentes": (tipoLogin == "admGeral"? "Administração" : "Usuários")}</div>
                 <input type="email" placeholder="email" onChange={e => {setEmail(e.target.value)}} className="rounded-md p-2"/>
                 <div className="rounded-md flex overflow-hidden bg-white">
                     <input type={showPassword ? "text" : "password"} placeholder="senha" onChange={e => {setSenha(e.target.value)}} className="p-2 flex-1 outline-none"/>
