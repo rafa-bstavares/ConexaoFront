@@ -66,7 +66,7 @@ export default function ModalCartao(){
                     }}
                     />
                     <div className="flex justify-center">
-                        <Botao onClickFn={() => setAbrirModalCartao(false)} texto="Fechar"/>
+                        <Botao onClickFn={() => {setAbrirModalCartao(false); window.location.reload()}} texto="Fechar"/>
                     </div>
                 </div>
             </div>

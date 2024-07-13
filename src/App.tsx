@@ -72,11 +72,6 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    if(abrirModalCartao == false || abrirModalPagamento == false){
-        window.location.reload() //pra puxar o saldo novo
-    }
- }, [abrirModalCartao, abrirModalPagamento])
 
 
 

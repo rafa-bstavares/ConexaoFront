@@ -182,7 +182,7 @@ export default function ModalPagamento(){
                     }
                     <div className="flex gap-4 self-center mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
-                        <Botao onClickFn={() => setAbrirModalPagamento(false)} texto="Cancelar"/>
+                        <Botao onClickFn={() => {setAbrirModalPagamento(false); window.location.reload()}} texto="Cancelar"/>
                     </div>
                     
                     <div className="flex justify-center">
