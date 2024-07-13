@@ -24,7 +24,7 @@ export default function ModalLogin(){
 
 
   function pegarInfoUsuario(){
-    fetch("http://167.88.32.149:8080/pegarInfoUsuario", {
+    fetch("https://167.88.32.149:8080/pegarInfoUsuario", {
         headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
     }).then(res => res.json()).then(data => {
         if(data[0] && data[0] == "erro"){
@@ -48,7 +48,7 @@ export default function ModalLogin(){
 }
 
     function logar(){
-        fetch("http://167.88.32.149:8080/login", {
+        fetch("https://167.88.32.149:8080/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

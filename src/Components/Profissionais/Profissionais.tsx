@@ -19,7 +19,7 @@ export default function Profissionais(){
     })
 
     useEffect(() => {
-        fetch("http://167.88.32.149:8080/pegarInfoProfissionais").then(res => res.json()).then(data => {
+        fetch("https://167.88.32.149:8080/pegarInfoProfissionais").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setProfissionais(data[1])
             }else{

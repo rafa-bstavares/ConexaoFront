@@ -50,7 +50,7 @@ export default function ModalCadastrarUsuario(){
                         setTextoErro("os campos devem ser todos preenchidos")
                     }else{
                         const dataNas = dia + "/"  + mes + "/" + ano
-                        fetch("http://167.88.32.149:8080/cadastrarUsuario", {
+                        fetch("https://167.88.32.149:8080/cadastrarUsuario", {
                             method: "POST",
                             headers: {"Content-Type": "application/json"},
                             body: JSON.stringify({

@@ -18,7 +18,7 @@ export default function ItemModalDetalhes({nome, valor, inicio, final, idHistori
     
     useEffect(() => {
         if(mostrarHistorico){
-            fetch("http://167.88.32.149:8080/pegarHistorico", {
+            fetch("https://167.88.32.149:8080/pegarHistorico", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({

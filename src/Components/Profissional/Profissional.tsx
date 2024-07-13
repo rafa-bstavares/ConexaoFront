@@ -30,7 +30,7 @@ useEffect(() => {
 
 
     function irParaChat(){
-        fetch("http://167.88.32.149:8080/confereTokenUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("https://167.88.32.149:8080/confereTokenUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
             if(data[0] == "erro"){
               setUsuarioLogado(false)
               localStorage.setItem("authToken", "")
@@ -55,7 +55,7 @@ useEffect(() => {
     }
 
     function irPerfil(){
-        fetch("http://167.88.32.149:8080/irPerfil", {
+        fetch("https://167.88.32.149:8080/irPerfil", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -80,7 +80,7 @@ useEffect(() => {
     return(
         <div className="flex flex-col py-4 lg:px-14 px-4 w-4/5 rounded-md border-white border-solid border-2 items-center gap-4 text-white bg-fundoProfissionais">
             <div className="w-full h-52 rounded-md overflow-hidden flex justify-center items-center">
-                <img className="object-cover h-full" src={`http://167.88.32.149:8080/images/${img}`} alt="imagem-profissional"/>
+                <img className="object-cover h-full" src={`https://167.88.32.149:8080/images/${img}`} alt="imagem-profissional"/>
             </div>
             <div className="font-bold text-2xl text-center">
                 {nome}

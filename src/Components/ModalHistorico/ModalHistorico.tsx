@@ -11,7 +11,7 @@ export default function ModalHistorico(){
     const {setTemAviso, setTextoAviso} = useContext(ContextoAviso)
 
     useEffect(() => {
-        fetch("http://167.88.32.149:8080/meusHistoricosAtendente", {
+        fetch("https://167.88.32.149:8080/meusHistoricosAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){

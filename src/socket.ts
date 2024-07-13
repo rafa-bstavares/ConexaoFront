@@ -22,4 +22,4 @@ interface ClientToServerEvents {
     respostaChamarAtendente: (data: {msg:  string, idCliente: number, idProfissional: number}) => {}
 }
 
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("http://167.88.32.149:8080")
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("https://167.88.32.149:8080")

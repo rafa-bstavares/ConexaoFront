@@ -18,7 +18,7 @@ export default function ControleAdm(){
     const [saldoAtual, setSaldoAtual] = useState<number>(0)
 
     useEffect(() => {
-        fetch("http://167.88.32.149:8080/pegarInfoProfissionais").then(res => res.json()).then(data => {
+        fetch("https://167.88.32.149:8080/pegarInfoProfissionais").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setProfissionais(data[1])
             }else{
@@ -33,7 +33,7 @@ export default function ControleAdm(){
         })
 
 
-        fetch("http://167.88.32.149:8080/listaClientes", {
+        fetch("https://167.88.32.149:8080/listaClientes", {
             headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then((res => res.json())).then(data => {
             if(data.length > 0){
@@ -52,7 +52,7 @@ export default function ControleAdm(){
 
     function alterarSaldoFn(){
         setAbrirModalCertezaSaldo(false)
-        fetch("http://167.88.32.149:8080/alterarSaldo", {
+        fetch("https://167.88.32.149:8080/alterarSaldo", {
             method: "POST",
             headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
             body: JSON.stringify({

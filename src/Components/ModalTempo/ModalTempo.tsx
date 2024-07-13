@@ -54,7 +54,7 @@ export default function ModalTempo(){
 
     
     function criarSala(){
-        fetch("http://167.88.32.149:8080/criarSala", {
+        fetch("https://167.88.32.149:8080/criarSala", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -87,7 +87,7 @@ export default function ModalTempo(){
         if(usuario.saldo >= precoConsultaVar){
             //criar sala e enviar o preco consultaVar pra setar os cronômetros
                 console.log("saldo suficiente")
-                fetch("http://167.88.32.149:8080/mudarSaldo", {
+                fetch("https://167.88.32.149:8080/mudarSaldo", {
                     method: "POST" ,
                     headers: {
                         "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export default function ModalTempo(){
                             setTextoAviso("Ocorreu um erro, por favor tente novamente")
                         }
                     }else if(data[0] == "sucesso"){
-                                fetch("http://167.88.32.149:8080/confereSalas", {
+                                fetch("https://167.88.32.149:8080/confereSalas", {
                                     method: "POST",
                                     headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                                     body: JSON.stringify({

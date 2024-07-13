@@ -15,7 +15,7 @@ export default function Perfil(){
     const {setTemAviso, setTextoAviso, temAviso} = useContext(ContextoAviso)
 
     useEffect(() => {
-        fetch("http://167.88.32.149:8080/infoIdAtendente", {
+        fetch("https://167.88.32.149:8080/infoIdAtendente", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -37,7 +37,7 @@ export default function Perfil(){
                 Perfil detalhado do profissional
             </div>
             <div className="w-[20vw] h-[20vw] flex justify-center items-center">
-                <img className="h-full object-cover" src={`http://167.88.32.149:8080/images/${perfilProAtual.foto}`} alt="foto perfil profissional" />
+                <img className="h-full object-cover" src={`https://167.88.32.149:8080/images/${perfilProAtual.foto}`} alt="foto perfil profissional" />
             </div>
             <div className="text-center text-xl">
                 {perfilProAtual.nome}

@@ -27,7 +27,7 @@ export default function Login({tipoLogin}: Props){
         e.preventDefault() //o preventDefault previne até que a conferencia do required seja feita, então vai ter que fazer essa conferência por JS
 
         if(email !== "" && senha !== ""){
-            fetch("http://167.88.32.149:8080/login", {
+            fetch("https://167.88.32.149:8080/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

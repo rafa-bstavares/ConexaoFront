@@ -72,7 +72,7 @@ export default function ModalPagamento(){
                 setTextoErro("")
                 const statusCpf = confereCpf(cpf)
                 if(statusCpf == "válido"){
-                    fetch("http://167.88.32.149:8080/pagamentoPix", {
+                    fetch("https://167.88.32.149:8080/pagamentoPix", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -124,7 +124,7 @@ export default function ModalPagamento(){
 
 
     function statusPagamento(){
-        fetch("http://167.88.32.149:8080/statusPagamento", {
+        fetch("https://167.88.32.149:8080/statusPagamento", {
             headers: {
                 "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
             }
