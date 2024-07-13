@@ -18,7 +18,7 @@ export default function ControleAdm(){
     const [saldoAtual, setSaldoAtual] = useState<number>(0)
 
     useEffect(() => {
-        fetch("api.conexaoastralmistica.com.br/pegarInfoProfissionais").then(res => res.json()).then(data => {
+        fetch("https://api.conexaoastralmistica.com.br/pegarInfoProfissionais").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setProfissionais(data[1])
             }else{
@@ -33,7 +33,7 @@ export default function ControleAdm(){
         })
 
 
-        fetch("api.conexaoastralmistica.com.br/listaClientes", {
+        fetch("https://api.conexaoastralmistica.com.br/listaClientes", {
             headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then((res => res.json())).then(data => {
             if(data.length > 0){
@@ -52,7 +52,7 @@ export default function ControleAdm(){
 
     function alterarSaldoFn(){
         setAbrirModalCertezaSaldo(false)
-        fetch("api.conexaoastralmistica.com.br/alterarSaldo", {
+        fetch("https://api.conexaoastralmistica.com.br/alterarSaldo", {
             method: "POST",
             headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
             body: JSON.stringify({

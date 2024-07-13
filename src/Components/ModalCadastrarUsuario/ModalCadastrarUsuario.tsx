@@ -50,7 +50,7 @@ export default function ModalCadastrarUsuario(){
                         setTextoErro("os campos devem ser todos preenchidos")
                     }else{
                         const dataNas = dia + "/"  + mes + "/" + ano
-                        fetch("api.conexaoastralmistica.com.br/cadastrarUsuario", {
+                        fetch("https://api.conexaoastralmistica.com.br/cadastrarUsuario", {
                             method: "POST",
                             headers: {"Content-Type": "application/json"},
                             body: JSON.stringify({

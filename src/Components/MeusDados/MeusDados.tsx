@@ -19,7 +19,7 @@ export default function MeusDados({tipo}: Props){
     function redefinirSenha(){
 
         if(novaSenha1 == novaSenha2 && novaSenha1 !== ""){
-            fetch("api.conexaoastralmistica.com.br/redefinirSenha" + tipo, {
+            fetch("https://api.conexaoastralmistica.com.br/redefinirSenha" + tipo, {
                 method: "POST",
                 headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                 body: JSON.stringify({

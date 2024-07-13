@@ -20,7 +20,7 @@ export default function ModalCartao(){
                     <CardPayment initialization={{ amount: saldoAdicionar }}
                     onSubmit={async (param) => {
                         console.log(param);
-                        fetch("api.conexaoastralmistica.com.br/pagamentoCartao", {
+                        fetch("https://api.conexaoastralmistica.com.br/pagamentoCartao", {
                             method: "POST",
                             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                             body: JSON.stringify(param)

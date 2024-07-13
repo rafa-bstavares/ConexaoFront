@@ -35,7 +35,7 @@ export default function CadastrarProfissional(){
         setTemAviso(false)
         setTextoAviso("")
 
-        fetch("api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
+        fetch("https://api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setArrTrabalhosTotais(data[1])
             }else{
@@ -57,13 +57,13 @@ export default function CadastrarProfissional(){
             if(imgProf){
                 formData.append("imgProf", imgProf)
             }
-            fetch("api.conexaoastralmistica.com.br/addFotoProfissional", {
+            fetch("https://api.conexaoastralmistica.com.br/addFotoProfissional", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
                 if(data[0] == "sucesso" && data[1][0].id){
                     //fazer segundo fetch
-                    fetch("api.conexaoastralmistica.com.br/addInfosProfissional", {
+                    fetch("https://api.conexaoastralmistica.com.br/addInfosProfissional", {
                         method: "POST",
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({
@@ -120,7 +120,7 @@ export default function CadastrarProfissional(){
             formData.append("novoTrabalho", novoTrabalho)
 
 
-            fetch("api.conexaoastralmistica.com.br/cadastrarTrabalho", {
+            fetch("https://api.conexaoastralmistica.com.br/cadastrarTrabalho", {
                 method: "POST",
                 body: formData
             }).then(res => res.json()).then(data => {
@@ -128,7 +128,7 @@ export default function CadastrarProfissional(){
                     setTextoAviso(data[1])
                     console.log(data[1])
                     setTemAviso(true)
-                    fetch("api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
+                    fetch("https://api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
                         if(data[0] == "sucesso"){
                             setArrTrabalhosTotais(data[1])
                         }else{

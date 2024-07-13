@@ -20,7 +20,7 @@ export default function Adm(){
     }, [temAviso])
 
     useEffect(() => {
-        fetch("api.conexaoastralmistica.com.br/confereTokenAdmGeral", {
+        fetch("https://api.conexaoastralmistica.com.br/confereTokenAdmGeral", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
           if(data[0] && data[0] == "erro"){

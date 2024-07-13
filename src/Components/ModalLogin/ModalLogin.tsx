@@ -24,7 +24,7 @@ export default function ModalLogin(){
 
 
   function pegarInfoUsuario(){
-    fetch("api.conexaoastralmistica.com.br/pegarInfoUsuario", {
+    fetch("https://api.conexaoastralmistica.com.br/pegarInfoUsuario", {
         headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
     }).then(res => res.json()).then(data => {
         if(data[0] && data[0] == "erro"){
@@ -48,7 +48,7 @@ export default function ModalLogin(){
 }
 
     function logar(){
-        fetch("api.conexaoastralmistica.com.br/login", {
+        fetch("https://api.conexaoastralmistica.com.br/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

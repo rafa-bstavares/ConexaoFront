@@ -19,7 +19,7 @@ export default function Profissionais(){
     })
 
     useEffect(() => {
-        fetch("api.conexaoastralmistica.com.br/pegarInfoProfissionais").then(res => res.json()).then(data => {
+        fetch("https://api.conexaoastralmistica.com.br/pegarInfoProfissionais").then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){
                 setProfissionais(data[1])
             }else{

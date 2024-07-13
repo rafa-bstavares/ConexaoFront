@@ -11,7 +11,7 @@ export default function ModalHistorico(){
     const {setTemAviso, setTextoAviso} = useContext(ContextoAviso)
 
     useEffect(() => {
-        fetch("api.conexaoastralmistica.com.br/meusHistoricosAtendente", {
+        fetch("https://api.conexaoastralmistica.com.br/meusHistoricosAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
             if(data[0] == "sucesso"){

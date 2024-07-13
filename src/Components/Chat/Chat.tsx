@@ -81,7 +81,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
     })
 
     /*async function pegarInfoCliente(id: string): Promise<{ nome: string; email: string; }> {
-      fetch("api.conexaoastralmistica.com.br/pegarInfoCliente", {
+      fetch("https://api.conexaoastralmistica.com.br/pegarInfoCliente", {
         method: "POST",
         headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
         body: JSON.stringify({
@@ -106,7 +106,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 */
 
     function pegarInfoUsuario(){
-      fetch("api.conexaoastralmistica.com.br/pegarInfoUsuario", {
+      fetch("https://api.conexaoastralmistica.com.br/pegarInfoUsuario", {
           headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
       }).then(res => res.json()).then(data => {
           if(data[0] && data[0] == "erro"){
@@ -145,7 +145,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         const {newRoom, createdById, idProfissional} = data
         if(atendente && idProfissional == idAtendenteAtual){
           console.log(createdById)
-          fetch("api.conexaoastralmistica.com.br/pegarInfoCliente", {
+          fetch("https://api.conexaoastralmistica.com.br/pegarInfoCliente", {
             method: "POST",
             headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
             body: JSON.stringify({
@@ -196,7 +196,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
          /* let infoSalasClone = [...infoSalas]
           infoSalasClone = infoSalasClone.filter(item => item.idSala !== Number(data.idSala))
           setInfoSalas(infoSalasClone)*/
-          fetch("api.conexaoastralmistica.com.br/buscarSalasAtendente", {
+          fetch("https://api.conexaoastralmistica.com.br/buscarSalasAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
           }).then(res => res.json()).then(data => {
             console.log(data)
@@ -231,7 +231,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           console.log("recebi o socket e sou atendente")
 
 
-          fetch("api.conexaoastralmistica.com.br/infoAtendente", {
+          fetch("https://api.conexaoastralmistica.com.br/infoAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
           }).then(res => res.json()).then(dataFetch => {
             if(dataFetch[0] == "erro"){
@@ -263,7 +263,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         socket.on("respostaAtendente", (data) => {
           if(atendente){
 
-            fetch("api.conexaoastralmistica.com.br/infoAtendente", {
+            fetch("https://api.conexaoastralmistica.com.br/infoAtendente", {
               headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
             }).then(res => res.json()).then(dataFetch => {
               if(dataFetch[0] == "erro"){
@@ -300,7 +300,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
       if(atendente){
 
-        fetch("api.conexaoastralmistica.com.br/buscarSalasAtendente", {
+        fetch("https://api.conexaoastralmistica.com.br/buscarSalasAtendente", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
           console.log(data)
@@ -310,7 +310,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             setInfoSalas(data[1])
           }
         })
-        fetch("api.conexaoastralmistica.com.br/infoAtendente", {
+        fetch("https://api.conexaoastralmistica.com.br/infoAtendente", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
           if(data[0] == "erro"){
@@ -326,7 +326,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }
         })
 
-        fetch("api.conexaoastralmistica.com.br/minhasInfosAtendente", {
+        fetch("https://api.conexaoastralmistica.com.br/minhasInfosAtendente", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
           if(data[0] == "sucesso"){
@@ -344,7 +344,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
       }else{
 
-        fetch("api.conexaoastralmistica.com.br/confereTokenUsuario", {
+        fetch("https://api.conexaoastralmistica.com.br/confereTokenUsuario", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
           if(data[0] && data[0] == "erro"){
@@ -361,7 +361,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
         socket.emit("tempoPreco", {preco: precoTotalConsulta, tempo: tempoConsulta, room: salaAtual.toString()})
-        fetch("api.conexaoastralmistica.com.br/confereTokenUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("https://api.conexaoastralmistica.com.br/confereTokenUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
           if(data[0] == "erro"){
             setUsuarioLogado(false)
             localStorage.setItem("authToken", "")
@@ -378,7 +378,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
           console.log("TA FAZENDO O FETCH NA PRIMEIRA VEZ")
-          fetch("api.conexaoastralmistica.com.br/buscarSalaUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+          fetch("https://api.conexaoastralmistica.com.br/buscarSalaUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
             if(data[0] == "erro"){
               setTemAviso(true)/*  */
               if(data[1]){
@@ -411,7 +411,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         
 
 
-        fetch("api.conexaoastralmistica.com.br/infoMeuAtendente", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("https://api.conexaoastralmistica.com.br/infoMeuAtendente", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
           if(data[0] == "sucesso"){
             setPerfilProAtual(data[1])
             console.log(data[1])
@@ -515,7 +515,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 /*
     function setarOffline(){
-      fetch("api.conexaoastralmistica.com.br/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+      fetch("https://api.conexaoastralmistica.com.br/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
         console.log(data)
         if(data[0] == "sucesso"){
           return "sucesso"
@@ -530,7 +530,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
     function sairFn(){
 
       if(atendente){
-        fetch("api.conexaoastralmistica.com.br/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+        fetch("https://api.conexaoastralmistica.com.br/SetarOffline", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
           console.log(data)
           if(data[0] == "sucesso"){
             localStorage.setItem("authToken", "")
@@ -582,7 +582,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
     function atualizarCronometro(){
-      fetch("api.conexaoastralmistica.com.br/quantoFalta" + (atendente? "Atendente": "Cliente"), {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+      fetch("https://api.conexaoastralmistica.com.br/quantoFalta" + (atendente? "Atendente": "Cliente"), {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
         if(data[0] == "sucesso"){
 
           console.log(data[1])
@@ -628,7 +628,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                   {
                     baralhosUrls && 
                     baralhosUrls.map((item, index) => {
-                      return <Carta urlImg={`api.conexaoastralmistica.com.br/images/${item}`} cartasSelecionadas={cartasSelecionadas} setCartasSelecionadas={setCartasSelecionadas} idxCarta={index} />
+                      return <Carta urlImg={`https://api.conexaoastralmistica.com.br/images/${item}`} cartasSelecionadas={cartasSelecionadas} setCartasSelecionadas={setCartasSelecionadas} idxCarta={index} />
                     })
                   }
                 </div>

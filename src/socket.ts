@@ -22,4 +22,4 @@ interface ClientToServerEvents {
     respostaChamarAtendente: (data: {msg:  string, idCliente: number, idProfissional: number}) => {}
 }
 
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("api.conexaoastralmistica.com.br")
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("https://api.conexaoastralmistica.com.br")

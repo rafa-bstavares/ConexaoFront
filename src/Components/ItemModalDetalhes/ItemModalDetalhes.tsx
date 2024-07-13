@@ -18,7 +18,7 @@ export default function ItemModalDetalhes({nome, valor, inicio, final, idHistori
     
     useEffect(() => {
         if(mostrarHistorico){
-            fetch("api.conexaoastralmistica.com.br/pegarHistorico", {
+            fetch("https://api.conexaoastralmistica.com.br/pegarHistorico", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
