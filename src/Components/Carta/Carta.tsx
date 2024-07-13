@@ -29,7 +29,7 @@ export default function Carta({urlImg, cartasSelecionadas, setCartasSelecionadas
     }
 
     return(
-        <div  onClick={cliqueNaCarta} className={`w-full h-full ${clicada? "bg-roxoPrincipal" : ""} transition-colors rounded-md flex justify-center items-center p-4`}>
+        <div  onClick={cliqueNaCarta} className={`w-full h-full ${clicada? "bg-roxoPrincipal" : ""} transition-colors rounded-md flex justify-center items-center`}>
             <img className={`w-2/3 h-auto`} src={urlImg} alt="" />
         </div>
     )

@@ -37,7 +37,7 @@ export default function Profissionais(){
 
 
     return(
-        <div className="lg:grid lg:grid-cols-3 lg:justify-items-center items-center flex flex-col lg:gap-14 gap-4 px-[var(--paddingXGeralCel)] lg:px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] bg-roxoPrincipal">
+        <div className="lg:grid lg:grid-cols-3 lg:justify-items-center items-center flex flex-col lg:gap-10 gap-4 px-[var(--paddingXGeralCel)] lg:px-[var(--paddingXGeral)] py-[var(--paddingYGeral)] bg-roxoPrincipal">
             {profissionais.map(item => <Profissional img={item.foto} descricaoMenor={item.descricaoMenor} nome={item.nome} id={item.id} status={item.status} valorMin={item.valorMin}/>)}
         </div>
     )

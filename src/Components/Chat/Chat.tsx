@@ -624,7 +624,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                     baralhos.map((item, index) => <option className='text-black' selected={index == 0} value={item.nome}>{item.nome}</option>)
                   }
                 </select>
-                <div className=' bg-white/30 backdrop-blur-md p-4 grid grid-cols-3 gap-4 items-center justify-items-center'>
+                <div className=' bg-white/30 backdrop-blur-md p-4 grid grid-cols-3 gap-4 items-center justify-items-center max-h-[700px] overflow-y-scroll'>
                   {
                     baralhosUrls && 
                     baralhosUrls.map((item, index) => {
