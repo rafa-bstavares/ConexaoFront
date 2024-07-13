@@ -1,5 +1,8 @@
 import { CardPayment } from "@mercadopago/sdk-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento";
+import Botao from "../Botao/Botao";
+import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso";
 
 
 
@@ -7,6 +10,8 @@ import { useState } from "react";
 
 export default function ModalCartao(){
     const [saldoAdicionar, setSaldoAdicionar] =  useState<number>(5)
+    const {setAbrirModalCartao} = useContext(ContextoPagamento)
+    const {setTemAviso, setTextoAviso} = useContext(ContextoAviso)
 
 
     return (
@@ -26,10 +31,57 @@ export default function ModalCartao(){
                             body: JSON.stringify(param)
                         }).then(res => res.json()).then(data => {
                             console.log(data)
+                            if(data[0] == "sucesso"){
+                                if(data[1]){
+                                    if(data[1].status){
+                                        switch(data[1].status){
+                                            case "aprovado":
+                                                setTemAviso(true)
+                                                setTextoAviso("seu pagamento foi aprovado!")
+                                                break
+
+                                            case "negado":
+                                                setTemAviso(true)
+                                                setTextoAviso("seu pagamento foi negado, por favor, confira os dados do cartão e tente novamente.")
+                                                break
+
+                                            case "sem info":
+                                                setTemAviso(true)
+                                                setTextoAviso("O banco não nos enviou informações sobre o seu pagamento. Pode ter ocorrido um problema no sistema deles. Caso você seja cobrado, mande o comprovante e explique a situação no seguinte whatsapp: +55 11 91636-7979")
+                                                break
+                                        }
+                                    }else{
+                                        setTemAviso(true)
+                                        setTextoAviso("Houve um problema desconhecido. Caso você seja cobrado, mande o comprovante e explique a situação no seguinte whatsapp: +55 11 91636-7979")
+                                    }
+                                }else{
+                                    setTemAviso(true)
+                                    setTextoAviso("Houve um problema desconhecido. Caso você seja cobrado, mande o comprovante e explique a situação no seguinte whatsapp: +55 11 91636-7979")
+                                }
+                            }else{
+                                setTemAviso(true)
+                                setTextoAviso("Houve um problema desconhecido. Caso você seja cobrado, mande o comprovante e explique a situação no seguinte whatsapp: +55 11 91636-7979")
+                            }
                         })
                     }}
                     />
+                    <div className="flex justify-center">
+                        <Botao onClickFn={() => setAbrirModalCartao(false)} texto="Fechar"/>
+                    </div>
                 </div>
             </div>
     )
+}
+
+
+
+{
+
+    /**
+     useEffect(() => {
+        if(abrirModalCartao == false || abrirModalPagamento == "false"){
+            window.reload() //pra puxar o saldo novo
+        }
+     }, [abrirModalCartao, abrirModalPagamento])
+     */
 }
