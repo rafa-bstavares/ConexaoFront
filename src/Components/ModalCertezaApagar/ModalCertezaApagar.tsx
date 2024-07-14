@@ -13,7 +13,7 @@ export default function ModalCertezaApagar(){
 
 
     function removerProfissional(){
-        fetch("https://www.conexaoastralmistica.com.br/apagarProfissional", {
+        fetch("https://api.conexaoastralmistica.com.br/apagarProfissional", {
             method: "POST",
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
             body: JSON.stringify({
