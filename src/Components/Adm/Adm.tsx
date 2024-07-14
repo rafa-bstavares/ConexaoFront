@@ -7,7 +7,6 @@ import ModalDetalhes from "../ModalDetalhes/ModalDetalhes"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import Login from "../Login/Login"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
-import ModalCertezaApagar from "../ModalCertezaApagar/ModalCertezaApagar"
 
 
 export default function Adm(){
