@@ -63,7 +63,7 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
                 Mais Detalhes
             </div>
             <div>Total a pagar: {0.3 * totalArrecadado}</div>
-            <button onClick={() => modalApagar} className="bg-red-600 rounded-md px-4 py-2">
+            <button onClick={modalApagar} className="bg-red-600 rounded-md px-4 py-2">
                 Excluir Profissional
             </button>
         </div>

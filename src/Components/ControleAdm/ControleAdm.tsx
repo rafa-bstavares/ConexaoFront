@@ -107,7 +107,7 @@ export default function ControleAdm(){
                         </div>
                     </div>
                 }
-                            {   
+                {   
                     abrirModalCertezaApagar &&
                     <ModalCertezaApagar/>
                  }
