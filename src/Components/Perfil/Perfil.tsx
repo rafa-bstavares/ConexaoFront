@@ -37,7 +37,7 @@ export default function Perfil(){
                 Perfil detalhado do profissional
             </div>
             <div className="w-[20vw] h-[20vw] flex justify-center items-center">
-                <img className="w-full h-auto object-top object-cover" src={`https://api.conexaoastralmistica.com.br/images/${perfilProAtual.foto}`} alt="foto perfil profissional" />
+                <img className="w-full h-[20vw] object-top object-cover" src={`https://api.conexaoastralmistica.com.br/images/${perfilProAtual.foto}`} alt="foto perfil profissional" />
             </div>
             <div className="text-center text-xl">
                 {perfilProAtual.nome}

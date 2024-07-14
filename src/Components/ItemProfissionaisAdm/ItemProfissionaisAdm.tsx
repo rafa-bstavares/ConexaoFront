@@ -56,13 +56,13 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
     return (
         <div className="px-20 py-10 flex items-center gap-8 rounded-md bg-black">
             <div className="h-40 w-40 overflow-hidden ">
-                <img className="object-cover object-top" src={`https://api.conexaoastralmistica.com.br/images/${img}`} alt="foto perfil profissional" />
+                <img className="object-cover object-top h-40 w-full" src={`https://api.conexaoastralmistica.com.br/images/${img}`} alt="foto perfil profissional" />
             </div>
             <div className="text-xl">{nomeProfissional}</div>
             <div className="px-4 py-2 rounded-md bg-slate-500 cursor-pointer" onClick={maisDetalherProfissional}>
                 Mais Detalhes
             </div>
-            <div>Total a pagar: {0.3 * totalArrecadado}</div>
+            <div>Total a pagar: {(0.3 * totalArrecadado).toFixed(2)}</div>
             <button onClick={modalApagar} className="bg-red-600 rounded-md px-4 py-2">
                 Excluir Profissional
             </button>
