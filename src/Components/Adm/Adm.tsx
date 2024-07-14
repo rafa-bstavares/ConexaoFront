@@ -7,12 +7,13 @@ import ModalDetalhes from "../ModalDetalhes/ModalDetalhes"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import Login from "../Login/Login"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
+import ModalCertezaApagar from "../ModalCertezaApagar/ModalCertezaApagar"
 
 
 export default function Adm(){
 
     const {temAviso} = useContext(ContextoAviso)
-    const {abrirModalDetalhes} = useContext(ContextoProfissionais)
+    const {abrirModalDetalhes, abrirModalCertezaApagar} = useContext(ContextoProfissionais)
     const {admGeralLogado, setAdmGeralLogado} = useContext(ContextoLogin)
 
     useEffect(() => {
@@ -60,6 +61,10 @@ export default function Adm(){
                 </>
                 :
                 <Login tipoLogin="admGeral" />
+            }
+            {   
+                abrirModalCertezaApagar &&
+                <ModalCertezaApagar/>
             }
         </div>  
     )

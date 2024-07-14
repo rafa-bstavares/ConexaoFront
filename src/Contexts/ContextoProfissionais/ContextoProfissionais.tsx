@@ -35,12 +35,16 @@ type TipoObjHistorico = {
 type TiposContextoProfissionais = {   
     setProfissionais: Dispatch<SetStateAction<TipoProfissionais[]>>,
     profissionais: TipoProfissionais[],
+    setIdProfissionalApagar: Dispatch<SetStateAction<number>>,
+    idProfissionalApagar: number,
     setPerfilProAtual: Dispatch<SetStateAction<TipoProfissionais>>,
     perfilProAtual: TipoProfissionais,
     detalhesProAdm: TipoObjDetalhe[],
     setDetalhesProAdm: Dispatch<SetStateAction<TipoObjDetalhe[]>>,
     abrirModalDetalhes: boolean,
     setAbrirModalDetalhes: Dispatch<SetStateAction<boolean>>,
+    abrirModalCertezaApagar: boolean,
+    setAbrirModalCertezaApagar: Dispatch<SetStateAction<boolean>>,
     abrirModalHistorico: boolean,
     setAbrirModalHistorico: Dispatch<SetStateAction<boolean>>,
     arrHistoricosAtendente: TipoObjHistorico[],
@@ -50,12 +54,16 @@ type TiposContextoProfissionais = {
 export const ContextoProfissionais = createContext<TiposContextoProfissionais>({
     setProfissionais: () => {},
     profissionais: [{foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0}],
+    idProfissionalApagar: 0,
+    setIdProfissionalApagar: () => {},
     setPerfilProAtual: () => {},
     perfilProAtual: {foto: "", nome: "", email: "", descricaoMaior: "", descricaoMenor: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0},
     detalhesProAdm: [{nomeCliente: "", precoConsulta: 0, inicio: new Date(), fim: new Date(), idHistorico: 0, nomeProfissional: "" }],
     setDetalhesProAdm: () => {},
     abrirModalDetalhes: false,
     setAbrirModalDetalhes: () => {},
+    abrirModalCertezaApagar: false,
+    setAbrirModalCertezaApagar: () => {},
     abrirModalHistorico: false,
     setAbrirModalHistorico: () => {},
     arrHistoricosAtendente: [{historico: "", id_cliente: 0, nomeCliente: "", data: new Date()}],
@@ -69,8 +77,10 @@ export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) =
     const [perfilProAtual, setPerfilProAtual] = useState<TipoProfissionais>({foto: "", nome: "", email: "", descricaoMaior: "", descricaoMenor: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0})
     const [detalhesProAdm, setDetalhesProAdm] = useState<TipoObjDetalhe[]>([{nomeCliente: "", precoConsulta: 0, inicio: new Date(), fim: new Date(), idHistorico: 0, nomeProfissional: "" }])
     const [abrirModalDetalhes, setAbrirModalDetalhes] = useState<boolean>(false)
+    const [abrirModalCertezaApagar, setAbrirModalCertezaApagar] = useState<boolean>(false)
     const [abrirModalHistorico, setAbrirModalHistorico] = useState<boolean>(false)
     const [arrHistoricosAtendente, setArrHistoricosAtendente] = useState<TipoObjHistorico[]>([{historico: "", id_cliente: 0, nomeCliente: "", data: new Date()}])
+    const [idProfissionalApagar, setIdProfissionalApagar] = useState<number>(0)
 
 
 
@@ -84,10 +94,14 @@ export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) =
             setDetalhesProAdm,
             abrirModalDetalhes,
             setAbrirModalDetalhes,
+            abrirModalCertezaApagar,
+            setAbrirModalCertezaApagar,
             abrirModalHistorico,
             setAbrirModalHistorico,
             arrHistoricosAtendente,
-            setArrHistoricosAtendente
+            setArrHistoricosAtendente,
+            idProfissionalApagar,
+            setIdProfissionalApagar
         }}>
             {children}
         </ContextoProfissionais.Provider>

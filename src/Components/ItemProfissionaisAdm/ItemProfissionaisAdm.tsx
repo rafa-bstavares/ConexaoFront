@@ -14,7 +14,7 @@ type Props = {
 export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissional, totalArrecadado}: Props){
 
     const { setTemAviso, setTextoAviso} = useContext(ContextoAviso)
-    const { setDetalhesProAdm, setAbrirModalDetalhes} = useContext(ContextoProfissionais)
+    const { setDetalhesProAdm, setAbrirModalDetalhes, setAbrirModalCertezaApagar, setIdProfissionalApagar} = useContext(ContextoProfissionais)
 
     function maisDetalherProfissional(){
 
@@ -47,6 +47,12 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
     }
 
 
+    function modalApagar(){
+        setAbrirModalCertezaApagar(true)
+        setIdProfissionalApagar(idProfissional)
+    }
+
+
     return (
         <div className="px-20 py-10 flex items-center gap-8 rounded-md bg-black">
             <div className="h-40 w-40 overflow-hidden ">
@@ -57,6 +63,9 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
                 Mais Detalhes
             </div>
             <div>Total a pagar: {0.3 * totalArrecadado}</div>
+            <button onClick={() => modalApagar} className="bg-red-600 rounded-md px-4 py-2">
+                Excluir Profissional
+            </button>
         </div>
     )
 }
