@@ -44,10 +44,10 @@ export default function ModalCertezaApagar(){
 
     return (
         <div className="fixed top-0 left-0 h-screen w-screen bg-black/80 flex flex-col justify-center items-center gap-10 z-50">
-            <div className="text-xl text-white">Tudo relativo a esse profissional será apagado, inclusive os históricos. Tem certeza que deseja remover completamente esse profissional?</div>
+            <div className="text-xl text-white">Tem certeza que deseja remover completamente esse profissional? Os históricos relativos a ele se mantém guardados e serão apagados normalmente após 30 dias como todos os outros.</div>
             <div className="flex gap-2">
                 <button className="px-4 py-2 rounded-md bg-white text-black" onClick={removerProfissional}>Sim</button>
-                <button className="px-4 py-2 rounded-md bg-white text-black" onClick={() => setAbrirModalCertezaApagar(true)}>Voltar</button>
+                <button className="px-4 py-2 rounded-md bg-white text-black" onClick={() => setAbrirModalCertezaApagar(false)}>Voltar</button>
             </div>
         </div>
     )
