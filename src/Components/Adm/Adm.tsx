@@ -13,7 +13,7 @@ import ModalCertezaApagar from "../ModalCertezaApagar/ModalCertezaApagar"
 export default function Adm(){
 
     const {temAviso} = useContext(ContextoAviso)
-    const {abrirModalDetalhes, abrirModalCertezaApagar} = useContext(ContextoProfissionais)
+    const {abrirModalDetalhes} = useContext(ContextoProfissionais)
     const {admGeralLogado, setAdmGeralLogado} = useContext(ContextoLogin)
 
     useEffect(() => {
@@ -62,10 +62,7 @@ export default function Adm(){
                 :
                 <Login tipoLogin="admGeral" />
             }
-            {   
-                abrirModalCertezaApagar &&
-                <ModalCertezaApagar/>
-            }
+
         </div>  
     )
 }

@@ -5,12 +5,13 @@ import ItemProfissionaisAdm from "../ItemProfissionaisAdm/ItemProfissionaisAdm"
 import ItemUsuariosAdm from "../ItemUsuariosAdm/ItemUsuariosAdm"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
 import Botao from "../Botao/Botao"
+import ModalCertezaApagar from "../ModalCertezaApagar/ModalCertezaApagar"
 
 
 
 export default function ControleAdm(){
 
-    const {setProfissionais, profissionais} = useContext(ContextoProfissionais)
+    const {setProfissionais, profissionais, abrirModalCertezaApagar} = useContext(ContextoProfissionais)
     const { setTemAviso, setTextoAviso} = useContext(ContextoAviso)
     const {arrUsuarios, setArrUsuarios} = useContext(ContextoUsuario)
     const [abrirModalCertezaSaldo, setAbrirModalCertezaSaldo] = useState<boolean>(false)
@@ -106,6 +107,10 @@ export default function ControleAdm(){
                         </div>
                     </div>
                 }
+                            {   
+                    abrirModalCertezaApagar &&
+                    <ModalCertezaApagar/>
+                 }
         </div>
     )
 }
