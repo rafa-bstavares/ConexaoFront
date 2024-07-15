@@ -65,8 +65,8 @@ export default function ModalRedefinirSenha({tipo}: Props){
 
     return (
         <div className="fixed inset-0 bg-white/80 flex items-center justify-center">
-            <div className="h-5/6 w-1/2 bg-roxoPrincipal rounded-xl flex flex-col px-12 py-8 gap-4 justify-center items-center overflow-y-scroll">
-                <div className="text-3xl">
+            <div className="h-5/6 w-[90%] lg:w-1/2 bg-roxoPrincipal rounded-xl flex flex-col px-4 lg:px-12 py-3 lg:py-8 gap-2 lg:gap-4 justify-center items-center overflow-y-scroll">
+                <div className="text-xl lg:text-3xl">
                     Redefinir Senha
                 </div>
                 <div className="w-4/5 flex flex-col gap-1">

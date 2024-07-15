@@ -178,11 +178,11 @@ export default function ModalTempo(){
 
     return(
         <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-            <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white">
-                <div className="w-1/4 self-center">
+            <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white">
+                <div className="w-2/3 lg:w-1/4 self-center">
                     <img src={imgLogo} alt="logo" className="w-full h-auto" />
                 </div>
-                <div className="self-center text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
+                <div className="self-center text-xl lg:text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="tempoConsulta">Tempo (mínimo 5 minutos):</label>
                     <input className="p-2 flex-1 outline-none text-black rounded-md" type="number" min={5} id="tempoConsulta" value={tempoConsultaVar} onChange={e => setTempoConsultaVar(Number(e.target.value))}/>
@@ -198,7 +198,7 @@ export default function ModalTempo(){
                     loading && 
                     <ModalChamando/>
                 }
-                <div className="flex gap-4 self-center mt-5">
+                <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 self-center mt-3 lg:mt-5">
                     <Botao onClickFn={efetivarPedido} texto="Ir para consulta"/>
                     <Botao onClickFn={aoCancelar} texto="Cancelar"/>
                 </div>

@@ -90,11 +90,11 @@ export default function ModalLogin(){
 
     return(
         <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-            <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white">
-                <div className="w-1/4 self-center">
+            <div className="flex flex-col gap-2: lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white">
+                <div className="w-2/3 lg:w-1/4 self-center">
                     <img src={imgLogo} alt="logo" className="w-full h-auto" />
                 </div>
-                <div className="self-center text-3xl font-bold">Faça login</div>
+                <div className="self-center text-xl lg:text-3xl font-bold">Faça login</div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="emailUsuario">Email:</label>
                     <input className="p-2 flex-1 outline-none text-black rounded-md" type="text" id="emailUsuario" onChange={e => {setEmailUsuario(e.target.value)}} />
@@ -110,7 +110,7 @@ export default function ModalLogin(){
                     temErro &&
                     <div className="self-center text-red-600 font-bold text-xl">{textoErro}</div>
                 }
-                <div className="flex gap-4 self-center mt-5">
+                <div className="flex flex-col lg:flex-row gap-4 self-center mt-5">
                     <Botao onClickFn={logar} texto="Efetuar Login"/>
                     <Botao onClickFn={aoCancelar} texto="Cancelar"/>
                 </div>

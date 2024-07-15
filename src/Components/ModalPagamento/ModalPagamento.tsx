@@ -157,11 +157,11 @@ export default function ModalPagamento(){
     return (
         <div>
             <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-                <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white overflow-y-scroll">
-                    <div className="w-1/4 self-center">
+                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white overflow-y-scroll">
+                    <div className="w-2/3 lg:w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>
-                    <div className="self-center text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
+                    <div className="self-center text-xl lg:text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="emailUsuario">Digite abaixo, apenas com números, quantos reais de saldo deseja comprar:</label>
                         <div className="text-sm text-gray-500">*Exemplo: caso queira 5 reais, digite apenas o número 5</div>
@@ -178,9 +178,9 @@ export default function ModalPagamento(){
                     }
                     {
                         temRespostaStatus &&
-                        <div className={`self-center ${respostaStatus == "pagamento realizado com sucesso"? "text-green-600": (respostaStatus == "pagamento em aberto"? "text-red-600" : "text-blue-600")} font-bold text-xl`}>{respostaStatus}</div>
+                        <div className={`self-center ${respostaStatus == "pagamento realizado com sucesso"? "text-green-600": (respostaStatus == "pagamento em aberto"? "text-red-600" : "text-blue-600")} font-bold text-sm lg:text-xl`}>{respostaStatus}</div>
                     }
-                    <div className="flex gap-4 self-center mt-5">
+                    <div className="flex flex-col lg:flex-row gap-4 self-center mt-3 lg:mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
                         <Botao onClickFn={() => {setAbrirModalPagamento(false); window.location.reload()}} texto="Cancelar"/>
                     </div>
@@ -195,7 +195,7 @@ export default function ModalPagamento(){
                                 <div className="text-center">Leia o Qr Code abaixo com o seu aplicativo do banco</div>
                                 <div className="text-gray-500 text-center">*Após realizar o pagamento clique no botão "Checar status último pagamento" para conferir os status do mesmo</div>
                             </div>
-                            <div className="w-40 h-40">
+                            <div className="w-32 lg:w-40 h-32 lg:h-40">
                                 <img className="w-full h-full" src={`data:image/jpeg;base64,${ultimoQrCode}`}/>
                             </div>
                         </div>

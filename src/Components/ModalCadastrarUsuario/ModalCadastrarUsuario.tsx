@@ -109,7 +109,7 @@ export default function ModalCadastrarUsuario(){
 
     return(
         <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-            <div className="flex flex-col gap-4 px-8 py-6 bg-roxoPrincipal w-1/2 rounded-md text-white">
+            <div className="flex flex-col gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white">
                 <div className="w-1/6 self-center">
                     <img src={imgLogo} alt="logo" className="w-full h-auto" />
                 </div>
@@ -121,15 +121,15 @@ export default function ModalCadastrarUsuario(){
                 <div className="flex flex-col gap-2">
                     <div>Data de Nascimento</div>
                     <div className="flex gap-2">
-                        <div className="flex gap-2 items-center">
+                        <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
                             <label htmlFor="dia">Dia</label>
                             <input className="p-2 w-1/2 outline-none text-black rounded-md" value={dia} type="number" id="dia" onChange={e => {setDia(e.target.value)}} />
                         </div>
-                        <div className="flex gap-2 items-center">
+                        <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
                             <label htmlFor="mes">Mes</label>
                             <input className="p-2 w-1/2 outline-none text-black rounded-md" value={mes} type="number" id="mes" onChange={e => {setMes(e.target.value)}} />
                         </div>
-                        <div className="flex gap-2 items-center">
+                        <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center">
                             <label htmlFor="ano">Ano</label>
                             <input className="p-2 w-1/2 outline-none text-black rounded-md" value={ano} type="number" id="ano" onChange={e => {setAno(e.target.value)}} />
                         </div>
