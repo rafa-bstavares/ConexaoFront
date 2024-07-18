@@ -34,7 +34,12 @@ export default function ModalPagamento(){
             }
 
             const mod11 = somaMult % 11
-            const primeiroDigVer =  11 - mod11
+            let primeiroDigVer
+            if(mod11 == 0){
+                primeiroDigVer = 0
+            }else{
+                primeiroDigVer =  11 - mod11
+            }
 
 
             if(primeiroDigVer.toString() == arrDigtsVer[0]){
@@ -48,7 +53,13 @@ export default function ModalPagamento(){
                 }
     
                 const mod11 = somaMult2 % 11
-                const segundoDigVer =  11 - mod11
+                let segundoDigVer
+                if(mod11 == 0){
+                    segundoDigVer = 0
+                }else{
+                    segundoDigVer =  11 - mod11
+                }
+
                 if(segundoDigVer.toString() == arrDigtsVer[1]){
                     return "válido"
                 }else{
