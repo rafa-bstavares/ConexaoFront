@@ -53,7 +53,7 @@ function App() {
 
   useEffect(() => {
 
-    initMercadoPago("APP_USR-1bbc7fc7-82fb-4893-b5d4-e809413360cb")
+    initMercadoPago("APP_USR-f4a11f07-575f-4fd9-9e1a-2385bcf0f2ff")
 
 
     fetch("https://api.conexaoastralmistica.com.br/confereTokenUsuario", {
