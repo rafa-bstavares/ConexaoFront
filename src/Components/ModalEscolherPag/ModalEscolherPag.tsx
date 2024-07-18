@@ -14,7 +14,11 @@ export default function ModalEscolherPag(){
                     Escolha a forma de pagamento
                 </div>
                 <div className="flex flex-col lg:flex-row gap-2 lg:gap-4">
-                    <Botao  onClickFn={()  => {setAbrirModalPagamento(true); setAbrirModalEscolher(false)}} texto="Pix"/>
+                    <Botao  onClickFn={()  => {
+                        setAbrirModalPagamento(true) 
+                        setAbrirModalEscolher(false)
+                        document.body.classList.add("modal-open")
+                    }} texto="Pix"/>
                     <Botao onClickFn={() => {setAbrirModalCartao(true); setAbrirModalEscolher(false)}} texto="Cartão"/>
                 </div>
             </div>

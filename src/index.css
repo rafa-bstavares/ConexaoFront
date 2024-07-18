@@ -14,3 +14,7 @@ body{
   --paddingXGeralCel: 30px;
   --paddingYGeralCel: 20px;
 }
+
+.modal-open{
+  overflow: hidden;
+}

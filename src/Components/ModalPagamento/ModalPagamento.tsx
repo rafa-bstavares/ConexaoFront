@@ -189,7 +189,7 @@ export default function ModalPagamento(){
                     <div className="w-2/3 lg:w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>
-                    <div className="self-center text-xl lg:text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
+                    <div className="self-center text-xl lg:text-3xl font-bold">Qual valor de crédito você deseja?</div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="emailUsuario">Digite abaixo, apenas com números, quantos reais de saldo deseja comprar:</label>
                         <div className="text-sm text-gray-500">*Exemplo: caso queira 5 reais, digite apenas o número 5</div>
@@ -210,7 +210,13 @@ export default function ModalPagamento(){
                     }
                     <div className="flex flex-col lg:flex-row gap-4 self-center mt-3 lg:mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
-                        <Botao onClickFn={() => {setAbrirModalPagamento(false); window.location.reload()}} texto="Cancelar"/>
+                        <Botao onClickFn={() => {
+                            setAbrirModalPagamento(false)
+                            window.location.reload()
+                            document.body.classList.remove("modal-open")
+                        }
+                            
+                        } texto="Cancelar"/>
                     </div>
                     
                     <div className="flex justify-center">
