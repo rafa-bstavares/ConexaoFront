@@ -72,6 +72,7 @@ export default function ModalPagamento(){
                 setTextoErro("")
                 const statusCpf = confereCpf(cpf)
                 if(statusCpf == "válido"){
+                    console.log("cpf válido")
                     fetch("https://api.conexaoastralmistica.com.br/pagamentoPix", {
                         method: "POST",
                         headers: {
@@ -113,6 +114,8 @@ export default function ModalPagamento(){
                         console.log("caiu no catch do pagamento")
                         console.log(err)
                     })
+                }else{
+                    console.log("cpf invalido")
                 }
 
             }else{
