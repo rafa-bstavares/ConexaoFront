@@ -15,6 +15,7 @@ export default function ModalPagamento(){
     const [respostaStatus, setRespostaStatus] = useState<string>("")
     const [saldoAdicionar, setSaldoAdicionar] = useState<number>(1)
     const [cpf, setCpf] = useState<string>("")
+    const [chaveQr, setChaveQr] = useState<string>("")
 
     const {setAbrirModalPagamento, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode} = useContext(ContextoPagamento)
     const {usuario} = useContext(ContextoUsuario)
@@ -105,10 +106,12 @@ export default function ModalPagamento(){
                         if(data[0] == "sucesso"){
                             setIdUltimoPix(data[1].id)
                             setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
+                            setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
                             setTemQrCode(true)
                         }else if(data[0] == "pagamento aberto"){
                             setIdUltimoPix(data[1].id)
                             setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
+                            setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
                             setTemQrCode(true)
                             setTemErro(true)
                             setTextoErro("você já tem um pagamento em aberto")
@@ -220,6 +223,10 @@ export default function ModalPagamento(){
                             </div>
                             <div className="w-32 lg:w-40 h-32 lg:h-40">
                                 <img className="w-full h-full" src={`data:image/jpeg;base64,${ultimoQrCode}`}/>
+                            </div>
+                            <div className="flex flex-col items-start">
+                                <div>Chave:</div>
+                                <div>{chaveQr}</div>
                             </div>
                         </div>
                     }
