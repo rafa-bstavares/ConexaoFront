@@ -115,7 +115,12 @@ export default function ModalPagamento(){
                         }else{
                             setTemErro(true)
                             if(data[1]){
-                                setTextoErro(data[1])
+                                if(typeof data[1] == "string"){
+                                    setTextoErro(data[1])
+                                }else{
+                                    console.log(data[1])
+                                }
+
                             }else{
                                 setTextoErro("ocorreu um erro desconhecido ao tentar efetuar seu pagamento")
                             }
