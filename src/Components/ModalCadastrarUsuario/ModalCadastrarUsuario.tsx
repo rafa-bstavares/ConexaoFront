@@ -109,11 +109,11 @@ export default function ModalCadastrarUsuario(){
 
     return(
         <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-            <div className="flex flex-col gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white">
+            <div className="flex flex-col gap-3 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white">
                 <div className="w-1/6 self-center">
-                    <img src={imgLogo} alt="logo" className="w-full h-auto" />
+                    <img src={imgLogo} alt="logo" className="w-full h-auto hidden lg:block" />
                 </div>
-                <div className="self-center text-3xl font-bold">Cadastre-se</div>
+                <div className="self-center text-xl lg:text-3xl font-bold">Cadastre-se</div>
                 <div className="flex flex-col gap-2">
                     <label htmlFor="nomeUsuario">Nome:</label>
                     <input className="p-2 flex-1 outline-none text-black rounded-md" type="text" id="nomeUsuario" onChange={e => {setNomeUsuCadastrar(e.target.value)}} />

@@ -88,8 +88,9 @@ export default function ModalPagamento(){
                             idempotencyKey: uuidv4()
                         })
                     }).then(res => res.json()).then(data => {
+                        console.log("ocorreu a resposta do fetch")
+                        console.log(data)
                         if(data[0] == "sucesso"){
-                            console.log(data)
                             setIdUltimoPix(data[1].id)
                             setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
                             setTemQrCode(true)
@@ -108,7 +109,10 @@ export default function ModalPagamento(){
                             }
 
                         }
-                    }).catch((err) => console.log(err))
+                    }).catch((err) => {
+                        console.log("caiu no catch do pagamento")
+                        console.log(err)
+                    })
                 }
 
             }else{
