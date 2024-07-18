@@ -107,11 +107,13 @@ export default function ModalPagamento(){
                             setIdUltimoPix(data[1].id)
                             setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
                             setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
+                            console.log(data[1].point_of_interaction.transaction_data.qr_code)
                             setTemQrCode(true)
                         }else if(data[0] == "pagamento aberto"){
                             setIdUltimoPix(data[1].id)
                             setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
                             setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
+                            console.log(data[1].point_of_interaction.transaction_data.qr_code)
                             setTemQrCode(true)
                             setTemErro(true)
                             setTextoErro("você já tem um pagamento em aberto")
