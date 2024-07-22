@@ -47,7 +47,7 @@ export default function ModalChamandoAtendente({usuario, idUsuario}: Props){
                 <div className="w-2/3 lg:w-1/6 h-auto">
                     <img className="w-full h-auto" src={logo} alt="logomarca" />
                 </div>
-                <div className="flex gap-2 lg:gap-4 items-center w-full">
+                <div className="flex gap-2 lg:gap-4 items-center w-full justify-center">
                     <div className="text-xl lg:text-5xl text-gray-700/70">{usuario} quer fazer uma consulta com você!</div>
                     <img className="w-1/2 lg:w-20 h-auto" src={loading} alt="loading" />
                 </div>

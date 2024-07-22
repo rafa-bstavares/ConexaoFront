@@ -19,7 +19,7 @@ export default function ModalChamando(){
                 <div className=" w-2/3 lg:w-1/6 h-auto">
                     <img className="w-full h-auto" src={logo} alt="logomarca" />
                 </div>
-                <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-center w-full">
+                <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-center w-full justify-center">
                     <div className="text-xl lg:text-5xl text-gray-700/70">Chamando Atendente</div>
                     <img className="w-1/2 lg:w-20 h-auto" src={loading} alt="loading" />
                 </div>
