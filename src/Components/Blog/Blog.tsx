@@ -1,12 +1,43 @@
 import PostPreview from "../PostPreview/PostPreview"
 import imgPost from "../../assets/images/bannerConexao.jpg"
+import { useContext, useEffect, useState } from "react"
+import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
+import ModalAviso from "../ModalAviso/ModalAviso"
 
 
 export default function Blog(){
+
+    type TipoPreviews = {
+        titulo: string,
+        texto: string,
+        img: string,
+        data_postagem: Date,
+        id: number
+    }
+
+    const [previews, setPreviews] = useState<TipoPreviews[]>([])
+    const {setTextoAviso, temAviso, setTemAviso} = useContext(ContextoAviso)
+
+    useEffect(() => {
+        fetch("https://api.conexaoastralmistica.com.br/pegarPreviews").then(res => res.json()).then(data => {
+            if(data[0] == "sucesso"){
+                setPreviews(data[1])
+            }else{
+                setTemAviso(true)
+                setTextoAviso("ocorreu um erro ao buscar as informações dos posts, perdão. Tente novamente mais tarde.")
+            }
+        })
+    }, [])
+
     return  (
         <div className="px-[var(--paddingXGeralCel)] lg:px-[var(--paddingXGeral)] flex flex-col min-h-screen bg-roxoPrincipal gap-16">
-            <PostPreview titulo="Nos Caminhos da Luz: A Jornada de Adriana Querino" desc="Desde os primeiros dias de minha infância, fui envolvida pelos mistérios do mundo espiritual. Nasci em um lar onde a…" data="03/12" id={0} img=""/>
-            <PostPreview titulo="Mantras: Como Essas Palavras Podem Transformar sua Vida" desc="Mantras têm sido uma parte essencial das práticas espirituais e meditativas há milhares de anos, encontrando raízes em tradições antigas…" data="04/01" id={1} img={imgPost}/>
+            {
+                previews.map(item => <PostPreview titulo={item.titulo} desc={item.texto} data={item.data_postagem} id={item.id} img={item.img}/>)
+            }
+            {
+                temAviso &&
+                <ModalAviso/>
+            }
         </div>
     )
 }

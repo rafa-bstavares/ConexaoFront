@@ -18,6 +18,7 @@ import { ProfissionaisProvider } from './Contexts/ContextoProfissionais/Contexto
 import Perfil from './Components/Perfil/Perfil.tsx'
 import { AtendimentoProvider } from './Contexts/ContextoAtendimento/ContextoAtendimento.tsx'
 import { PagamentoProvider } from './Contexts/ContextoPagamento/ContextoPagamento.tsx'
+import { BlogProvider } from './Contexts/ContextoBlog/ContextoBlog.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -28,9 +29,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ProfissionaisProvider>
       <AtendimentoProvider>
       <PagamentoProvider>
+      <BlogProvider>
         <Routes>
           <Route path='/' element={<App/>}></Route>
-          <Route path='/Blog' element={<Blog/>}></Route>
+          <Route path='/Blog' element={<Blog/>}>
+            <Route path='/Blog/pedirPost/:id' element></Route>
+          </Route>
           <Route path='/PerfilAtendente/:id' element={<Perfil/>}></Route>
           <Route path='/adm' element={<Adm/>}>
             <Route path='/adm/postarBlog' element={<AdmBlog/>}></Route>
@@ -41,6 +45,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path='/Chat' element={<Chat atendente={false}/>}></Route>
           <Route path='/AdmChat' element={<AdmChat/>}></Route>
         </Routes>
+      </BlogProvider>
       </PagamentoProvider>
       </AtendimentoProvider>
       </ProfissionaisProvider>
