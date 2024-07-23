@@ -19,6 +19,7 @@ import Perfil from './Components/Perfil/Perfil.tsx'
 import { AtendimentoProvider } from './Contexts/ContextoAtendimento/ContextoAtendimento.tsx'
 import { PagamentoProvider } from './Contexts/ContextoPagamento/ContextoPagamento.tsx'
 import { BlogProvider } from './Contexts/ContextoBlog/ContextoBlog.tsx'
+import PostBlog from './Components/PostBlog/PostBlog.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -33,7 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path='/' element={<App/>}></Route>
           <Route path='/Blog' element={<Blog/>}>
-            <Route path='/Blog/pedirPost/:id' element></Route>
+            <Route path='/Blog/pedirPost/:id' element={<PostBlog/>}></Route>
           </Route>
           <Route path='/PerfilAtendente/:id' element={<Perfil/>}></Route>
           <Route path='/adm' element={<Adm/>}>
