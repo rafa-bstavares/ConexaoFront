@@ -19,7 +19,7 @@ export default function PostPreview({img, titulo, desc, data, id}: Props){
     function queroPost(){
         setImgBlog(img)
         setTituloBlog(titulo)
-        navigate(`Blog/pedirPost/${id}`)
+        navigate(`/pedirPost/${id}`)
     }
 
     return(
