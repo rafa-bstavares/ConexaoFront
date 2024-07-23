@@ -1,5 +1,4 @@
 import PostPreview from "../PostPreview/PostPreview"
-import imgPost from "../../assets/images/bannerConexao.jpg"
 import { useContext, useEffect, useState } from "react"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 import ModalAviso from "../ModalAviso/ModalAviso"
