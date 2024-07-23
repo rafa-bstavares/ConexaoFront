@@ -33,9 +33,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <BlogProvider>
         <Routes>
           <Route path='/' element={<App/>}></Route>
-          <Route path='/Blog' element={<Blog/>}>
-            <Route path='Blog/pedirPost/:id' element={<PostBlog/>}></Route>
-          </Route>
+          <Route path='/Blog' element={<Blog/>}></Route>
+          <Route path='/pedirPost/:id' element={<PostBlog/>}></Route>
           <Route path='/PerfilAtendente/:id' element={<Perfil/>}></Route>
           <Route path='/adm' element={<Adm/>}>
             <Route path='/adm/postarBlog' element={<AdmBlog/>}></Route>
