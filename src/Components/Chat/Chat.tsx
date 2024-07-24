@@ -62,6 +62,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
   const [idUsuarioChamando, setIdUsuarioChamando] = useState<number>(0)
 
   const audio = useRef<HTMLAudioElement>(null)
+  const divScroll = useRef<HTMLDivElement>(null)
 
 
   const {setPerfilProAtual, perfilProAtual} = useContext(ContextoProfissionais)
@@ -129,6 +130,14 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }
       })
   }
+
+  useEffect(() => {
+    if(historico.length > 0){
+      if(divScroll.current?.scrollTop){
+        divScroll.current.scrollTop = divScroll.current.scrollHeight
+      }
+    }
+  }, [historico])
 
 
 
@@ -663,7 +672,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               }
             </div>
             <div className='h-full flex-1 bg-fundoTextoChat bg-cover rounded-md  flex flex-col justify-end'>
-              <div className='p-4 overflow-y-scroll overflow-x-hidden flex flex-col gap-4'>
+              <div ref={divScroll} className='p-4 overflow-y-scroll overflow-x-hidden flex flex-col gap-4'>
                 {historico.map(item => {
                   if(item.slice(0, 5) == "[img]"){
                     let arrImg:string[] = []
