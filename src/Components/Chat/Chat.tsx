@@ -701,7 +701,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                 })}
               </div>
               <div className='flex rounded-b-md overflow-hidden'>
-                <textarea disabled={cartasSelecionadas.length > 0} className='bg-roxoPrincipal w-full px-4 py-2 outline-none text-white resize-none h-14' value={msg} onChange={(e) => setMsg(e.target.value)} placeholder='mensagem'/>
+                <textarea disabled={cartasSelecionadas.length > 0} className='bg-roxoPrincipal w-full px-4 py-2 outline-none text-white resize-none min-h-14' value={msg} onChange={(e) => setMsg(e.target.value)} placeholder='mensagem'/>
                 <button disabled={cartasSelecionadas.length > 0} onClick={enviarFn} className='bg-roxoPrincipal px-8 h-full flex justify-center items-center'>
                   <img className='h-auto w-7' src={imgEnviar} alt="enviar mensagem" />
                 </button>
