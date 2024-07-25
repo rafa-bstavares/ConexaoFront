@@ -18,7 +18,7 @@ export default function Profissional({img, nome, descricaoMenor, id, status, val
 
     const {setTemAviso, setTextoAviso, setAbrirModalTempo, setValorMinModal} = useContext(ContextoAviso)
     const { setUsuarioLogado, setAbrirModalLogUsuario} = useContext(ContextoLogin)
-    const {setPerfilProAtual, perfilProAtual} = useContext(ContextoProfissionais)
+    const {setPerfilProAtual, perfilProAtual, setNomeProModTempo} = useContext(ContextoProfissionais)
     const {setIdMeuAtendente} = useContext(ContextoUsuario)
 
     const navigate = useNavigate()
@@ -38,7 +38,8 @@ useEffect(() => {
               setTextoAviso("você precisa se logar para entrar no chat")
               setAbrirModalLogUsuario(true)
             }else{
-                //abrir modal escolher tempo 
+                //abrir modal escolher tempo
+                setNomeProModTempo(nome) 
                 setIdMeuAtendente(id)
                 setAbrirModalTempo(true)
                 setValorMinModal(valorMin)

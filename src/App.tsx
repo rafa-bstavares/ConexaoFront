@@ -14,6 +14,7 @@ import { ContextoPagamento } from './Contexts/ContextoPagamento/ContextoPagament
 import { initMercadoPago } from '@mercadopago/sdk-react'
 import ModalCartao from './Components/ModalCartao/ModalCartao'
 import ModalEscolherPag from './Components/ModalEscolherPag/ModalEscolherPag'
+import { ContextoProfissionais } from './Contexts/ContextoProfissionais/ContextoProfissionais'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   const {abrirModalLogUsuario, abrirModalCadastroUsuario, setUsuarioLogado} = useContext(ContextoLogin)
   const {setUsuario} = useContext(ContextoUsuario)
   const {abrirModalPagamento, abrirModalCartao, abrirModalEscolher} = useContext(ContextoPagamento)
+  const {nomeProModTempo} = useContext(ContextoProfissionais)
 
 
   
@@ -94,7 +96,7 @@ function App() {
       }
       {
         abrirModalTempo &&
-        <ModalTempo/>
+        <ModalTempo nomePro={nomeProModTempo}/>
       }
       {
         abrirModalPagamento &&

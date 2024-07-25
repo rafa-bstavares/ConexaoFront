@@ -9,11 +9,12 @@ import ModalChamando from "../ModalChamando/ModalChamando"
 import { socket } from "../../socket"
 
 
-export default function ModalTempo(){
+export default function ModalTempo({nomePro}: {nomePro: string}){
 
     const {setTemAviso, setTextoAviso, setAbrirModalTempo, valorMinModal} = useContext(ContextoAviso)
     const {usuario, setSalaAtual, idMeuAtendente, setPrecoTotalConsulta, setTempoConsulta, loading, setLoading} = useContext(ContextoUsuario)
     const {setUsuarioLogado} = useContext(ContextoLogin)
+
 
     /*const [temErro, setTemErro] = useState<boolean>(false)
     const [textoErro, setTextoErro] = useState<string>("") SE DER RUIM TIRA ESSE COMENTARIO*/
@@ -50,6 +51,10 @@ export default function ModalTempo(){
             }
         }
     }, [respAtendente])
+
+    useEffect(() => {
+        setPrecoConsultaVar(usuario.saldo)
+    }, [])
 
 
     
@@ -173,8 +178,8 @@ export default function ModalTempo(){
 
 
     useEffect(() => {
-        setPrecoConsultaVar(tempoConsultaVar * valorMinModal)
-    }, [tempoConsultaVar])
+        setTempoConsultaVar(precoConsultaVar / valorMinModal)
+    }, [precoConsultaVar])
 
     return(
         <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
@@ -182,7 +187,8 @@ export default function ModalTempo(){
                 <div className="w-2/3 lg:w-1/4 self-center">
                     <img src={imgLogo} alt="logo" className="w-full h-auto" />
                 </div>
-                <div className="self-center text-xl lg:text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
+                <div className="self-center text-xl lg:text-3xl font-bold">Deseja abrir um chat com {nomePro}</div>
+                {/*
                 <div className="flex flex-col gap-2">
                     <label htmlFor="tempoConsulta">Tempo (mínimo 5 minutos):</label>
                     <input className="p-2 flex-1 outline-none text-black rounded-md" type="number" min={5} id="tempoConsulta" value={tempoConsultaVar} onChange={e => setTempoConsultaVar(Number(e.target.value))}/>
@@ -190,10 +196,11 @@ export default function ModalTempo(){
                 <div>
                     valor consulta: {precoConsultaVar}
                 </div>
-                {/*
+                
                     temErro &&
                     <div className="self-center text-red-600 font-bold text-xl">{textoErro}</div>
-                SE DER RUIM TIRA ESSE COMENTARIO*/}
+                SE DER RUIM TIRA ESSE COMENTARIO*/
+                }
                 {
                     loading && 
                     <ModalChamando/>
