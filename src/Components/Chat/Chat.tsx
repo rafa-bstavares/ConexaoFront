@@ -200,7 +200,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         setHistorico(data.novoHistorico.split("||n||"))
       })
 
-      socket.on("salaEncerrada", () => {
+      socket.on("salaEncerrada", (data) => {
         if(atendente && infoSalas){
          /* let infoSalasClone = [...infoSalas]
           infoSalasClone = infoSalasClone.filter(item => item.idSala !== Number(data.idSala))
@@ -218,6 +218,14 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }).catch((err) => {
             console.log("ocorreu o seguinte erro: " + err)
           })
+
+          setTemAviso(true)
+          if(data.msg == "cliente"){
+            setTextoAviso("A sala foi encerrada pelo cliente")
+          }else{
+            setTextoAviso("A sala foi encerrada")
+          }
+
           
           
         }else{
@@ -630,6 +638,20 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
       }
     }
 
+    function encerrarAtendimentoCliente(){
+      fetch("https://api.conexaoastralmistica.com.br/encerrarAtendimentoCliente", {
+        method: "POST",
+    headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
+        body: JSON.stringify({
+          idProfissional: infoSalas[0].id_profissional,
+        })
+      }).then(res => res.json()).then(data => {
+        console.log(data)
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+
 
     return(
         <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "" : "flex-col"} justify-center relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
@@ -672,6 +694,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoPrincipal'>
                 {minutos}:{segundos}
               </div>
+              <button onClick={encerrarAtendimentoCliente} className="p-4 rounded-md bg-red-500 ">
+                  Encerrar antendimento
+                </button>              
             </div>
           }
           <div className={` ${atendente? "w-1/2 mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex `}>

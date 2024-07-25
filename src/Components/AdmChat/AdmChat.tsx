@@ -221,7 +221,9 @@ export default function AdmChat(){
                                 </div>*/}
                               </div>
                             </div>
-                            <button onClick={encerrarAtendimento} className="p-4 rounded-md bg-red-500 ">Encerrar antendimento</button>
+                            <button onClick={encerrarAtendimento} className="p-4 rounded-md bg-red-500 ">
+                              Encerrar antendimento
+                            </button>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
                               Data de nascimento: {dataNascimento}
                             </div>
