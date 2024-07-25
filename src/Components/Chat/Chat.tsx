@@ -621,6 +621,15 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
     }
 
 
+    function handleKeyPress(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+      console.log("ativou key down")
+      if (event.key === "Enter") {
+        console.log("é enter")
+        event.preventDefault()
+        enviarFn()
+      }
+    }
+
 
     return(
         <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "" : "flex-col"} justify-center relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
@@ -710,7 +719,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                 })}
               </div>
               <div className='flex rounded-b-md overflow-hidden'>
-                <textarea disabled={cartasSelecionadas.length > 0} className='bg-roxoPrincipal w-full px-4 py-2 outline-none text-white resize-none min-h-14' value={msg} onChange={(e) => setMsg(e.target.value)} placeholder='mensagem'/>
+                <textarea onKeyDown={e => {handleKeyPress(e)}} disabled={cartasSelecionadas.length > 0} className='bg-roxoPrincipal w-full px-4 py-2 outline-none text-white resize-none min-h-14' value={msg} onChange={(e) => setMsg(e.target.value)} placeholder='mensagem'/>
                 <button disabled={cartasSelecionadas.length > 0} onClick={enviarFn} className='bg-roxoPrincipal px-8 h-full flex justify-center items-center'>
                   <img className='h-auto w-7' src={imgEnviar} alt="enviar mensagem" />
                 </button>
