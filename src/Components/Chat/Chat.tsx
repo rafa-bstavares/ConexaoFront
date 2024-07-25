@@ -643,7 +643,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         method: "POST",
     headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
         body: JSON.stringify({
-          idProfissional: infoSalas[0].id_profissional,
+          idProfissional: perfilProAtual.id,
         })
       }).then(res => res.json()).then(data => {
         console.log(data)
