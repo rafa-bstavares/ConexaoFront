@@ -70,28 +70,6 @@ export default function AdmChat(){
     }, [infoSalas])*/
 
 
-    useEffect(() => {
-      if(infoSalas.length > 0 && infoSalas[0].idSala !== 0){
-
-
-
-        setTimeout(() => {
-          if(minutos !== 0 || segundos !== 0){
-            if(segundos == 0){
-              setSegundos(59)
-              setMinutos(minutos - 1)
-            }else{
-              setSegundos(segundos - 1)
-            }
-          }else{
-
-          }
-
-          
-        }, 1000)
-      }
-      console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA")
-    }, [infoSalas, segundos])
 
 
     useEffect(() => {
