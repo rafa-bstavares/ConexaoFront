@@ -18,6 +18,7 @@ type Props = {
   atendente: boolean,
   minutosAtendenteFn?: Dispatch<SetStateAction<number>>,
   segundosAtendenteFn?: Dispatch<SetStateAction<number>>,
+  segundosAtendente?: number
 }
 
 type TipoInfoSala = {
@@ -28,7 +29,8 @@ type TipoInfoSala = {
   tempoConsulta: number,
   precoConsulta: number,
   saldo: number,
-  dataNas: string
+  dataNas: string,
+  finalConsulta: Date
 }
 
 type objBaralho = {
@@ -36,7 +38,7 @@ type objBaralho = {
   urls: string[]
 }
 
-export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, }: Props){
+export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, segundosAtendente}: Props){
 
   const {infoSalas, setInfoSalas, abrirModalChamandoAtendente, setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
 
@@ -60,6 +62,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
   const [minutosRestantes, setMinutosRestantes] = useState<number>(0)
   const [usuarioChamando, setUsuarioChamando] = useState<string>("")
   const [idUsuarioChamando, setIdUsuarioChamando] = useState<number>(0)
+  const [finalConsulta, setFinalConsulta] = useState<Date>()
 
   const audio = useRef<HTMLAudioElement>(null)
   const divScroll = useRef<HTMLDivElement>(null)
@@ -161,7 +164,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               idCliente: createdById.toString()
             })
           }).then(res => res.json()).then(data => {
-            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0, dataNas: ""}
+            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0, dataNas: "", finalConsulta: new Date()}
             console.log(data)
             if(data[0] == "erro" || data[0] == "sucesso"){
               if(data[1]){
@@ -170,7 +173,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }
             if(infoSalas){
               const infoSalasClone: TipoInfoSala[] = [...infoSalas]
-              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo, dataNas: objCliente.dataNas})
+              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo, dataNas: objCliente.dataNas, finalConsulta: objCliente.finalConsulta})
               setInfoSalas(infoSalasClone)
             }
           }).catch(() => {
@@ -412,6 +415,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                   console.log("TEMPO CONSULTA: " + data[1].tempoConsulta)
                   setTempoConsulta(data[1].tempoConsulta)
                   setPrecoTotalConsulta(data[1].precoConsulta)
+                  setFinalConsulta(data[1].finalConsulta)
                   /*setMinutos(data[1].tempoConsulta)*///AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
                   /*setSegundos(0)*/
                 }else{
@@ -447,7 +451,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
       console.log("a sala ao carregar é: " + salaAtual)
 
 
-      atualizarCronometro()
+      iniciarCronometro()
 
     }, [])
 
@@ -501,7 +505,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
         setTimeout(() => {
-          if(minutos !== 0 || segundos !== 0){
+          /*if(minutos !== 0 || segundos !== 0){
             if(segundos == 0){
               setSegundos(59)
               setMinutos(minutos - 1)
@@ -510,7 +514,8 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }
           }else{
 
-          }
+          }*/
+         atualizarCronometro()
 
           
         }, 1000)
@@ -523,6 +528,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         if(minutos == 1 && segundos == 0){
           setMinutosRestantes(1)
           setAbrirModalRecarregar(true)
+        }
+
+        if(segundos == 0 && minutos == 0){
+          encerrarAtendimentoCliente()
         }
       }
       console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA")
@@ -592,6 +601,11 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
 
+    useEffect(() => {
+      console.log("atualizarcron pra djcknsavjkadnsvjklnaslvnasdjklvn")
+      atualizarCronometro()
+    }, [infoSalas, finalConsulta])
+
 
     useEffect(() => {
 
@@ -599,6 +613,61 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
     function atualizarCronometro(){
+      console.log("acionou atualizar cronometro")
+
+      if(atendente){
+        console.log(infoSalas.length)
+        if(infoSalas.length > 0){
+          console.log("finalConsulta atendente")
+          console.log(infoSalas[0].finalConsulta)
+          if(infoSalas[0].finalConsulta && minutosAtendenteFn && segundosAtendenteFn){
+            const time = new Date()
+            console.log(new Date(infoSalas[0].finalConsulta).getTime())
+            console.log("Faltam: " + Math.abs(new Date(infoSalas[0].finalConsulta).getTime() - time.getTime()))
+            const tempoBruto = Math.abs(new Date(infoSalas[0].finalConsulta).getTime() - time.getTime())/60000
+            const arrTempos = tempoBruto.toFixed(2).toString().split(".")
+            console.log(arrTempos)
+            const minutosRestantes = Number(arrTempos[0])
+            const segundosRestantes = Number(arrTempos[1])*60/100
+            minutosAtendenteFn(minutosRestantes)
+            if(segundosAtendente == Number(segundosRestantes.toFixed(0))){
+              segundosAtendenteFn(Number(segundosRestantes.toFixed(0)) - 1)
+            }else{
+              segundosAtendenteFn(Number(segundosRestantes.toFixed(0)))
+            }
+            console.log(Number(segundosRestantes.toFixed(0)))
+          }
+        }
+      }else{
+        console.log("final consulta do if")
+        console.log(finalConsulta)
+          if(finalConsulta){
+            const time = new Date()
+            console.log(time)
+            console.log(time.getTime())
+            console.log(finalConsulta)
+            console.log("PROBLEMA É NO GFINAL CONSULTA")
+            console.log(finalConsulta)
+            const finalConsultaDate = new Date(finalConsulta)
+            console.log("Faltam: " + Math.abs(finalConsultaDate.getTime() - time.getTime()))
+            const tempoBruto = Math.abs(finalConsultaDate.getTime() - time.getTime())/60000
+            const arrTempos = tempoBruto.toFixed(2).toString().split(".")
+
+            const minutosRestantes = Number(arrTempos[0])
+            const segundosRestantes = Number(arrTempos[1])*60/100
+            setMinutos(minutosRestantes)
+
+            if(segundos == Number(segundosRestantes.toFixed(0))){
+              setSegundos(Number(segundosRestantes.toFixed(0)) - 1)
+            }else{
+              setSegundos(Number(segundosRestantes.toFixed(0)))
+            }
+          }
+      }
+    }
+
+
+    function iniciarCronometro(){
       fetch("https://api.conexaoastralmistica.com.br/quantoFalta" + (atendente? "Atendente": "Cliente"), {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
         if(data[0] == "sucesso"){
 
@@ -758,7 +827,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }
           {
             abrirModalRecarregar &&
-            <ModalRecarregar atualizarCronFn={atualizarCronometro} minutosRestantes={minutosRestantes}/>
+            <ModalRecarregar atualizarCronFn={iniciarCronometro} minutosRestantes={minutosRestantes}/>
           }
           {
             abrirModalChamandoAtendente &&

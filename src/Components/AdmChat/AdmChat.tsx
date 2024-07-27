@@ -246,7 +246,7 @@ export default function AdmChat(){
                             </div>
                           </div>
                         </div>
-                        <Chat minutosAtendenteFn={setMinutos} segundosAtendenteFn={setSegundos} atendente={true}/>
+                        <Chat minutosAtendenteFn={setMinutos} segundosAtendenteFn={setSegundos} atendente={true} segundosAtendente={segundos}/>
                       </>
                     :
                     <Login tipoLogin="atendente"/>
