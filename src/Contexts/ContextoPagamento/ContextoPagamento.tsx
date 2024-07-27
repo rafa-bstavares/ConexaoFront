@@ -2,6 +2,8 @@ import { createContext, useState, Dispatch, SetStateAction } from "react";
 
 type TiposContextoPagamento = {   
     setAbrirModalPagamento: Dispatch<SetStateAction<boolean>>,
+    setAbrirPagamentoDentroConsulta: Dispatch<SetStateAction<boolean>>,
+    abrirPagamentoDentroConsulta: boolean,
     abrirModalPagamento: boolean,
     setAbrirModalCartao: Dispatch<SetStateAction<boolean>>,
     abrirModalCartao: boolean,
@@ -17,6 +19,8 @@ type TiposContextoPagamento = {
 
 export const ContextoPagamento = createContext<TiposContextoPagamento>({
     setAbrirModalPagamento: () => {},
+    setAbrirPagamentoDentroConsulta: () => {},
+    abrirPagamentoDentroConsulta: false,
     abrirModalPagamento: false,
     setAbrirModalCartao: () => {},
     abrirModalCartao: false,
@@ -33,6 +37,7 @@ export const ContextoPagamento = createContext<TiposContextoPagamento>({
 
 export const PagamentoProvider = ({children}: {children: React.ReactNode}) => {
     const [abrirModalPagamento, setAbrirModalPagamento] = useState<boolean>(false)
+    const [abrirPagamentoDentroConsulta, setAbrirPagamentoDentroConsulta] = useState<boolean>(false)
     const [abrirModalCartao, setAbrirModalCartao] = useState<boolean>(false)
     const [abrirModalEscolher, setAbrirModalEscolher] = useState<boolean>(false)
     const [temQrCode, setTemQrCode] = useState<boolean>(false)
@@ -44,6 +49,8 @@ export const PagamentoProvider = ({children}: {children: React.ReactNode}) => {
     return (
         <ContextoPagamento.Provider value={{
             setAbrirModalPagamento,
+            setAbrirPagamentoDentroConsulta,
+            abrirPagamentoDentroConsulta,
             abrirModalPagamento,
             setAbrirModalCartao,
             abrirModalCartao,

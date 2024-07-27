@@ -13,6 +13,8 @@ import ModalChamandoAtendente from '../ModalChamandoAtendente/ModalChamandoAtend
 import { ContextoProfissionais } from '../../Contexts/ContextoProfissionais/ContextoProfissionais';
 import imgEnviar from "../../assets/images/enviarChat.svg"
 import campainha from "../../assets/sounds/old-style-phone-ringer-37761.mp3"
+import { ContextoPagamento } from '../../Contexts/ContextoPagamento/ContextoPagamento';
+import PagamentoDentroConsulta from '../PagamentoDentroConsulta/PagamentoDentroConsulta';
 
 type Props = {
   atendente: boolean,
@@ -41,6 +43,7 @@ type objBaralho = {
 export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, segundosAtendente}: Props){
 
   const {infoSalas, setInfoSalas, abrirModalChamandoAtendente, setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
+  const {abrirPagamentoDentroConsulta, setAbrirPagamentoDentroConsulta} = useContext(ContextoPagamento)
 
 
   /*const [infoSalas, setInfoSalas] = useState<TipoInfoSala[]>()*/
@@ -835,6 +838,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           {
             abrirModalChamandoAtendente &&
             <ModalChamandoAtendente idUsuario={idUsuarioChamando} usuario={usuarioChamando}/>
+          }
+          {
+            abrirPagamentoDentroConsulta &&
+            <PagamentoDentroConsulta/>
           }
         </div>
     )

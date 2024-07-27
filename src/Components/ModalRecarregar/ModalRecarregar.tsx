@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 import Botao from "../Botao/Botao"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
+import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
 
 
 type Props= {
@@ -21,6 +22,8 @@ export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Pro
     const [tempoAdicionalConsulta, setTempoAdicionalConsulta] = useState<number>(2)
     const [precoAdicionalConsulta, setPrecoAdicionalConsulta] = useState<number>(tempoAdicionalConsulta * perfilProAtual.valorMin)
 
+    const {setAbrirPagamentoDentroConsulta} = useContext(ContextoPagamento)
+
 
     useEffect(() => {
         console.log("O valor do minuto da consulta do atendente vale: " + perfilProAtual.valorMin)
@@ -32,7 +35,8 @@ export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Pro
     }
 
     function prolongarConsulta(){
-        setQuerRecarregar(true)
+        setAbrirPagamentoDentroConsulta(true)
+        setAbrirModalRecarregar(false)
     }
 
 
@@ -103,7 +107,7 @@ export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Pro
                     <Botao onClickFn={prolongarConsulta} texto="Quero prolongar consulta"/>
                 </div>
                 {
-                    querRecarregar &&
+                   /* querRecarregar &&
                     <div className="flex flex-col">
                         <div className="self-center text-xl lg:text-3xl font-bold">Deseja uma consulta de quanto tempo?</div>
                         <div className="flex flex-col gap-2">
@@ -116,7 +120,7 @@ export default function ModalRecarregar({minutosRestantes, atualizarCronFn}: Pro
                         <div className="flex gap-4 self-center mt-3 lg:mt-5">
                             <Botao onClickFn={confereSaldo} texto="Prolongar Consulta"/>
                         </div>
-                    </div>
+                    </div>*/
                 }
             </div>
         </div>
