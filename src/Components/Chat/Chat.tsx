@@ -43,7 +43,7 @@ type objBaralho = {
 export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, segundosAtendente}: Props){
 
   const {infoSalas, setInfoSalas, abrirModalChamandoAtendente, setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
-  const {abrirPagamentoDentroConsulta, setAbrirPagamentoDentroConsulta} = useContext(ContextoPagamento)
+  const {abrirPagamentoDentroConsulta} = useContext(ContextoPagamento)
 
 
   /*const [infoSalas, setInfoSalas] = useState<TipoInfoSala[]>()*/
