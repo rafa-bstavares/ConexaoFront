@@ -24,7 +24,7 @@ export default function AdmChat(){
     const [toOn, setToOn] =  useState<boolean>(true)
     const [saldoTotalCliente, setSaldoTotalCliente] = useState<number>(0)
     const [abrirMenu, setAbrirMenu] = useState<boolean>(false)
-    const [dataNascimento, setDataNascimento] = useState<string>("")
+
 
 
 
@@ -76,10 +76,8 @@ export default function AdmChat(){
       if(infoSalas){
         if(infoSalas.length > 0){
           setSaldoTotalCliente(infoSalas[0].saldo)
-          setDataNascimento(infoSalas[0].dataNas)
         }else{
           setSaldoTotalCliente(0)
-          setDataNascimento("")
         }
       }
       console.log("infosalaassss")
@@ -202,9 +200,6 @@ export default function AdmChat(){
                             <button onClick={encerrarAtendimento} className="p-4 rounded-md bg-red-500 ">
                               Encerrar antendimento
                             </button>
-                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
-                              Data de nascimento: {dataNascimento}
-                            </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
                               tempo consulta: {tempoConsulta}
                             </div>

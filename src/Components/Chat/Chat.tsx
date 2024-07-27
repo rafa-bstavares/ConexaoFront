@@ -63,6 +63,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
   const [usuarioChamando, setUsuarioChamando] = useState<string>("")
   const [idUsuarioChamando, setIdUsuarioChamando] = useState<number>(0)
   const [finalConsulta, setFinalConsulta] = useState<Date>()
+  const [dataNascimento, setDataNascimento] = useState<string>("")
 
   const audio = useRef<HTMLAudioElement>(null)
   const divScroll = useRef<HTMLDivElement>(null)
@@ -478,10 +479,12 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           setSalaAtualAdm(infoSalas[0].idSala)
           setPrecoTotalConsulta(infoSalas[0].precoConsulta)
           setTempoConsulta(infoSalas[0].tempoConsulta)
+          setDataNascimento(infoSalas[0].dataNas)
           /*setMinutos(infoSalas[0].precoConsulta)*/
         }else{
           setPrecoTotalConsulta(0)
           setTempoConsulta(0)
+          setDataNascimento("")
         }
       }
     }, [infoSalas])
@@ -771,7 +774,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           <div className={` ${atendente? "w-1/2 mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex `}>
             <div className='flex flex-col mt-16 rounded-md bg-white h-fit'>
               {infoSalas &&
-                infoSalas.map((item, index) => <OpcaoChat salaOpcao={item.idSala} setSalaAdm={setSalaAtualAdm} nomeCliente={item.nome} primeiro={index == 0} ultimoClicado={ultimoClicado} ultimoClicadoFn={setUltimoClicado} index={index}/>)
+                infoSalas.map((item, index) => <OpcaoChat dataNascimento={dataNascimento} salaOpcao={item.idSala} setSalaAdm={setSalaAtualAdm} nomeCliente={item.nome} primeiro={index == 0} ultimoClicado={ultimoClicado} ultimoClicadoFn={setUltimoClicado} index={index}/>)
               }
             </div>
             <div className='h-full flex-1 bg-fundoTextoChat bg-cover rounded-md  flex flex-col justify-end'>
