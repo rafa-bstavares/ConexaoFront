@@ -535,7 +535,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         }
       }
       console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA")
-    }, [segundos])
+    }, [segundos, segundosAtendente])
 
 
 
