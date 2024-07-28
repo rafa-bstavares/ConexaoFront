@@ -401,8 +401,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         })
 
 
-          console.log("TA FAZENDO O FETCH NA PRIMEIRA VEZ")
+
           fetch("https://api.conexaoastralmistica.com.br/buscarSalaUsuario", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
+            console.log("RESPOSTA BUSCANDO SALA USUARIOO0OOOO")
+            console.log(data)
             if(data[0] == "erro"){
               setTemAviso(true)/*  */
               if(data[1]){
