@@ -215,12 +215,24 @@ export default function PagamentoDentroConsulta(){
                     <div className="flex flex-col lg:flex-row gap-4 self-center mt-3 lg:mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
                         <Botao onClickFn={() => {
+                            fetch("https://api.conexaoastralmistica.com.br/cancelarPagamento", {
+                                headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
+                            }).then(res => res.json()).then(data => {
+                                if(data.length > 0){
+                                    if(data[0] == "sucesso"){
+                                        console.log("pagamento cancelado com sucesso")
+                                    }else{
+                                        console.log("ocorreu um erro ao cancelar o pagamento")
+                                    }
+                                }
+
+                            }).catch(() => console.log("ocorreu um erro ao enviar a requisição de cancelamento do pagamento"))
                             setAbrirPagamentoDentroConsulta(false)
                             window.location.reload()
                             document.body.classList.remove("modal-open")
                         }
                             
-                        } texto="Cancelar"/>
+                        } texto="Cancelar Pagamento"/>
                     </div>
                     
                     <div className="flex justify-center">
