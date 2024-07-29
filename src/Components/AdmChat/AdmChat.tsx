@@ -151,6 +151,11 @@ export default function AdmChat(){
     useEffect(() => {
       const valorTempoTotal = Math.floor(saldoTotalCliente / perfilProAtual.valorMin)
       const tempoPassou = valorTempoTotal - minutos
+      console.log("TEMPO PASSOU")
+      console.log(tempoPassou)
+      console.log("TEMPO TOTAL CONSULTA")
+      console.log(valorTempoTotal)
+      console.log(perfilProAtual.valorMin)
       if(tempoPassou < valorTempoTotal){
         setGanhoAtual((tempoPassou + 1)*perfilProAtual.valorMin)
       }
