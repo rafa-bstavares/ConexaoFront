@@ -15,9 +15,9 @@ export default function ModalEditarDetalhes(){
     const [emailProfEditar, setEmailProfEditar] = useState<string>(profEditar.email)
     const [descricaoMenorEditar, setDescricaoMenorEditar] = useState<string>(profEditar.descricaoMenor)
     const [descricaoMaiorEditar, setDescricaoMaiorEditar] = useState<string>(profEditar.descricaoMaior)
-    const [imgProfAtual, setImgProfAtual] = useState<string>(profEditar.foto)
-    const [imgProfEditar, setImgProfEditar] = useState<File>()
     const [valorMinEditar, setValorMinEditar] = useState<number>(profEditar.valorMin)
+    /*const [imgProfAtual, setImgProfAtual] = useState<string>(profEditar.foto)
+    const [imgProfEditar, setImgProfEditar] = useState<File>()*/
 
 
     function EditarCampo(nomeCampo: string, valorCampo: string | number){
@@ -47,15 +47,12 @@ export default function ModalEditarDetalhes(){
                 }
             }
 
-        }).catch((err) => {
+        }).catch(() => {
             setTemAviso(true)
             setTextoAviso("ocorreu um erro ao editar as informações. Por favor, tente novamente. Confira sua conexão com a internet")
         })
     }
 
-    function Editarfoto(arquivo: File){
-
-    }
 
     useEffect(() => {
         console.log(profEditar.descricaoMaior)
