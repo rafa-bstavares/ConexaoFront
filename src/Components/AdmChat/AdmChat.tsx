@@ -24,6 +24,7 @@ export default function AdmChat(){
     const [toOn, setToOn] =  useState<boolean>(true)
     const [saldoTotalCliente, setSaldoTotalCliente] = useState<number>(0)
     const [abrirMenu, setAbrirMenu] = useState<boolean>(false)
+    const [ganhoAtual, setGanhoAtual] = useState<number>(0)
 
 
 
@@ -147,6 +148,14 @@ export default function AdmChat(){
 
     }
 
+    useEffect(() => {
+      const valorTempoTotal = Math.floor(saldoTotalCliente / perfilProAtual.valorMin)
+      const tempoPassou = valorTempoTotal - minutos
+      if(tempoPassou < valorTempoTotal){
+        setGanhoAtual((tempoPassou + 1)*perfilProAtual.valorMin)
+      }
+    }, [minutos])
+
 
 
     
@@ -205,6 +214,9 @@ export default function AdmChat(){
                             </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
                               valor consulta: {precoTotalConsulta}
+                            </div>
+                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
+                              Ganhos na consulta atual: {ganhoAtual}
                             </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4 font-bold text-xl">
                               {minutos}:{segundos}
