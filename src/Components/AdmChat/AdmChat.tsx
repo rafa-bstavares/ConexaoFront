@@ -17,14 +17,13 @@ export default function AdmChat(){
     const {atendenteLogado, setAtendenteLogado, abrirModalRedefinir, setAbrirModalRedefinir} = useContext(ContextoLogin)
     const {setTemAviso, setTextoAviso, temAviso} = useContext(ContextoAviso)
     const {precoTotalConsulta, tempoConsulta} = useContext(ContextoUsuario)
-    const {perfilProAtual} = useContext(ContextoProfissionais)
-    const {setAbrirModalHistorico, abrirModalHistorico} = useContext(ContextoProfissionais)
+    const {setAbrirModalHistorico, abrirModalHistorico, perfilProAtual} = useContext(ContextoProfissionais)
     const [minutos, setMinutos] = useState<number>(0)
     const [segundos, setSegundos] = useState<number>(60)
     const [toOn, setToOn] =  useState<boolean>(true)
     const [saldoTotalCliente, setSaldoTotalCliente] = useState<number>(0)
     const [abrirMenu, setAbrirMenu] = useState<boolean>(false)
-    const [ganhoAtual, setGanhoAtual] = useState<number>(0)
+    const [ganhosAtual, setGanhosAtual] = useState<number>((perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
 
 
 
@@ -37,7 +36,14 @@ export default function AdmChat(){
     ] 
   
 
-
+    useEffect(() => {
+      if(minutos){
+        if(Math.floor(saldoTotalCliente / perfilProAtual.valorMin) - minutos >= 0){
+          const quantTempoPassado = Math.floor(saldoTotalCliente / perfilProAtual.valorMin) - minutos
+          setGanhosAtual(((quantTempoPassado)*perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+        }
+      }
+    }, [minutos])
 
 
     useEffect(() => {
@@ -148,22 +154,8 @@ export default function AdmChat(){
 
     }
 
-    useEffect(() => {
-      const valorTempoTotal = Math.floor(saldoTotalCliente / perfilProAtual.valorMin)
-      const tempoPassou = valorTempoTotal - minutos
-      console.log("TEMPO PASSOU")
-      console.log(tempoPassou)
-      console.log("TEMPO TOTAL CONSULTA")
-      console.log(valorTempoTotal)
-      console.log(perfilProAtual.valorMin)
-      if(tempoPassou < valorTempoTotal){
-        setGanhoAtual((tempoPassou + 1)*perfilProAtual.valorMin)
-      }
-    }, [minutos])
 
 
-
-    
 
     return(
         <div className="min-h-screen relative bg-roxoPrincipal text-white">
@@ -221,7 +213,7 @@ export default function AdmChat(){
                               valor consulta: {precoTotalConsulta}
                             </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
-                              Ganhos na consulta atual: {ganhoAtual}
+                              Ganhos consulta: R${ganhosAtual}
                             </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4 font-bold text-xl">
                               {minutos}:{segundos}

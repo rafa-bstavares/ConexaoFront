@@ -2,6 +2,7 @@ import { useContext, useEffect} from "react"
 import { Outlet } from "react-router-dom"
 import MenuAdm from "../MenuAdm/MenuAdm"
 import ModalAviso from "../ModalAviso/ModalAviso"
+import ModalEditarDetalhes from "../ModalEditarDetalhes/ModalEditarDetalhes"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 import ModalDetalhes from "../ModalDetalhes/ModalDetalhes"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
@@ -12,7 +13,7 @@ import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 export default function Adm(){
 
     const {temAviso} = useContext(ContextoAviso)
-    const {abrirModalDetalhes} = useContext(ContextoProfissionais)
+    const {abrirModalDetalhes, abrirModalEditar} = useContext(ContextoProfissionais)
     const {admGeralLogado, setAdmGeralLogado} = useContext(ContextoLogin)
 
     useEffect(() => {
@@ -44,16 +45,19 @@ export default function Adm(){
                         abrirModalDetalhes ?
                         <ModalDetalhes/>
                         :
-                        <>
-                            <MenuAdm/>
-                            <div className="flex flex-col gap-4">
-                                <Outlet/>
-                            </div>
-                            {
-                                temAviso &&
-                                <ModalAviso />
-                            }                        
-                        </>
+                            abrirModalEditar ?
+                            <ModalEditarDetalhes/>
+                            :
+                            <>
+                                <MenuAdm/>
+                                <div className="flex flex-col gap-4">
+                                    <Outlet/>
+                                </div>
+                                {
+                                    temAviso &&
+                                    <ModalAviso />
+                                }                        
+                            </>                            
                         
                         
                     }                    

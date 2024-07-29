@@ -10,9 +10,19 @@ type TipoProfissionais = {
     email: string,
     status: string,
     valorMin: number,
-    totalArrecadado: number
+    totalArrecadado: number,
+    percentualPro: number
 }
 
+type TipoProfEditar = {
+    foto: string,
+    nome: string,
+    descricaoMenor: string,
+    descricaoMaior: string,
+    email: string,
+    valorMin: number,
+    id: number
+}
 
 type TipoObjDetalhe = {
     nomeCliente: string,
@@ -35,6 +45,8 @@ type TipoObjHistorico = {
 type TiposContextoProfissionais = {   
     setProfissionais: Dispatch<SetStateAction<TipoProfissionais[]>>,
     profissionais: TipoProfissionais[],
+    setProfEditar: Dispatch<SetStateAction<TipoProfEditar>>,
+    profEditar: TipoProfEditar,
     setIdProfissionalApagar: Dispatch<SetStateAction<number>>,
     idProfissionalApagar: number,
     setPerfilProAtual: Dispatch<SetStateAction<TipoProfissionais>>,
@@ -50,16 +62,20 @@ type TiposContextoProfissionais = {
     arrHistoricosAtendente: TipoObjHistorico[],
     setArrHistoricosAtendente: Dispatch<SetStateAction<TipoObjHistorico[]>>,
     nomeProModTempo: string,
-    setNomeProModTempo: Dispatch<SetStateAction<string>>
+    setNomeProModTempo: Dispatch<SetStateAction<string>>,
+    abrirModalEditar: boolean,
+    setAbrirModalEditar: Dispatch<SetStateAction<boolean>>,
 }
 
 export const ContextoProfissionais = createContext<TiposContextoProfissionais>({
     setProfissionais: () => {},
-    profissionais: [{foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0}],
+    profissionais: [{foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0, percentualPro: 30}],
     idProfissionalApagar: 0,
     setIdProfissionalApagar: () => {},
+    setProfEditar: () => {},
+    profEditar: {foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "",  valorMin: 0, id: 0},
     setPerfilProAtual: () => {},
-    perfilProAtual: {foto: "", nome: "", email: "", descricaoMaior: "", descricaoMenor: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0},
+    perfilProAtual: {foto: "", nome: "", email: "", descricaoMaior: "", descricaoMenor: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0, percentualPro: 30},
     detalhesProAdm: [{nomeCliente: "", precoConsulta: 0, inicio: new Date(), fim: new Date(), idHistorico: 0, nomeProfissional: "" }],
     setDetalhesProAdm: () => {},
     abrirModalDetalhes: false,
@@ -71,21 +87,25 @@ export const ContextoProfissionais = createContext<TiposContextoProfissionais>({
     arrHistoricosAtendente: [{historico: "", id_cliente: 0, nomeCliente: "", data: new Date()}],
     setArrHistoricosAtendente: () => {},
     nomeProModTempo: "",
-    setNomeProModTempo: () => {}
+    setNomeProModTempo: () => {},
+    abrirModalEditar: false,
+    setAbrirModalEditar: () => {},
 } as TiposContextoProfissionais)
 
 
 export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) => {
 
-    const [profissionais, setProfissionais] = useState<TipoProfissionais[]>([{foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0}])
-    const [perfilProAtual, setPerfilProAtual] = useState<TipoProfissionais>({foto: "", nome: "", email: "", descricaoMaior: "", descricaoMenor: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0})
+    const [profissionais, setProfissionais] = useState<TipoProfissionais[]>([{foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0, percentualPro: 30}])
+    const [perfilProAtual, setPerfilProAtual] = useState<TipoProfissionais>({foto: "", nome: "", email: "", descricaoMaior: "", descricaoMenor: "", id: 0, status: "", valorMin: 0, totalArrecadado: 0, percentualPro: 30})
     const [detalhesProAdm, setDetalhesProAdm] = useState<TipoObjDetalhe[]>([{nomeCliente: "", precoConsulta: 0, inicio: new Date(), fim: new Date(), idHistorico: 0, nomeProfissional: "" }])
     const [abrirModalDetalhes, setAbrirModalDetalhes] = useState<boolean>(false)
+    const [profEditar, setProfEditar] = useState<TipoProfEditar>({foto: "", nome: "", email: "", descricaoMenor: "", descricaoMaior: "", valorMin: 0, id: 0})
     const [abrirModalCertezaApagar, setAbrirModalCertezaApagar] = useState<boolean>(false)
     const [abrirModalHistorico, setAbrirModalHistorico] = useState<boolean>(false)
     const [arrHistoricosAtendente, setArrHistoricosAtendente] = useState<TipoObjHistorico[]>([{historico: "", id_cliente: 0, nomeCliente: "", data: new Date()}])
     const [idProfissionalApagar, setIdProfissionalApagar] = useState<number>(0)
     const [nomeProModTempo, setNomeProModTempo] = useState<string>("")
+    const [abrirModalEditar, setAbrirModalEditar] = useState<boolean>(false)
 
 
 
@@ -93,6 +113,8 @@ export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) =
         <ContextoProfissionais.Provider value={{
             profissionais,
             setProfissionais,
+            profEditar,
+            setProfEditar,
             setPerfilProAtual,
             perfilProAtual,
             detalhesProAdm,
@@ -108,7 +130,9 @@ export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) =
             idProfissionalApagar,
             setIdProfissionalApagar,
             nomeProModTempo,
-            setNomeProModTempo
+            setNomeProModTempo,
+            abrirModalEditar,
+            setAbrirModalEditar,
         }}>
             {children}
         </ContextoProfissionais.Provider>

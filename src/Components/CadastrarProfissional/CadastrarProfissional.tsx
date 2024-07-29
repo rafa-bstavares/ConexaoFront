@@ -23,6 +23,7 @@ export default function CadastrarProfissional(){
     const [fotos, setFotos] = useState<File[] | []>([])
     const [idxUltimaClicada, setIdxUltimaClicada] = useState<number>() 
     const [valorMin, setValorMin] = useState<number>(1)
+    const [percentualPro, setPercentualPro] = useState<number>(30)
 
 
     const {setTextoAviso, setTemAviso} = useContext(ContextoAviso)
@@ -52,7 +53,7 @@ export default function CadastrarProfissional(){
 
 
     function cadastrarProfFn(){
-        if(valorMin > 0 && emailProf !== "" ){
+        if(valorMin > 0 && emailProf !== "" && percentualPro >= 1 && percentualPro <= 100){
             let formData = new FormData()
             if(imgProf){
                 formData.append("imgProf", imgProf)
@@ -72,7 +73,8 @@ export default function CadastrarProfissional(){
                             descricaoMenor,
                             descricaoMaior,
                             id: data[1][0].id,
-                            valorMin
+                            valorMin,
+                            percentualPro
                         })
                     }).then(res => res.json()).then(data => {
                         if(data[0] == "sucesso"){
@@ -206,6 +208,8 @@ export default function CadastrarProfissional(){
                 <input type="file" onChange={(e) => {if(e.target.files){setImgProf(e.target.files[0])}}}  className=""/> {/* e.target.files[0].name */}
                 <div>Valor em reais do minuto do profissional:</div>
                 <input type="number" min={1} onChange={e => setValorMin(Number(e.target.value))} className="text-black"/>
+                <div>Percentual do profissional. Ex: Caso queira que seja 30% colocar abaixo apenas o número 30.</div>
+                <input type="number" min={1} onChange={e => setPercentualPro(Number(e.target.value))} className="text-black"/>
                 <button className="self-start px-4 py-2 rounded-md bg-white text-black" onClick={cadastrarProfFn}>Cadastrar</button>
             </div>
             <div className="flex flex-col gap-2 p-4 items-start">
