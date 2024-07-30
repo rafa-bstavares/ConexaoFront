@@ -203,29 +203,34 @@ export default function AdmChat(){
                                 </div>*/}
                               </div>
                             </div>
-                            <button onClick={encerrarAtendimento} className="p-4 rounded-md bg-red-500 ">
-                              Encerrar antendimento
-                            </button>
-                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
-                              tempo consulta: {tempoConsulta}
-                            </div>
-                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
-                              valor consulta: {precoTotalConsulta}
-                            </div>
-                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
-                              Ganhos consulta: R${ganhosAtual}
-                            </div>
-                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4 font-bold text-xl">
-                              {minutos}:{segundos}
-                            </div>
-                            <div className="flex flex-col rounded-md bg-roxoPrincipal items-center justify-center p-4 text-lg">
-                              <div className="text-center">
-                                Tempo Total Cliente:
-                              </div>
-                              <div>  
-                                {Math.floor(saldoTotalCliente / perfilProAtual.valorMin)} minutos
-                              </div>
-                            </div>
+                            {
+                              infoSalas.length > 0 && 
+                              <>
+                                <button onClick={encerrarAtendimento} className="p-4 rounded-md bg-red-500 ">
+                                  Encerrar antendimento
+                                </button>
+                                <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
+                                  tempo consulta: {tempoConsulta}
+                                </div>
+                                <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
+                                  valor consulta: {precoTotalConsulta}
+                                </div>
+                                <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
+                                  Ganhos consulta: R${ganhosAtual}
+                                </div>
+                                <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4 font-bold text-xl">
+                                  {minutos}:{segundos}
+                                </div>
+                                <div className="flex flex-col rounded-md bg-roxoPrincipal items-center justify-center p-4 text-lg">
+                                  <div className="text-center">
+                                    Tempo Total Cliente:
+                                  </div>
+                                  <div>  
+                                    {Math.floor(saldoTotalCliente / perfilProAtual.valorMin)} minutos
+                                  </div>
+                                </div>
+                              </>
+                            }
                           </div>
                         </div>
                         <Chat minutosAtendenteFn={setMinutos} segundosAtendenteFn={setSegundos} atendente={true} segundosAtendente={segundos}/>
