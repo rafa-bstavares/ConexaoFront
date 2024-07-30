@@ -10,7 +10,8 @@ interface ServerToClientEvents {
     precoTempoServMsg: (data: {preco: number, tempo: number}) => void,
     erroMsg: (data: {erroMsg: ""}) => void,
     clienteChamando: (data: {idProfissional: number, nomeCliente: string, idCliente: number}) => void,
-    respostaAtendente: (data: {msg: string, idCliente: number, idProfissional: number}) => void
+    respostaAtendente: (data: {msg: string, idCliente: number, idProfissional: number}) => void,
+    atualizarAdm: () => void
 }
 
 interface ClientToServerEvents {
@@ -19,7 +20,8 @@ interface ClientToServerEvents {
     adicionarNaSala: (data: {room: string}) => void,
     tempoPreco: (data: {tempo: number, preco: number, room: string}) => void,
     chamarAtendente: (data: {idProfissional: number, nomeCliente: string, idCliente: number}) => void,
-    respostaChamarAtendente: (data: {msg:  string, idCliente: number, idProfissional: number}) => {}
+    respostaChamarAtendente: (data: {msg:  string, idCliente: number, idProfissional: number}) => {},
+    comprouSaldoDentroConsulta: (data: {room: string}) => void 
 }
 
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io("https://api.conexaoastralmistica.com.br")

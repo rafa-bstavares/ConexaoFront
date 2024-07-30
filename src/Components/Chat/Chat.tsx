@@ -157,6 +157,12 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           setMessages(pastMsg)
       })
 
+      socket.on("atualizarAdm", () => {
+        if(atendente){
+          window.location.reload()
+        }
+      })
+
       socket.on("novaSala", async (data) => {
         const {newRoom, createdById, idProfissional} = data
         if(atendente && idProfissional == idAtendenteAtual){

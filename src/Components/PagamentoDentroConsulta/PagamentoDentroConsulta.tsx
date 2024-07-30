@@ -5,6 +5,7 @@ import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPaga
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from "react-router-dom"
+import { socket } from "../../socket"
 
 
 
@@ -19,7 +20,7 @@ export default function PagamentoDentroConsulta(){
     const [chaveQr, setChaveQr] = useState<string>("")
 
     const {setAbrirPagamentoDentroConsulta, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode} = useContext(ContextoPagamento)
-    const {usuario} = useContext(ContextoUsuario)
+    const {usuario, salaAtual} = useContext(ContextoUsuario)
 
     const navigate = useNavigate()
 
@@ -166,6 +167,7 @@ export default function PagamentoDentroConsulta(){
             if(data[0] == "pago"){
                 setRespostaStatus("pagamento realizado com sucesso")
                 navigate("/Chat")
+                socket.emit("comprouSaldoDentroConsulta", {room: salaAtual.toString()})
             }else if(data[0] == "pagamento em aberto"){
                 setRespostaStatus("pagamento em  aberto")
             }else{
