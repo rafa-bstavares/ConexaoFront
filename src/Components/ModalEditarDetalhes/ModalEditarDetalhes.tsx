@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react"
 import { ContextoProfissionais } from "../../Contexts/ContextoProfissionais/ContextoProfissionais"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 import ModalAviso from "../ModalAviso/ModalAviso"
+import seta from "../../assets/images/setaSeletor.svg"
 
 
 
 
 export default function ModalEditarDetalhes(){
 
-    const {profEditar, setProfEditar} = useContext(ContextoProfissionais)
+    const {profEditar, setProfEditar, setAbrirModalEditar} = useContext(ContextoProfissionais)
     const {temAviso, setTemAviso, setTextoAviso} = useContext(ContextoAviso)
 
     const [nomeProfEditar, setNomeProfEditar] = useState<string>(profEditar.nome)
@@ -62,7 +63,11 @@ export default function ModalEditarDetalhes(){
 
 
     return (
-        <div className="bg-roxoPrincipal flex items-center justify-center relative">
+        <div className="bg-roxoPrincipal flex flex-col items-center justify-center relative">
+            <div onClick={() => setAbrirModalEditar(false)} className="flex items-center gap-2 cursor-pointer p-2">
+                <img src={seta} alt="seta voltar"/>
+                <div>Voltar</div>
+            </div>
             <div className="p-10 grid grid-cols-2 justify-evenly">
                 <div className="flex flex-col gap-5">
                     <div className="text-white text-2xl">Cadastrar Profissional</div>
