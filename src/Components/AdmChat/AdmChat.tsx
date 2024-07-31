@@ -67,8 +67,10 @@ export default function AdmChat(){
         })
 
         if(infoSalas.length > 0){
-          if(infoSalas[0].minutosPassados){
-            setGanhosAtual(((infoSalas[0].minutosPassados)*perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+          if(infoSalas[0].minutosPassados && perfilProAtual){
+            if(perfilProAtual.valorMin && perfilProAtual.percentualPro){
+              setGanhosAtual(((infoSalas[0].minutosPassados)*perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+            }
           }
         }
 
@@ -91,7 +93,7 @@ export default function AdmChat(){
       if(infoSalas){
         if(infoSalas.length > 0){
           setSaldoTotalCliente(infoSalas[0].saldo)
-          if(perfilProAtual.valorMin && perfilProAtual.percentualPro){
+          if(perfilProAtual.valorMin && perfilProAtual.percentualPro && infoSalas[0].minutosPassados){
             setGanhosAtual((infoSalas[0].minutosPassados)*(perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
           }
         }else{
