@@ -63,7 +63,7 @@ export default function AdmChat(){
             setTextoAviso("ocorreu algum erro, por favor, tente novamente")
         })
 
-        if(infoSalas){
+        if(infoSalas.length > 0){
           if(infoSalas[0].minutosPassados){
             setGanhosAtual(((infoSalas[0].minutosPassados)*perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
           }
