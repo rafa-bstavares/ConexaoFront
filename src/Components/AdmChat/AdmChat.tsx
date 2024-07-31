@@ -225,6 +225,9 @@ export default function AdmChat(){
                                 </div>*/}
                               </div>
                             </div>
+                            <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
+                                  Valor Total: R${perfilProAtual.totalArrecadado}
+                            </div>
                             {
                               infoSalas.length > 0 && 
                               <>
@@ -238,7 +241,7 @@ export default function AdmChat(){
                                   valor consulta: {precoTotalConsulta}
                                 </div>
                                 <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4">
-                                  Ganhos consulta: R${ganhosAtual}
+                                  Ganhos consulta: R${ganhosAtual.toFixed(2)}
                                 </div>
                                 <div className="flex rounded-md bg-roxoPrincipal items-center justify-center p-4 font-bold text-xl">
                                   {minutos}:{segundos}
