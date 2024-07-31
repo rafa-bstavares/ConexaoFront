@@ -39,7 +39,10 @@ export default function AdmChat(){
     useEffect(() => {
       if(minutos){
         if(Math.floor(saldoTotalCliente / perfilProAtual.valorMin) - minutos >= 0){
-          const quantTempoPassado = Math.floor(saldoTotalCliente / perfilProAtual.valorMin) - minutos
+          let quantTempoPassado = Math.floor(saldoTotalCliente / perfilProAtual.valorMin) - minutos
+          if(quantTempoPassado == 0){
+            quantTempoPassado = 1
+          }
           setGanhosAtual(((quantTempoPassado)*perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
         }
       }
