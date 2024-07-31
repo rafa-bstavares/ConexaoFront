@@ -494,7 +494,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           setTempoConsulta(infoSalas[0].tempoConsulta)
           setDataNascimento(infoSalas[0].dataNas)
           if(ganhosAtualFn){
-            ganhosAtualFn((infoSalas[0].minutosPassados)*(perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+            if(perfilProAtual.valorMin && perfilProAtual.percentualPro){
+              ganhosAtualFn((infoSalas[0].minutosPassados)*(perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+            }
           }
           /*setMinutos(infoSalas[0].precoConsulta)*/
         }else{

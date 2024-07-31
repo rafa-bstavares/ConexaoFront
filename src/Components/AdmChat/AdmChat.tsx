@@ -91,6 +91,9 @@ export default function AdmChat(){
       if(infoSalas){
         if(infoSalas.length > 0){
           setSaldoTotalCliente(infoSalas[0].saldo)
+          if(perfilProAtual.valorMin && perfilProAtual.percentualPro){
+            setGanhosAtual((infoSalas[0].minutosPassados)*(perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+          }
         }else{
           setSaldoTotalCliente(0)
         }
