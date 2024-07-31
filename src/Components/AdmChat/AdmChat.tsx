@@ -23,7 +23,7 @@ export default function AdmChat(){
     const [toOn, setToOn] =  useState<boolean>(true)
     const [saldoTotalCliente, setSaldoTotalCliente] = useState<number>(0)
     const [abrirMenu, setAbrirMenu] = useState<boolean>(false)
-    const [ganhosAtual, setGanhosAtual] = useState<number>((perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
+    const [ganhosAtual, setGanhosAtual] = useState<number>(0)
 
 
 
