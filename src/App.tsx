@@ -15,6 +15,7 @@ import { initMercadoPago } from '@mercadopago/sdk-react'
 import ModalCartao from './Components/ModalCartao/ModalCartao'
 import ModalEscolherPag from './Components/ModalEscolherPag/ModalEscolherPag'
 import { ContextoProfissionais } from './Contexts/ContextoProfissionais/ContextoProfissionais'
+import Footer from './Components/Footer/Footer'
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
       <Banner/>
       <Servicos/>
       <Profissionais/>
+      <Footer/>
       {
         temAviso &&
         <ModalAviso />
