@@ -46,9 +46,8 @@ export default function AdmChat(){
     }, [minutos])
 
 
+
     useEffect(() => {
-
-
 
 
         fetch("https://api.conexaoastralmistica.com.br/confereTokenAtendente", {headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}}).then(res => res.json()).then(data => {
@@ -63,6 +62,8 @@ export default function AdmChat(){
             setTemAviso(true)
             setTextoAviso("ocorreu algum erro, por favor, tente novamente")
         })
+
+        setGanhosAtual(((infoSalas[0].minutosPassados)*perfilProAtual.valorMin)*perfilProAtual.percentualPro/100)
 
     }, [])
 
@@ -153,6 +154,20 @@ export default function AdmChat(){
         })
 
     }
+
+    useEffect(() => {
+      if(minutos){
+        fetch("https://api.conexaoastralmistica.com.br/atualizarMinutosPassados", {
+          method: "POST",
+          headers: {"Content-Type": "application/json", "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""},
+          body: JSON.stringify({
+            tempoDeConsulta: tempoConsulta - minutos
+          })
+        }).then(res => res.json()).then(() => {
+          
+        })
+      }
+    }, [minutos])
 
 
 

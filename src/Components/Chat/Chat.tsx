@@ -32,7 +32,8 @@ type TipoInfoSala = {
   precoConsulta: number,
   saldo: number,
   dataNas: string,
-  finalConsulta: Date
+  finalConsulta: Date,
+  minutosPassados: number
 }
 
 type objBaralho = {
@@ -174,7 +175,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               idCliente: createdById.toString()
             })
           }).then(res => res.json()).then(data => {
-            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0, dataNas: "", finalConsulta: new Date()}
+            let objCliente = {nome: "Usuário", email: "", tempoConsulta: 0, precoConsulta: 0, saldo: 0, dataNas: "", finalConsulta: new Date(), minutosPassados: 0}
             console.log(data)
             if(data[0] == "erro" || data[0] == "sucesso"){
               if(data[1]){
@@ -183,7 +184,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             }
             if(infoSalas){
               const infoSalasClone: TipoInfoSala[] = [...infoSalas]
-              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo, dataNas: objCliente.dataNas, finalConsulta: objCliente.finalConsulta})
+              infoSalasClone.push({idSala: Number(newRoom), id_cliente: Number(createdById), id_profissional: idAtendenteAtual, nome: objCliente.nome, precoConsulta: objCliente.precoConsulta, tempoConsulta: objCliente.tempoConsulta, saldo: objCliente.saldo, dataNas: objCliente.dataNas, finalConsulta: objCliente.finalConsulta, minutosPassados: objCliente.minutosPassados})
               setInfoSalas(infoSalasClone)
             }
           }).catch(() => {
