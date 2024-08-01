@@ -89,7 +89,7 @@ export default function ModalTempo({nomePro}: {nomePro: string}){
     }
 
     function efetivarPedido(){
-        if(usuario.saldo >= precoConsultaVar){
+        if(usuario.saldo >= 5){
             //criar sala e enviar o preco consultaVar pra setar os cronômetros
                 console.log("saldo suficiente")
                 fetch("https://api.conexaoastralmistica.com.br/mudarSaldo", {
@@ -172,7 +172,9 @@ export default function ModalTempo({nomePro}: {nomePro: string}){
 
         }else{
             //dar opção para ele adicionar saldo ou fazer a consultaVar com o tempo sugerido que ele consegue
-            console.log("saldo INNNNsuficiente")
+            setTemAviso(true)
+            setTextoAviso("Para iniciar consulta, seu saldo deve ser, no mínimo, 5 reais.")
+            setAbrirModalTempo(false)
         }
     }
 
