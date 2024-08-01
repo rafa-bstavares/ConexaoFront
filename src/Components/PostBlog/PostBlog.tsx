@@ -36,7 +36,7 @@ export default function PostBlog(){
                 </div>
             }
             <div className="text-white text-xl lg:text-4xl text-center">{tituloBlog}</div>
-            <div>{textoComp}</div>
+            <div className="text-white">{textoComp}</div>
         </div>
     )
 }

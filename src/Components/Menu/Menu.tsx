@@ -16,10 +16,7 @@ export default function Menu(){
     const arrItensMenu = [
         {nome: "Home", link: "/"},
         {nome: "Serviços", link: "/"},
-        {nome: "Sobre", link: "/"},
         {nome: "Blog", link: "/Blog"},
-        {nome: "Contato", link: "/"},
-        {nome: "Trabalhe conosco", link: "/"},
         {nome: "Consulta", link: "/"},
     ]
 
@@ -56,6 +53,8 @@ export default function Menu(){
                         </div>
                     </Link>
                 ))}
+                <a className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden" href="://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Contato</a>
+                <a className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden" href="://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Trabalhe Conosco</a>
             </div>
             <div className="flex gap-5">
                 {
