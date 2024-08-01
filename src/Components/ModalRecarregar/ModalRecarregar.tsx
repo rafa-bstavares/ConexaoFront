@@ -38,8 +38,8 @@ export default function ModalRecarregar({minutosRestantes}: Props){
     
 
     return(
-        <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-            <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] lg:w-1/2 rounded-md text-white">
+        <div className="fixed bg-white/90 h-[30%] w-[40%] top-2 left-2 flex justify-center items-center">
+            <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90%] overflow-y-scroll rounded-md text-white">
                 <div>Faltam {minutosRestantes} minutos para acabar sua consulta, deseja prolongar o tempo da consulta?</div>
                 <div>*Será calculado o valor para o tempo adicional e ele será retirado do seu saldo.</div>
                 <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 self-center mt-3 lg:mt-5">

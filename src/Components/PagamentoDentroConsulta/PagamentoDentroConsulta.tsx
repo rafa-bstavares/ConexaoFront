@@ -190,8 +190,8 @@ export default function PagamentoDentroConsulta(){
     
     return (
         <div>
-            <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90vh] lg:w-1/2 rounded-md text-white overflow-y-scroll">
+            <div className="fixed bg-white/90 h-[30%] w-[40%] top-2 left-2 flex justify-center items-center">
+                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90%] rounded-md text-white overflow-y-scroll">
                     <div className="w-2/3 lg:w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>
