@@ -193,7 +193,7 @@ export default function PagamentoDentroConsulta(){
         <div>
             <div className="fixed bg-white/90 h-[30%] w-[40%] top-2 left-2 flex justify-center items-center">
                 <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90%] rounded-md text-white overflow-y-scroll relative">
-                    <img className="w-14 aspect-square absolute top-2 right-2" src={xisFechar} alt="xis para fechar" onClick={() => setAbrirPagamentoDentroConsulta(false)}/>
+                    <img className="w-10 cursor-pointer aspect-square absolute top-2 right-2" src={xisFechar} alt="xis para fechar" onClick={() => setAbrirPagamentoDentroConsulta(false)}/>
                     <div className="w-full lg:w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>

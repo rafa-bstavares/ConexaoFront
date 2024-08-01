@@ -752,7 +752,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         setTemAviso(true)
         if(data[0] == "pago"){
             setTextoAviso("pagamento realizado com sucesso")
-            navigate("/Chat")
+            window.location.reload()
             socket.emit("comprouSaldoDentroConsulta", {room: salaAtual.toString()})
         }else if(data[0] == "pagamento em aberto"){
             setTextoAviso("pagamento em  aberto")
@@ -812,7 +812,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoPrincipal'>
                 {minutos}:{segundos}
               </div>
-              <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoSecundario' onClick={atualizarPagamento}>
+              <div className='text-white p-4 rounded-md text-xl bg-roxoSecundario cursor-pointer' onClick={atualizarPagamento}>
                 Atualizar pagamento
               </div>
               <button onClick={encerrarAtendimentoCliente} className="p-4 rounded-md bg-red-500 ">
