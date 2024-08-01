@@ -5,25 +5,18 @@ import Botao from "../Botao/Botao"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from "react-router-dom"
-import { socket } from "../../socket"
 
 
 
 export default function PagamentoDentroConsulta(){
 
     const [temErro, setTemErro] = useState<boolean>(false)
-    const [temRespostaStatus, setTemRespostaStatus] = useState<boolean>(false)
     const [textoErro, setTextoErro] = useState<string>("")
-    const [respostaStatus, setRespostaStatus] = useState<string>("")
     const [saldoAdicionar, setSaldoAdicionar] = useState<number>(1)
     const [cpf, setCpf] = useState<string>("")
-    const [chaveQr, setChaveQr] = useState<string>("")
 
-    const {setAbrirPagamentoDentroConsulta, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode} = useContext(ContextoPagamento)
-    const {usuario, salaAtual} = useContext(ContextoUsuario)
-
-    const navigate = useNavigate()
+    const {setAbrirPagamentoDentroConsulta, setIdUltimoPix, setUltimoQrCode, setTemQrCode, setChaveQr} = useContext(ContextoPagamento)
+    const {usuario} = useContext(ContextoUsuario)
 
 
     function confereCpf(cpf: string): "inválido" | "válido"{
@@ -156,34 +149,7 @@ export default function PagamentoDentroConsulta(){
     }
 
 
-    function statusPagamento(){
-        fetch("https://api.conexaoastralmistica.com.br/statusPagamentoDentroConsulta", {
-            headers: {
-                "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
-            }
-        }).then(res => res.json()).then(data => {
-            console.log(data)
-            setTemErro(false)
-            setTemRespostaStatus(true)
-            if(data[0] == "pago"){
-                setRespostaStatus("pagamento realizado com sucesso")
-                navigate("/Chat")
-                socket.emit("comprouSaldoDentroConsulta", {room: salaAtual.toString()})
-            }else if(data[0] == "pagamento em aberto"){
-                setRespostaStatus("pagamento em  aberto")
-            }else{
-                setRespostaStatus("você não tem pendências de pagamento")
-            }
-            /*if(data[0] == "sucesso"){
-                console.log(data[1])
-            }else if(data[0] == "sem pagamentos"){
-                console.log("sem pagamentos")
-            }else{
-                console.log("erro")
-
-            }*/
-        })
-    }
+ 
 
     
 
@@ -212,52 +178,9 @@ export default function PagamentoDentroConsulta(){
                         temErro &&
                         <div className="self-center text-red-600 font-bold text-xl">{textoErro}</div>
                     }
-                    {
-                        temRespostaStatus &&
-                        <div className={`self-center ${respostaStatus == "pagamento realizado com sucesso"? "text-green-600": (respostaStatus == "pagamento em aberto"? "text-red-600" : "text-blue-600")} font-bold text-sm lg:text-xl`}>{respostaStatus}</div>
-                    }
                     <div className="flex flex-col lg:flex-row gap-4 self-center mt-3 lg:mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
-                        <Botao onClickFn={() => {
-                            fetch("https://api.conexaoastralmistica.com.br/cancelarPagamento", {
-                                headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
-                            }).then(res => res.json()).then(data => {
-                                if(data.length > 0){
-                                    if(data[0] == "sucesso"){
-                                        console.log("pagamento cancelado com sucesso")
-                                    }else{
-                                        console.log("ocorreu um erro ao cancelar o pagamento")
-                                    }
-                                }
-
-                            }).catch(() => console.log("ocorreu um erro ao enviar a requisição de cancelamento do pagamento"))
-                            setAbrirPagamentoDentroConsulta(false)
-                            window.location.reload()
-                            document.body.classList.remove("modal-open")
-                        }
-                            
-                        } texto="Cancelar Pagamento"/>
                     </div>
-                    
-                    <div className="flex justify-center">
-                        <Botao onClickFn={statusPagamento} texto="Checar status último pagamento"/>
-                    </div>
-                    {
-                        temQrCode && 
-                        <div className="flex flex-col items-center gap-4">
-                            <div className="flex flex-col items-center">
-                                <div className="text-center">Leia o Qr Code abaixo com o seu aplicativo do banco</div>
-                                <div className="text-gray-500 text-center">*Após realizar o pagamento clique no botão "Checar status último pagamento" para conferir os status do mesmo</div>
-                            </div>
-                            <div className="w-32 lg:w-40 h-32 lg:h-40">
-                                <img className="w-full h-full" src={`data:image/jpeg;base64,${ultimoQrCode}`}/>
-                            </div>
-                            <div className="flex flex-col items-start">
-                                <div>Chave:</div>
-                                <div>{chaveQr}</div>
-                            </div>
-                        </div>
-                    }
                 </div>
             </div>
         </div>

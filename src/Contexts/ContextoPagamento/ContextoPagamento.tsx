@@ -14,7 +14,9 @@ type TiposContextoPagamento = {
     idUltimoPix: number,
     setIdUltimoPix: Dispatch<SetStateAction<number>>,
     ultimoQrCode: string,
-    setUltimoQrCode: Dispatch<SetStateAction<string>>
+    setUltimoQrCode: Dispatch<SetStateAction<string>>,
+    chaveQr: string,
+    setChaveQr: Dispatch<SetStateAction<string>>,
 }
 
 export const ContextoPagamento = createContext<TiposContextoPagamento>({
@@ -31,7 +33,9 @@ export const ContextoPagamento = createContext<TiposContextoPagamento>({
     idUltimoPix: 0,
     ultimoQrCode: "",
     setUltimoQrCode: () => {},
-    setIdUltimoPix: () => {}
+    setIdUltimoPix: () => {},
+    chaveQr: "",
+    setChaveQr: () => {},
 } as TiposContextoPagamento)
 
 
@@ -43,6 +47,7 @@ export const PagamentoProvider = ({children}: {children: React.ReactNode}) => {
     const [temQrCode, setTemQrCode] = useState<boolean>(false)
     const [idUltimoPix, setIdUltimoPix] = useState<number>(0)
     const [ultimoQrCode, setUltimoQrCode] = useState<string>("")
+    const [chaveQr, setChaveQr] = useState<string>("")
 
 
 
@@ -61,7 +66,9 @@ export const PagamentoProvider = ({children}: {children: React.ReactNode}) => {
             ultimoQrCode,
             setUltimoQrCode,
             setTemQrCode,
-            temQrCode
+            temQrCode,
+            chaveQr,
+            setChaveQr,
         }}>
             {children}
         </ContextoPagamento.Provider>

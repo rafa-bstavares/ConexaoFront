@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import imgLogo from "../../assets/images/logoConexao.png"
+import xisFechar from "../../assets/images/xisFechar.svg"
 import Botao from "../Botao/Botao"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
@@ -15,9 +16,9 @@ export default function ModalPagamento(){
     const [respostaStatus, setRespostaStatus] = useState<string>("")
     const [saldoAdicionar, setSaldoAdicionar] = useState<number>(5)
     const [cpf, setCpf] = useState<string>("")
-    const [chaveQr, setChaveQr] = useState<string>("")
 
-    const {setAbrirModalPagamento, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode} = useContext(ContextoPagamento)
+
+    const {setAbrirModalPagamento, setIdUltimoPix, setUltimoQrCode, ultimoQrCode, setTemQrCode, temQrCode, chaveQr, setChaveQr} = useContext(ContextoPagamento)
     const {usuario} = useContext(ContextoUsuario)
 
 
@@ -190,7 +191,12 @@ export default function ModalPagamento(){
     return (
         <div>
             <div className="fixed bg-white/90 h-screen w-full top-0 left-0 flex justify-center items-center">
-                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90vh] lg:w-1/2 rounded-md text-white overflow-y-scroll">
+                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90vh] lg:w-1/2 rounded-md text-white overflow-y-scroll relative">
+                    <img className="w-10 cursor-pointer aspect-square absolute top-2 right-2" src={xisFechar} alt="xis para fechar" onClick={() => {
+                        setAbrirModalPagamento(false)
+                        window.location.reload()
+                        document.body.classList.remove("modal-open")
+                    }}/>
                     <div className="w-2/3 lg:w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>
@@ -215,13 +221,6 @@ export default function ModalPagamento(){
                     }
                     <div className="flex flex-col lg:flex-row gap-4 self-center mt-3 lg:mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
-                        <Botao onClickFn={() => {
-                            setAbrirModalPagamento(false)
-                            window.location.reload()
-                            document.body.classList.remove("modal-open")
-                        }
-                            
-                        } texto="Cancelar"/>
                     </div>
                     
                     <div className="flex justify-center">

@@ -15,6 +15,7 @@ import imgEnviar from "../../assets/images/enviarChat.svg"
 import campainha from "../../assets/sounds/old-style-phone-ringer-37761.mp3"
 import { ContextoPagamento } from '../../Contexts/ContextoPagamento/ContextoPagamento';
 import PagamentoDentroConsulta from '../PagamentoDentroConsulta/PagamentoDentroConsulta';
+import ModalQrCode from '../ModalQrCode/ModalQrCode';
 
 type Props = {
   atendente: boolean,
@@ -45,7 +46,7 @@ type objBaralho = {
 export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, segundosAtendente, ganhosAtualFn}: Props){
 
   const {infoSalas, setInfoSalas, abrirModalChamandoAtendente, setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
-  const {abrirPagamentoDentroConsulta} = useContext(ContextoPagamento)
+  const {abrirPagamentoDentroConsulta, temQrCode} = useContext(ContextoPagamento)
 
 
   /*const [infoSalas, setInfoSalas] = useState<TipoInfoSala[]>()*/
@@ -888,6 +889,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           {
             abrirPagamentoDentroConsulta &&
             <PagamentoDentroConsulta/>
+          }
+          {
+            temQrCode &&
+            <ModalQrCode/>
           }
         </div>
     )
