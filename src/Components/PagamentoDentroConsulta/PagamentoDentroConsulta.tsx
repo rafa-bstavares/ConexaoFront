@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import imgLogo from "../../assets/images/logoConexao.png"
+import xisFechar from "../../assets/images/xisFechar.svg"
 import Botao from "../Botao/Botao"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
@@ -191,8 +192,9 @@ export default function PagamentoDentroConsulta(){
     return (
         <div>
             <div className="fixed bg-white/90 h-[30%] w-[40%] top-2 left-2 flex justify-center items-center">
-                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90%] rounded-md text-white overflow-y-scroll">
-                    <div className="w-2/3 lg:w-1/4 self-center">
+                <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90%] rounded-md text-white overflow-y-scroll relative">
+                    <img className="w-14 aspect-square absolute top-2 right-2" src={xisFechar} alt="xis para fechar" onClick={() => setAbrirPagamentoDentroConsulta(false)}/>
+                    <div className="w-full lg:w-1/4 self-center">
                         <img src={imgLogo} alt="logo" className="w-full h-auto" />
                     </div>
                     <div className="self-center text-xl lg:text-3xl font-bold">Qual valor de crédito você deseja?</div>

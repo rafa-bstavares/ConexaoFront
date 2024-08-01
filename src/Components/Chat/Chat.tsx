@@ -742,6 +742,34 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
       })
     }
 
+    function atualizarPagamento(){
+      fetch("https://api.conexaoastralmistica.com.br/statusPagamentoDentroConsulta", {
+        headers: {
+            "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
+        }
+    }).then(res => res.json()).then(data => {
+        console.log(data)
+        setTemAviso(true)
+        if(data[0] == "pago"){
+            setTextoAviso("pagamento realizado com sucesso")
+            navigate("/Chat")
+            socket.emit("comprouSaldoDentroConsulta", {room: salaAtual.toString()})
+        }else if(data[0] == "pagamento em aberto"){
+            setTextoAviso("pagamento em  aberto")
+        }else{
+            setTextoAviso("você não tem pendências de pagamento")
+        }
+        /*if(data[0] == "sucesso"){
+            console.log(data[1])
+        }else if(data[0] == "sem pagamentos"){
+            console.log("sem pagamentos")
+        }else{
+            console.log("erro")
+
+        }*/
+    })
+    }
+
 
     return(
         <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "" : "flex-col"} justify-center relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
@@ -783,6 +811,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
               </div>
               <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoPrincipal'>
                 {minutos}:{segundos}
+              </div>
+              <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoSecundario' onClick={atualizarPagamento}>
+                Atualizar pagamento
               </div>
               <button onClick={encerrarAtendimentoCliente} className="p-4 rounded-md bg-red-500 ">
                   Encerrar antendimento
