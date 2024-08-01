@@ -71,7 +71,7 @@ export default function Banner(){
                     Onde o universo se encontra com a sabedoria ancestral. Orientação espiritual para ajudá-lo a encontrar clareza, paz interior e prosperidade. Inicie sua jornada de auto conhecimento e crescimento espiritual.
                 </div>
                 <div className="flex gap-3 mt-10">
-                    <a className="bg-white rounded-full lg:px-6 px-3 py-3 self-center text-roxoPrincipal font-bold lg:text-base text-sm" href="://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Contato</a> 
+                    <a className="bg-white rounded-full lg:px-6 px-3 py-3 self-center text-roxoPrincipal font-bold lg:text-base text-sm" href="https://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Contato</a> 
                     <Link to="/Blog">
                         <Botao onClickFn={()=>{}} texto="Blog"/> 
                     </Link>
