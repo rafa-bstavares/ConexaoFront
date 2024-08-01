@@ -25,6 +25,7 @@ export default function Menu(){
     }
 
     function aoClicarBtCadastro(){
+        document.body.classList.add("modal-open")
         setAbrirModalCadastroUsuario(true)
     }
 
