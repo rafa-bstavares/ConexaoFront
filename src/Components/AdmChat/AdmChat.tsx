@@ -188,6 +188,9 @@ export default function AdmChat(){
         <div className="min-h-screen relative bg-roxoPrincipal text-white">
             {
                 atendenteLogado ?
+                    abrirModalHistorico ? 
+                      <ModalHistorico/>
+                      :
                       <>
                         {/* Menu lateral */}
                         <div className={`fixed top-0 left-0 w-96 h-screen z-50 flex transition-all ${abrirMenu? "translate-x-[0]" : "translate-x-[-90%]"}`}>
@@ -267,10 +270,6 @@ export default function AdmChat(){
                       </>
                     :
                     <Login tipoLogin="atendente"/>
-            }
-            {
-              abrirModalHistorico && 
-              <ModalHistorico />
             }
             {
               temAviso && 
