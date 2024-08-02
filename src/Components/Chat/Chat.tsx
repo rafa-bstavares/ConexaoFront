@@ -776,7 +776,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "lg:flex-row flex-col" : "flex-col"} justify-center items-center  lg:items-stretch relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
           {
             atendente &&
-            <div className='lg:w-1/2 w-[90%] order-1 flex justify-center'>
+            <div className='lg:w-1/2 w-[90%] order-1 lg:order-none flex justify-center'>
               <div className='lg:w-1/2 w-[90%] flex flex-col justify-center lg:gap-8 gap-4 mt-4 lg:mt-0'>
                 <select className='text-black' name="" id="" onChange={(e) => {onChangeSelect(e)}}>
                   {
@@ -821,13 +821,13 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                 </button>              
             </div>
           }
-          <div className={` ${atendente? "lg:w-1/2 w-[90%] lg:mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex flex-col items-center lg:items-stretch lg:flex-row `}>
+          <div className={` ${atendente? "lg:w-1/2 w-full lg:mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex flex-col items-center lg:items-stretch lg:flex-row `}>
             <div className='flex flex-col mt-16 rounded-md bg-white h-fit'>
               {infoSalas &&
                 infoSalas.map((item, index) => <OpcaoChat dataNascimento={dataNascimento} salaOpcao={item.idSala} setSalaAdm={setSalaAtualAdm} nomeCliente={item.nome} primeiro={index == 0} ultimoClicado={ultimoClicado} ultimoClicadoFn={setUltimoClicado} index={index}/>)
               }
             </div>
-            <div className='h-full w-full lg:w-auto flex-1 bg-fundoTextoChat bg-cover rounded-md flex flex-col justify-end'>
+            <div className='lg:h-full h-[70vh] w-[90%] lg:w-auto lg:flex-1 bg-fundoTextoChat bg-cover rounded-md flex flex-col justify-end'>
               <div ref={divScroll} className='p-4 overflow-y-scroll overflow-x-hidden flex flex-col gap-4'>
                 {historico.map(item => {
                   if(item.slice(0, 5) == "[img]"){
