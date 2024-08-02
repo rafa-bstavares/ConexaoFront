@@ -231,7 +231,7 @@ export default function AdmChat(){
                               </div>
                             </div>
                             <div className="flex rounded-md bg-roxoPrincipal items-center justify-center lg:p-4 p-2">
-                                  Valor Total: R${perfilProAtual.totalArrecadado.toFixed(2)}
+                                  Valor Total: R${((perfilProAtual.totalArrecadado)*perfilProAtual.percentualPro/100).toFixed(2)}
                             </div>
                             {
                               infoSalas.length > 0 && 
