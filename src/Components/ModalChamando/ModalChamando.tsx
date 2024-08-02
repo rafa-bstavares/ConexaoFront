@@ -15,13 +15,13 @@ export default function ModalChamando(){
 
     return (
         <div className="fixed inset-0 bg-white/80 flex flex-col items-center justify-center">
-            <div className="h-5/6 w-[90%] lg:w-4/5 bg-white rounded-xl flex flex-col px-4 lg:px-12 py-3 lg:py-8 gap-4 lg:gap-8 justify-center items-center">
-                <div className=" w-2/3 lg:w-1/6 h-auto">
+            <div className="lg:h-5/6 h-auto w-[90%] lg:w-4/5 bg-white rounded-xl flex flex-col px-4 lg:px-12 py-3 lg:py-8 gap-4 lg:gap-8 justify-center items-center">
+                <div className=" w-1/2 lg:w-1/6 h-auto">
                     <img className="w-full h-auto" src={logo} alt="logomarca" />
                 </div>
                 <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-center w-full justify-center">
                     <div className="text-xl lg:text-5xl text-gray-700/70">Chamando Atendente</div>
-                    <img className="w-1/2 lg:w-20 h-auto" src={loading} alt="loading" />
+                    <img className="w-1/4 lg:w-20 h-auto" src={loading} alt="loading" />
                 </div>
                 <div className="text-center text-gray-600 text-sm lg:text-lg px-2 lg:px-24">
                     *Caso não haja resposta dentro de um minuto você será redirecionado para a página principal. Você também pode retornnar a página principal por conta própria clicando no botão abaixo

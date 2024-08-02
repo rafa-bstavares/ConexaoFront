@@ -77,73 +77,78 @@ export default function PagamentoDentroConsulta(){
 
     function pagarComPix(){
                 
-        if(cpf.length == 11){
-            if(cpf.split("").every(item => item !== "." && item !== ",")){
-                setTextoErro("")
-                const statusCpf = confereCpf(cpf)
-                if(statusCpf == "válido"){
-                    console.log("cpf válido")
-                    fetch("https://api.conexaoastralmistica.com.br/pagamentoPix", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
-                        },
-                        body: JSON.stringify({
-                            transaction_amount: saldoAdicionar,
-                            description: "Aumento de saldo na plataforma Conexão Mística",
-                            paymentMethodId: "pix",
-                            email: usuario.email,
-                            identificationType: "cpf",
-                            number: cpf,
-                            idempotencyKey: uuidv4()
-                        })
-                    }).then(res => res.json()).then(data => {
-                        console.log("ocorreu a resposta do fetch")
-                        console.log(data)
-                        if(data[0] == "sucesso"){
-                            setIdUltimoPix(data[1].id)
-                            setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
-                            setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
-                            console.log(data[1].point_of_interaction.transaction_data.qr_code)
-                            setTemQrCode(true)
-                        }else if(data[0] == "pagamento aberto"){
-                            setIdUltimoPix(data[1].id)
-                            setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
-                            setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
-                            console.log(data[1].point_of_interaction.transaction_data.qr_code)
-                            setTemQrCode(true)
-                            setTemErro(true)
-                            setTextoErro("você já tem um pagamento em aberto")
-                        }else{
-                            setTemErro(true)
-                            if(data[1]){
-                                if(typeof data[1] == "string"){
-                                    setTextoErro(data[1])
-                                }else{
-                                    console.log(data[1])
-                                }
-
+        if(saldoAdicionar >= 5){
+            if(cpf.length == 11){
+                if(cpf.split("").every(item => item !== "." && item !== ",")){
+                    setTextoErro("")
+                    const statusCpf = confereCpf(cpf)
+                    if(statusCpf == "válido"){
+                        console.log("cpf válido")
+                        fetch("https://api.conexaoastralmistica.com.br/pagamentoPix", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
+                            },
+                            body: JSON.stringify({
+                                transaction_amount: saldoAdicionar,
+                                description: "Aumento de saldo na plataforma Conexão Mística",
+                                paymentMethodId: "pix",
+                                email: usuario.email,
+                                identificationType: "cpf",
+                                number: cpf,
+                                idempotencyKey: uuidv4()
+                            })
+                        }).then(res => res.json()).then(data => {
+                            console.log("ocorreu a resposta do fetch")
+                            console.log(data)
+                            if(data[0] == "sucesso"){
+                                setIdUltimoPix(data[1].id)
+                                setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
+                                setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
+                                console.log(data[1].point_of_interaction.transaction_data.qr_code)
+                                setTemQrCode(true)
+                            }else if(data[0] == "pagamento aberto"){
+                                setIdUltimoPix(data[1].id)
+                                setUltimoQrCode(data[1].point_of_interaction.transaction_data.qr_code_base64)
+                                setChaveQr(data[1].point_of_interaction.transaction_data.qr_code)
+                                console.log(data[1].point_of_interaction.transaction_data.qr_code)
+                                setTemQrCode(true)
+                                setTemErro(true)
+                                setTextoErro("você já tem um pagamento em aberto")
                             }else{
-                                setTextoErro("ocorreu um erro desconhecido ao tentar efetuar seu pagamento")
+                                setTemErro(true)
+                                if(data[1]){
+                                    if(typeof data[1] == "string"){
+                                        setTextoErro(data[1])
+                                    }else{
+                                        console.log(data[1])
+                                    }
+    
+                                }else{
+                                    setTextoErro("ocorreu um erro desconhecido ao tentar efetuar seu pagamento")
+                                }
+    
                             }
-
-                        }
-                    }).catch((err) => {
-                        console.log("caiu no catch do pagamento")
-                        console.log(err)
-                    })
+                        }).catch((err) => {
+                            console.log("caiu no catch do pagamento")
+                            console.log(err)
+                        })
+                    }else{
+                        console.log("cpf invalido")
+                    }
+    
                 }else{
-                    console.log("cpf invalido")
+                    setTemErro(true)
+                    setTextoErro("Não são permitidos pontos ou vírgulas, por favor, digite APENAS NÚMEROS")    
                 }
-
             }else{
                 setTemErro(true)
-                setTextoErro("Não são permitidos pontos ou vírgulas, por favor, digite APENAS NÚMEROS")    
+                setTextoErro("O CPF precisa ter exatamente 11 números")
             }
         }else{
             setTemErro(true)
-            setTextoErro("O CPF precisa ter exatamente 11 números")
+            setTextoErro("O saldo tem que ser no mínimo 5 reais")
         }
 
     }
@@ -167,7 +172,7 @@ export default function PagamentoDentroConsulta(){
                     <div className="flex flex-col gap-2">
                         <label htmlFor="emailUsuario">Digite abaixo, apenas com números, quantos reais de saldo deseja comprar:</label>
                         <div className="text-sm text-gray-500">*Exemplo: caso queira 5 reais, digite apenas o número 5</div>
-                        <input className="p-2 flex-1 outline-none text-black rounded-md" type="number" min={1} id="" value={saldoAdicionar} onChange={e => setSaldoAdicionar(Number(e.target.value))}/>
+                        <input className="p-2 flex-1 outline-none text-black rounded-md" type="number" min={1} id="" onChange={e => setSaldoAdicionar(Number(e.target.value))}/>
                     </div>
                     <div className="flex flex-col gap-2">
                         <label htmlFor="emailUsuario">Digite seu CPF:</label>

@@ -43,16 +43,16 @@ export default function ModalChamandoAtendente({usuario, idUsuario}: Props){
 
     return (
         <div className="fixed inset-0 bg-white/80 flex items-center justify-center flex-col gap-8 ">
-            <div className="h-5/6 w-[90%] lg:w-4/5 bg-white rounded-xl flex flex-col px-4 lg:px-12 py-3 lg:py-8 gap-2 lg:gap-4 justify-center items-center">
-                <div className="w-2/3 lg:w-1/6 h-auto">
+            <div className="lg:h-5/6 h-auto w-[90%] lg:w-4/5 bg-white rounded-xl flex flex-col px-4 lg:px-12 py-3 lg:py-8 gap-2 lg:gap-4 justify-center items-center">
+                <div className="w-1/2 lg:w-1/6 h-auto">
                     <img className="w-full h-auto" src={logo} alt="logomarca" />
                 </div>
-                <div className="flex gap-2 lg:gap-4 items-center w-full justify-center">
+                <div className="flex flex-col lg:flex-row gap-2 lg:gap-4 items-center w-full justify-center">
                     <div className="text-xl lg:text-5xl text-gray-700/70">{usuario} quer fazer uma consulta com você!</div>
-                    <img className="w-1/2 lg:w-20 h-auto" src={loading} alt="loading" />
+                    <img className="w-1/4 lg:w-20 h-auto" src={loading} alt="loading" />
                 </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-4">
+            <div className="flex gap-4">
                 <div onClick={aceitarChamada} className="px-8 py-4 rounded-xl bg-roxoPrincipal text-white font-bold cursor-pointer">
                     Aceitar
                 </div>
