@@ -16,6 +16,7 @@ import ModalCartao from './Components/ModalCartao/ModalCartao'
 import ModalEscolherPag from './Components/ModalEscolherPag/ModalEscolherPag'
 import { ContextoProfissionais } from './Contexts/ContextoProfissionais/ContextoProfissionais'
 import Footer from './Components/Footer/Footer'
+import Idealizadora from './Components/Idealizadora/Idealizadora'
 
 
 function App() {
@@ -81,8 +82,9 @@ function App() {
   return (
     <div className='relative'>
       <Banner/>
-      <Servicos/>
       <Profissionais/>
+      <Servicos/>
+      <Idealizadora/>
       <Footer/>
       {
         temAviso &&
