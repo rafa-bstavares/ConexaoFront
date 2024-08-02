@@ -773,7 +773,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
     return(
-        <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "lg:flex-row flex-col" : "flex-col"} justify-center items-center  lg:items-stretch relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
+        <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"} flex ${atendente? "lg:flex-row flex-col" : "flex-col"} justify-center items-center  lg:items-stretch relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
           {
             atendente &&
             <div className='lg:w-1/2 w-[90%] order-1 lg:order-none flex justify-center'>

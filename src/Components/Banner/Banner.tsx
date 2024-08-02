@@ -65,7 +65,7 @@ export default function Banner(){
     return (
         <div className="min-h-[70vh] lg:h-[70vh] bg-bannerImg lg:px-[var(--paddingXGeral)] px-[var(--paddingXGeralCel)] py-4 flex flex-col text-white relative">
             <Menu/>
-            <div className="flex-1 flex flex-col justify-center lg:pr-80">
+            <div className="flex-1 flex flex-col justify-center lg:pr-80 mt-4 lg:mt-0">
                 <div className="lg:text-7xl text-4xl font-bold">Bem-vindo(a) à Conexão Mística</div>
                 <div className="lg:text-xl text-lg">
                     Onde o universo se encontra com a sabedoria ancestral. Orientação espiritual para ajudá-lo a encontrar clareza, paz interior e prosperidade. Inicie sua jornada de auto conhecimento e crescimento espiritual.
