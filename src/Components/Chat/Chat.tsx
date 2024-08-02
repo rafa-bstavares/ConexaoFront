@@ -803,14 +803,14 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           }
           {
             !atendente &&
-            <div className='flex flex-col items-center gap-3 md:justify-center md:gap-8 text-white mb-8'>
+            <div className='flex flex-col items-center gap-3 lg:justify-center lg:gap-8 text-white lg:mb-8 mb-3'>
               <div  className='flex justify-center items-center text-xl'> 
                 tempo consulta: {tempoConsulta}
               </div >
               <div className='flex justify-center items-center text-xl'>
                 valor consulta: {precoTotalConsulta}
               </div>
-              <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoPrincipal'>
+              <div className='text-white px-10 py-4 rounded-md text-3xl font-bold bg-roxoPrincipal order-1 lg:order-none'>
                 {minutos}:{segundos}
               </div>
               <div className='text-white p-4 rounded-md text-xl bg-roxoSecundario cursor-pointer' onClick={atualizarPagamento}>
