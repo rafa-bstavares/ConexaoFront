@@ -199,7 +199,7 @@ export default function PagamentoDentroConsulta(){
                             Pix copia e cola:<br/>
                             <div className="flex gap-2 items-center">
                                 <input type="text" readOnly value={chaveQr} className="w-4/5"/>
-                                <button onClick={copiarFn} className="flex-1">{textoCopiarBt}</button>
+                                <button onClick={copiarFn} className="flex-1 text-black p-1">{textoCopiarBt}</button>
                             </div>
                         </div>
                     }
