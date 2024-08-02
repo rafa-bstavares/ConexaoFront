@@ -210,7 +210,7 @@ export default function AdmChat(){
                         <div className="fixed top-0 left-0 w-screen h-screen bg-fundoChat bg-cover"></div>
                         <div className="flex flex-col relative ">
                           <div className="flex justify-center items-center gap-8 pt-4 flex-wrap">
-                            <div className="flex flex-col items-center">
+                            <div className="lg:flex lg:flex-col grid grid-cols-2 gap-1 items-center">
                               <div className="px-4 py-2 rounded-t-md bg-white/30 backdrop-blur-md">
                                 Meu status:
                               </div>

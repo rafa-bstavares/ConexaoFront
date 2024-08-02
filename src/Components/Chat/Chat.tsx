@@ -773,10 +773,10 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
     return(
-        <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "" : "flex-col"} justify-center relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
+        <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "lg:flex-row flex-col" : "flex-col"} justify-center relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
           {
             atendente &&
-            <div className='w-1/2 flex justify-center'>
+            <div className='lg:w-1/2 w-[90%] order-1 flex justify-center'>
               <div className='w-1/2 flex flex-col justify-center gap-8'>
                 <select className='text-black' name="" id="" onChange={(e) => {onChangeSelect(e)}}>
                   {
