@@ -777,7 +777,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           {
             atendente &&
             <div className='lg:w-1/2 w-[90%] order-1 flex justify-center'>
-              <div className='w-1/2 flex flex-col justify-center gap-8'>
+              <div className='lg:w-1/2 w-[90%] flex flex-col justify-center gap-8'>
                 <select className='text-black' name="" id="" onChange={(e) => {onChangeSelect(e)}}>
                   {
                     baralhos.map((item, index) => <option className='text-black' selected={index == 0} value={item.nome}>{item.nome}</option>)
@@ -821,7 +821,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                 </button>              
             </div>
           }
-          <div className={` ${atendente? "w-1/2 mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex `}>
+          <div className={` ${atendente? "lg:w-1/2 w-[90%] lg:mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex `}>
             <div className='flex flex-col mt-16 rounded-md bg-white h-fit'>
               {infoSalas &&
                 infoSalas.map((item, index) => <OpcaoChat dataNascimento={dataNascimento} salaOpcao={item.idSala} setSalaAdm={setSalaAtualAdm} nomeCliente={item.nome} primeiro={index == 0} ultimoClicado={ultimoClicado} ultimoClicadoFn={setUltimoClicado} index={index}/>)
