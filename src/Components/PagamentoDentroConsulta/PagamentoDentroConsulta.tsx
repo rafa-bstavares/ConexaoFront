@@ -14,8 +14,9 @@ export default function PagamentoDentroConsulta(){
     const [textoErro, setTextoErro] = useState<string>("")
     const [saldoAdicionar, setSaldoAdicionar] = useState<number>(1)
     const [cpf, setCpf] = useState<string>("")
+    const [textoCopiarBt, setTextoCopiarBt] = useState<string>("Copiar")
 
-    const {setAbrirPagamentoDentroConsulta, setIdUltimoPix, setUltimoQrCode, setTemQrCode, setChaveQr} = useContext(ContextoPagamento)
+    const {setAbrirPagamentoDentroConsulta, setIdUltimoPix, setUltimoQrCode, setTemQrCode, setChaveQr, temQrCode, chaveQr} = useContext(ContextoPagamento)
     const {usuario} = useContext(ContextoUsuario)
 
 
@@ -154,7 +155,13 @@ export default function PagamentoDentroConsulta(){
     }
 
 
- 
+    function copiarFn(){
+        navigator.clipboard.writeText(chaveQr)
+        setTextoCopiarBt("Copiado")
+        setTimeout(() => {
+            setTextoCopiarBt("Copiar")
+        }, 10000)
+    }
 
     
 
@@ -186,6 +193,16 @@ export default function PagamentoDentroConsulta(){
                     <div className="flex flex-col lg:flex-row gap-4 self-center mt-3 lg:mt-5">
                         <Botao onClickFn={pagarComPix} texto="Pagar com PIX"/>
                     </div>
+                    {
+                        temQrCode && 
+                        <div className="lg:hidden w-full">
+                            Pix copia e cola:<br/>
+                            <div className="flex gap-2 items-center">
+                                <input type="text" readOnly value={chaveQr} className="w-4/5"/>
+                                <button onClick={copiarFn} className="flex-1">{textoCopiarBt}</button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

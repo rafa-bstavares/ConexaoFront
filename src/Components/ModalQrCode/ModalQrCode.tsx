@@ -39,7 +39,7 @@ export default function ModalQrCode(){
     }
 
     return(
-        <div className="fixed bg-white/90 h-auto w-[40%] top-2 right-2 flex justify-center items-center">
+        <div className="fixed bg-white/90 h-auto w-[40%] top-2 right-2 lg:flex justify-center items-center hidden">
             <div className="flex flex-col gap-2 lg:gap-4 px-4 lg:px-8 py-3 lg:py-6 bg-roxoPrincipal w-[90%] max-h-[90%] overflow-y-scroll rounded-md text-white relative">
                 <img className="w-10 cursor-pointer aspect-square absolute top-2 right-2" src={xisFechar} alt="xis para fechar" onClick={() => {
                     setTemQrCode(false)
