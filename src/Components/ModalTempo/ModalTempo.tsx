@@ -180,7 +180,7 @@ export default function ModalTempo({nomePro}: {nomePro: string}){
 
 
     useEffect(() => {
-        setTempoConsultaVar(precoConsultaVar / valorMinModal)
+        setTempoConsultaVar(Math.floor(precoConsultaVar / valorMinModal))
     }, [precoConsultaVar])
 
     return(
