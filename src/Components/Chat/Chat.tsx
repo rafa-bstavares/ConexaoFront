@@ -773,11 +773,11 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
 
 
     return(
-        <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "lg:flex-row flex-col" : "flex-col"} justify-center relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
+        <div className={`min-h-screen ${atendente? "" : "bg-fundoChat bg-cover"}  h-screen flex ${atendente? "lg:flex-row flex-col" : "flex-col"} justify-center items-center  lg:items-stretch relative ${atendente ? "py-4" : "py-[var(--paddingYGeral)]"}`}>
           {
             atendente &&
             <div className='lg:w-1/2 w-[90%] order-1 flex justify-center'>
-              <div className='lg:w-1/2 w-[90%] flex flex-col justify-center gap-8'>
+              <div className='lg:w-1/2 w-[90%] flex flex-col justify-center lg:gap-8 gap-4 mt-4 lg:mt-0'>
                 <select className='text-black' name="" id="" onChange={(e) => {onChangeSelect(e)}}>
                   {
                     baralhos.map((item, index) => <option className='text-black' selected={index == 0} value={item.nome}>{item.nome}</option>)
