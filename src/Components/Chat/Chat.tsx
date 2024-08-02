@@ -821,7 +821,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
                 </button>              
             </div>
           }
-          <div className={` ${atendente? "lg:w-1/2 w-full lg:mr-10 h-4/5 self-start mt-8" : "w-2/3 mx-10 h-4/5 self-center"} flex flex-col items-center lg:items-stretch lg:flex-row `}>
+          <div className={` ${atendente? "lg:w-1/2 w-full lg:mr-10 h-4/5 self-start mt-8" : "lg:w-2/3 w-full mx-10 h-4/5 self-center"} flex flex-col items-center lg:items-stretch lg:flex-row `}>
             <div className='flex flex-col mt-16 rounded-md bg-white h-fit'>
               {infoSalas &&
                 infoSalas.map((item, index) => <OpcaoChat dataNascimento={dataNascimento} salaOpcao={item.idSala} setSalaAdm={setSalaAtualAdm} nomeCliente={item.nome} primeiro={index == 0} ultimoClicado={ultimoClicado} ultimoClicadoFn={setUltimoClicado} index={index}/>)
