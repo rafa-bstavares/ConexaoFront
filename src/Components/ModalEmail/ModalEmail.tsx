@@ -11,6 +11,8 @@ export default function ModalEmail(){
     const [mensagem, setMensagem] = useState<string>("")
     const [celular, setCelular] = useState<string>("")
     const [email, setEmail] = useState<string>("")
+    const [respostaEmail, setRespostaEmail] = useState<boolean>(false)
+    const [mensagemTela, setMensagemTela] = useState<string>("")
 
     function cancelarModal(){
         setAbrirModalEmail(false)
@@ -28,8 +30,16 @@ export default function ModalEmail(){
                     email,
                     mensagem
                 })
-            }).then(res => res.json()).then(() => {
-
+            }).then(res => res.json()).then(data => {
+                if(data[0] == "erro"){
+                    console.log(data[1])
+                    setRespostaEmail(true)
+                    setMensagemTela("ocorreu um erro, por favor, tente novamente mais tarde.")
+                }else{
+                    console.log(data[1])
+                    setRespostaEmail(true)
+                    setMensagemTela("Email enviado com sucesso")
+                }
             })
         }else{
             setTemAviso(true)
@@ -59,13 +69,19 @@ export default function ModalEmail(){
                     </div>
                     <div className="flex flex-col">
                         <label htmlFor="Mensagem">Mensagem</label>
-                        <textarea id="mensagem" className="h-44 resize-none rounded-md" onChange={(e) => setMensagem(e.target.value)}/>
+                        <textarea id="mensagem" className="h-44 resize-none rounded-md text-black px-1 py-2" onChange={(e) => setMensagem(e.target.value)}/>
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <Botao texto="Enviar Email" onClickFn={enviarEmail}/>
                     <Botao texto="Cancelar" onClickFn={cancelarModal}/>
                 </div>
+                {
+                    respostaEmail &&
+                    <div className="font-bold text-center">
+                        {mensagemTela}
+                    </div>
+                }
             </div>
         </div>
     )
