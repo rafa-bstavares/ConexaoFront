@@ -28,7 +28,7 @@ export default function ModalEmail(){
                     email,
                     mensagem
                 })
-            }).then(res => res.json()).then(data => {
+            }).then(res => res.json()).then(() => {
 
             })
         }else{
