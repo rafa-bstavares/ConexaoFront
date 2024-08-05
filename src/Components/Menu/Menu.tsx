@@ -60,7 +60,7 @@ export default function Menu(){
                     </Link>
                 ))}
                 <a className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden" href="https://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Contato</a>
-                <div onClick={trabalheConoscoFn} className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden">
+                <div onClick={trabalheConoscoFn} className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden cursor-pointer">
                     Trabalhe Conosco
                 </div>
             </div>
