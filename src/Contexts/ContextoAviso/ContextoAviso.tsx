@@ -11,6 +11,8 @@ type TiposContextoAviso = {
     abrirModalRecarregar: boolean,
     valorMinModal: number,
     setValorMinModal: Dispatch<SetStateAction<number>>,
+    setAbrirModalEmail: Dispatch<SetStateAction<boolean>>,
+    abrirModalEmail: boolean
 }
 
 export const ContextoAviso = createContext<TiposContextoAviso>({
@@ -23,7 +25,9 @@ export const ContextoAviso = createContext<TiposContextoAviso>({
     textoAviso: "",
     setTextoAviso: () => {},
     setValorMinModal: () => {},
-    valorMinModal: 1
+    valorMinModal: 1,
+    setAbrirModalEmail: () => {},
+    abrirModalEmail: false
     
 } as TiposContextoAviso)
 
@@ -32,6 +36,7 @@ export const AvisoProvider = ({children}: {children: React.ReactNode}) => {
 
     const [temAviso, setTemAviso] = useState<boolean>(false)
     const [abrirModalTempo, setAbrirModalTempo] = useState<boolean>(false)
+    const [abrirModalEmail, setAbrirModalEmail] = useState<boolean>(false)
     const [abrirModalRecarregar, setAbrirModalRecarregar] = useState<boolean>(false)
     const [textoAviso, setTextoAviso] = useState<string>("")
     const [valorMinModal, setValorMinModal] = useState<number>(1)
@@ -49,7 +54,9 @@ export const AvisoProvider = ({children}: {children: React.ReactNode}) => {
             setAbrirModalTempo,
             setAbrirModalRecarregar,
             valorMinModal,
-            setValorMinModal
+            setValorMinModal,
+            setAbrirModalEmail,
+            abrirModalEmail
         }}>
             {children}
         </ContextoAviso.Provider>

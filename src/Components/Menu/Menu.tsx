@@ -5,6 +5,7 @@ import { useContext } from "react"
 import { ContextoLogin } from "../../Contexts/ContextoLogin/ContextoLogin"
 import { ContextoUsuario } from "../../Contexts/ContextoUsuario/ContextoUsuario"
 import { ContextoPagamento } from "../../Contexts/ContextoPagamento/ContextoPagamento"
+import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
 
 export default function Menu(){
 
@@ -12,6 +13,7 @@ export default function Menu(){
     const {usuarioLogado, setAbrirModalLogUsuario, setAbrirModalCadastroUsuario, setUsuarioLogado} = useContext(ContextoLogin)
     const {usuario} = useContext(ContextoUsuario)
     const {setAbrirModalEscolher} = useContext(ContextoPagamento)
+    const {setAbrirModalEmail} = useContext(ContextoAviso)
 
     const arrItensMenu = [
         {nome: "Home", link: "/"},
@@ -40,6 +42,9 @@ export default function Menu(){
         setAbrirModalEscolher(true)
     }
 
+    function trabalheConoscoFn(){
+        setAbrirModalEmail(true)
+    }
     
 
 
@@ -55,7 +60,9 @@ export default function Menu(){
                     </Link>
                 ))}
                 <a className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden" href="https://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Contato</a>
-                <a className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden" href="https://wa.me/5511916367979?text=Olá!%20Vim%20pelo%20site%20etenho%20uma%20dúvida">Trabalhe Conosco</a>
+                <div onClick={trabalheConoscoFn} className="px-4 h-full lg:flex justify-center items-center text-white text-xl hidden">
+                    Trabalhe Conosco
+                </div>
             </div>
             <div className="flex gap-5">
                 {

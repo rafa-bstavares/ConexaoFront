@@ -17,11 +17,12 @@ import ModalEscolherPag from './Components/ModalEscolherPag/ModalEscolherPag'
 import { ContextoProfissionais } from './Contexts/ContextoProfissionais/ContextoProfissionais'
 import Footer from './Components/Footer/Footer'
 import Idealizadora from './Components/Idealizadora/Idealizadora'
+import ModalEmail from './Components/ModalEmail/ModalEmail'
 
 
 function App() {
 
-  const {temAviso, setTemAviso, setTextoAviso, abrirModalTempo} = useContext(ContextoAviso)
+  const {temAviso, setTemAviso, setTextoAviso, abrirModalTempo, abrirModalEmail} = useContext(ContextoAviso)
   const {abrirModalLogUsuario, abrirModalCadastroUsuario, setUsuarioLogado} = useContext(ContextoLogin)
   const {setUsuario} = useContext(ContextoUsuario)
   const {abrirModalPagamento, abrirModalCartao, abrirModalEscolher} = useContext(ContextoPagamento)
@@ -113,6 +114,10 @@ function App() {
       {
         abrirModalEscolher &&
         <ModalEscolherPag/>
+      }
+      {
+        abrirModalEmail &&
+        <ModalEmail/>
       }
     </div>
   )
