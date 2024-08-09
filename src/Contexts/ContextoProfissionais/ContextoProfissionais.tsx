@@ -65,6 +65,8 @@ type TiposContextoProfissionais = {
     setNomeProModTempo: Dispatch<SetStateAction<string>>,
     abrirModalEditar: boolean,
     setAbrirModalEditar: Dispatch<SetStateAction<boolean>>,
+    idProfissionalDetalhes: number,
+    setIdProfissionalDetalhes: Dispatch<SetStateAction<number>>
 }
 
 export const ContextoProfissionais = createContext<TiposContextoProfissionais>({
@@ -90,6 +92,8 @@ export const ContextoProfissionais = createContext<TiposContextoProfissionais>({
     setNomeProModTempo: () => {},
     abrirModalEditar: false,
     setAbrirModalEditar: () => {},
+    idProfissionalDetalhes: 0,
+    setIdProfissionalDetalhes: () => {}
 } as TiposContextoProfissionais)
 
 
@@ -104,6 +108,7 @@ export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) =
     const [abrirModalHistorico, setAbrirModalHistorico] = useState<boolean>(false)
     const [arrHistoricosAtendente, setArrHistoricosAtendente] = useState<TipoObjHistorico[]>([{historico: "", id_cliente: 0, nomeCliente: "", data: new Date()}])
     const [idProfissionalApagar, setIdProfissionalApagar] = useState<number>(0)
+    const [idProfissionalDetalhes, setIdProfissionalDetalhes] = useState<number>(0)
     const [nomeProModTempo, setNomeProModTempo] = useState<string>("")
     const [abrirModalEditar, setAbrirModalEditar] = useState<boolean>(false)
 
@@ -133,6 +138,8 @@ export const ProfissionaisProvider = ({children}: {children: React.ReactNode}) =
             setNomeProModTempo,
             abrirModalEditar,
             setAbrirModalEditar,
+            idProfissionalDetalhes,
+            setIdProfissionalDetalhes
         }}>
             {children}
         </ContextoProfissionais.Provider>

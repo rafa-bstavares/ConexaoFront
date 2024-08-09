@@ -14,7 +14,7 @@ type Props = {
 export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissional, totalArrecadado}: Props){
 
     const { setTemAviso, setTextoAviso} = useContext(ContextoAviso)
-    const { setDetalhesProAdm, setAbrirModalDetalhes, setAbrirModalCertezaApagar, setIdProfissionalApagar} = useContext(ContextoProfissionais)
+    const { setDetalhesProAdm, setAbrirModalDetalhes, setAbrirModalCertezaApagar, setIdProfissionalApagar, setIdProfissionalDetalhes} = useContext(ContextoProfissionais)
 
     function maisDetalherProfissional(){
 
@@ -29,6 +29,7 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
         }).then(res => res.json()).then(data => {
             console.log(data)
             if(data[0] == "sucesso"){
+                setIdProfissionalDetalhes(idProfissional)
                 setAbrirModalDetalhes(true)
                 const arrDetalhes = data[1]
                 for(let i = 0; i < arrDetalhes.length; i++){
@@ -37,6 +38,7 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
                 }
                 setDetalhesProAdm(arrDetalhes)
             }else if(data[0] == "sem dados"){
+                setIdProfissionalDetalhes(idProfissional)
                 setAbrirModalDetalhes(true)
                 setDetalhesProAdm([])
             }else{
@@ -66,6 +68,7 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
             <button onClick={modalApagar} className="bg-red-600 rounded-md px-4 py-2">
                 Excluir Profissional
             </button>
+            
         </div>
     )
 }
