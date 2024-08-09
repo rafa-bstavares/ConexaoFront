@@ -29,7 +29,7 @@ export default function ModalDetalhes(){
 
     function pesquisarFrase(){
         if(frase){
-            fetch("http://localhost:8080/conversasFrase", {
+            fetch("https://api.conexaoastralmistica.com.br/conversasFrase", {
                 method: "POST",
                 headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
                 body: JSON.stringify({
