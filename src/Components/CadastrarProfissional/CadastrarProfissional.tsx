@@ -20,7 +20,7 @@ export default function CadastrarProfissional(){
     /*const [arrTrabalho, setArrTrabalho] = useState<string[]>([])*/
     const [numeroFotos, setNumeroFotos] = useState<number>(1)
     const [arrNumFotos, setArrNumFotos] = useState<string[]>([])
-    const [fotos, setFotos] = useState<File[] | []>([])
+    const [fotos, setFotos] = useState<FileList | []>([])
     const [idxUltimaClicada, setIdxUltimaClicada] = useState<number>() 
     const [valorMin, setValorMin] = useState<number>(1)
     const [percentualPro, setPercentualPro] = useState<number>(30)
@@ -173,19 +173,23 @@ export default function CadastrarProfissional(){
         setArrTrabalho(arrTrabClone)
     }*/
 
-    function inputFn(file: File){
+    /*function inputFn(file: File){
         if(idxUltimaClicada !== undefined){
             console.log(fotos)
             let newFotos = [...fotos]
             newFotos[idxUltimaClicada] = file
             setFotos(newFotos)
         }
+    }*/
+
+    function inputArrFn(files: FileList){
+        setFotos(files)
     }
 
 
     
 
-    useEffect(() => {
+    /*useEffect(() => {
         let newArr = []
         let initialFotos = new Array(numeroFotos)
         for(let i = 0; i < numeroFotos; i++){
@@ -193,7 +197,7 @@ export default function CadastrarProfissional(){
         }
         setArrNumFotos(newArr)
         setFotos(initialFotos)
-    }, [numeroFotos])
+    }, [numeroFotos])*/
 
     return(
         <div className="p-10 grid grid-cols-2 justify-evenly">
@@ -216,18 +220,22 @@ export default function CadastrarProfissional(){
                 <div className="text-white text-2xl">Cadastrar Novo Baralho</div>
                 <input className="px-4 py-2  text-black" type="text" placeholder="Digite o novo trabalho" value={novoTrabalho} onChange={e => setNovoTrabalho(e.target.value)}/>
                 <input className="px-4 py-2  text-black" type="text" placeholder="Repita o novo trabalho" value={novoTrabalho2} onChange={e => setNovoTrabalho2(e.target.value)}/>
-                <div className="flex flex-col">
+                {/*<div className="flex flex-col">
                     <label htmlFor="selectNumFotos" className="text-lg">Numero de cartas</label>
                     <select onChange={(e) => {setNumeroFotos(Number(e.target.value))}} name="selectNumFotos" id="selectNumFotos" className="border-2 border-solid border-black text-black">
                         {ordinalidade.map((item, index) => <option value={index + 1} key={item}>{index + 1}</option>)}
                     </select>
-                </div>
+                </div>*/}
                 <div className="flex flex-col relative">
-                    <div className="grid grid-cols-3 gap-2">
+                    {/*<div className="grid grid-cols-3 gap-2">
                         {arrNumFotos.map((item, index) =>  <div key={item} className={`cursor-pointer p-1 rounded-md bg-${fotos[index] ? "verdeMaisEscuro" : "white"} text-${fotos[index] ? "white" : "black"} text-sm flex justify-center items-center`} onClick={() => {setIdxUltimaClicada(index); ref.current?.click()}}>
                         {fotos[index] ? "foto selecionada" : ordinalidade[index] + " foto"}</div>)}
-                    </div>
-                    <input type="file" ref={ref} onChange={(e) => {if(e.target.files){inputFn(e.target.files[0])}}}  className="opacity-0 absolute inset-0 -z-10"/> {/* e.target.files[0].name */}
+                    </div>*/}
+                    <input multiple={true} type="file" ref={ref} onChange={/*(e) => {if(e.target.files){inputFn(e.target.files[0])}}*/(e) => {
+                        if(e.target.files){
+                            inputArrFn(e.target.files)
+                        }
+                    }}  className={/*"opacity-0 absolute inset-0 -z-10"*/""}/> {/* e.target.files[0].name */}
                 </div>
                 <button className="self-start px-4 py-2 rounded-md bg-white text-black" onClick={cadastrarTrabFn}>Cadastrar Novo Baralho</button>
                 <div className="mt-10">Baralhos Cadastrados:</div>
