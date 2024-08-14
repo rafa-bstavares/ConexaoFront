@@ -18,10 +18,7 @@ export default function CadastrarProfissional(){
     const [imgProf, setImgProf] = useState<File>()
     const [arrTrabalhosTotais, setArrTrabalhosTotais] = useState<objTrabalho[]>([])
     /*const [arrTrabalho, setArrTrabalho] = useState<string[]>([])*/
-    const [numeroFotos, setNumeroFotos] = useState<number>(1)
-    const [arrNumFotos, setArrNumFotos] = useState<string[]>([])
     const [fotos, setFotos] = useState<FileList | []>([])
-    const [idxUltimaClicada, setIdxUltimaClicada] = useState<number>() 
     const [valorMin, setValorMin] = useState<number>(1)
     const [percentualPro, setPercentualPro] = useState<number>(30)
 
@@ -30,7 +27,6 @@ export default function CadastrarProfissional(){
 
     const ref = useRef<HTMLInputElement>(null)
 
-    const ordinalidade = ['primeira', 'segunda', 'terceira', 'quarta', 'quinta', 'sexta', 'sétima', 'oitava', 'nona', 'décima', 'décima primeira', 'décima segunda', 'décima terceira', 'décima quarta', 'décima quinta']
 
     useEffect(() => {
         setTemAviso(false)
