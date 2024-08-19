@@ -267,6 +267,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
           fetch("https://api.conexaoastralmistica.com.br/infoAtendente", {
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
           }).then(res => res.json()).then(dataFetch => {
+            if(dataFetch == "não é erro de cors"){
+              return console.log(dataFetch)
+            }
             if(dataFetch[0] == "erro"){
               setTemAviso(true)
               setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
@@ -299,6 +302,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             fetch("https://api.conexaoastralmistica.com.br/infoAtendente", {
               headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
             }).then(res => res.json()).then(dataFetch => {
+              if(dataFetch == "não é erro de cors"){
+                return console.log(dataFetch)
+              }
               if(dataFetch[0] == "erro"){
                 setTemAviso(true)
                 setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
@@ -346,6 +352,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
         fetch("https://api.conexaoastralmistica.com.br/infoAtendente", {
           headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
         }).then(res => res.json()).then(data => {
+          if(data == "não é erro de cors"){
+            return console.log(data)
+          }
           if(data[0] == "erro"){
             setTemAviso(true)
             setTextoAviso("Ocorreu um erro na função de buscar o id do atendente atual, por favor, tente novamente. Caso o erro persista contate o suporte")
