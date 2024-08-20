@@ -1,12 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import { ContextoAviso } from "../../Contexts/ContextoAviso/ContextoAviso"
-
+import xis from "../../assets/images/xisFechar.svg"
+import ModalDeletarCarta from "../ModalDeletarCarta/ModalDeletarCarta"
 
 
 export default function CadastrarProfissional(){
 
     type objTrabalho = {
-        trabalho: string
+        trabalho: string,
+        id: number
     }
 
     const [nomeProf, setNomeProf] = useState<string>("")
@@ -21,6 +23,8 @@ export default function CadastrarProfissional(){
     const [fotos, setFotos] = useState<FileList | []>([])
     const [valorMin, setValorMin] = useState<number>(1)
     const [percentualPro, setPercentualPro] = useState<number>(30)
+    const [idItemDeletar, setIdItemDeletar] = useState<number>(0)
+    const [queroDeletar, setQueroDeletar] = useState<boolean>(false)
 
 
     const {setTextoAviso, setTemAviso} = useContext(ContextoAviso)
@@ -159,6 +163,11 @@ export default function CadastrarProfissional(){
         }
     }
 
+
+
+
+    
+
    /* function confereCheckbox(ev: ChangeEvent<HTMLInputElement>, trabalho: string){
         let arrTrabClone = [...arrTrabalho]
         if(ev.target.checked){
@@ -184,6 +193,42 @@ export default function CadastrarProfissional(){
 
 
     
+    function deletarItemBaralho(idItem: number){
+        setQueroDeletar(false)
+        fetch("https://api.conexaoastralmistica.com.br/deletarBaralho", {
+            method: "POST",
+            headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
+            body: JSON.stringify({
+                idItem
+            })
+        }).then(res => res.json()).then(data => {
+            if(data.length > 0){
+                if(data[0] == "sucesso"){
+                    setTemAviso(true)
+                    setTextoAviso("item deletado com sucesso")
+                    fetch("https://api.conexaoastralmistica.com.br/pegarTrabalhos").then(res => res.json()).then(data => {
+                        if(data[0] == "sucesso"){
+                            setArrTrabalhosTotais(data[1])
+                        }else{
+                            setTextoAviso("ocorreu um erro desconhecido, por favor tente novamente")
+                            console.log("ocorreu um erro desconhecido, por favor tente novamente")
+                            setTemAviso(true)
+                        }
+                    }).catch(err => {
+                        setTextoAviso("ocorreu um erro no fetch. Erro: " + err)
+                        console.log("ocorreu um erro no fetch. Erro: " + err)
+                        setTemAviso(true)
+                    })
+                }else{
+                    setTextoAviso("ocorreu um erro ao deletar o item, por favor, tente novamente")
+                    setTemAviso(true)
+                }
+            }else{
+                setTextoAviso("ocorreu um erro ao deletar o item, por favor, tente novamente")
+                setTemAviso(true)
+            }
+        })
+    }
 
     /*useEffect(() => {
         let newArr = []
@@ -236,9 +281,27 @@ export default function CadastrarProfissional(){
                 <button className="self-start px-4 py-2 rounded-md bg-white text-black" onClick={cadastrarTrabFn}>Cadastrar Novo Baralho</button>
                 <div className="mt-10">Baralhos Cadastrados:</div>
                 <div>
-                    {arrTrabalhosTotais.map(item => <div>{item.trabalho}</div>)}
+                    <div className="flex flex-col gap-4">
+                        {arrTrabalhosTotais.map(item => (
+                            <div  className="flex gap-2">
+                                <div>
+                                    {item.trabalho}
+                                </div>
+                                <button className="flex items-center gap-1 bg-red-600 rounded-md p-1" onClick={() => {setIdItemDeletar(item.id); setQueroDeletar(true)}}>
+                                    <img src={xis} alt="xis deletar item baralho" className="w-3 h-auto"/>
+                                    <div>
+                                        deletar
+                                    </div>
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
+            {
+                queroDeletar &&
+                <ModalDeletarCarta deletarFn={deletarItemBaralho} idItem={idItemDeletar} setQueroDeletar={setQueroDeletar}/>
+            }
         </div>
     )
 }
