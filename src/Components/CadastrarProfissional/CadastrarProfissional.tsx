@@ -195,6 +195,7 @@ export default function CadastrarProfissional(){
     
     function deletarItemBaralho(idItem: number){
         setQueroDeletar(false)
+        console.log("deletar de id " + idItem)
         fetch("https://api.conexaoastralmistica.com.br/deletarBaralho", {
             method: "POST",
             headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
@@ -202,6 +203,7 @@ export default function CadastrarProfissional(){
                 idItem
             })
         }).then(res => res.json()).then(data => {
+            console.log(data)
             if(data.length > 0){
                 if(data[0] == "sucesso"){
                     setTemAviso(true)
