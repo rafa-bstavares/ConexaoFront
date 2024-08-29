@@ -89,34 +89,33 @@ export default function ModalTempo({nomePro}: {nomePro: string}){
     }
 
     function efetivarPedido(){
-        if(usuario.saldo >= 5){
-            //criar sala e enviar o preco consultaVar pra setar os cronômetros
-                console.log("saldo suficiente")
-                fetch("https://api.conexaoastralmistica.com.br/mudarSaldo", {
-                    method: "POST" ,
-                    headers: {
-                        "Content-Type": "application/json",
-                        "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
-                    },
-                    body: JSON.stringify({
-                        previsaoSaldo: usuario.saldo - precoConsultaVar
-                    })
-                }).then(res => res.json()).then(data => {
-                    if(data[0] == "erro"){
-                        setTemAviso(true)
-                        if(data[1]){
-                            setTextoAviso(data[1])
-                        }else{
-                            setTextoAviso("Ocorreu um erro, por favor tente novamente")
-                        }
-                    }else if(data[0] == "sucesso"){
-                                fetch("https://api.conexaoastralmistica.com.br/confereSalas", {
-                                    method: "POST",
-                                    headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
-                                    body: JSON.stringify({
-                                        idProfissional: idMeuAtendente
-                                    })
-                                }).then(res => res.json()).then(data => {
+
+        fetch("https://api.conexaoastralmistica.com.br/pegarInfoUsuario", {
+            headers: { "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""}
+        }).then(res => res.json()).then(data => {
+            if(data[0] && data[0] == "erro"){
+                setTemAviso(true)
+                if(data[1]){
+                    setTextoAviso(data[1])
+                }else{
+                    setTextoAviso("Ocorreu um erro inesperado. Por favor, tente novamente")
+                }
+            }else if(data[0] && data[0] == "sucesso"){
+                if(data[1].id && data[1].email && data[1].nome && data[1].saldo >= 0){
+                    
+                    if(data[1].saldo >= 5){
+                        //criar sala e enviar o preco consultaVar pra setar os cronômetros
+                            console.log("saldo suficiente")
+                            fetch("https://api.conexaoastralmistica.com.br/mudarSaldo", {
+                                method: "POST" ,
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : ""
+                                },
+                                body: JSON.stringify({
+                                    previsaoSaldo: data[1].saldo - precoConsultaVar
+                                })
+                            }).then(res => res.json()).then(data => {
                                 if(data[0] == "erro"){
                                     setTemAviso(true)
                                     if(data[1]){
@@ -125,34 +124,57 @@ export default function ModalTempo({nomePro}: {nomePro: string}){
                                         setTextoAviso("Ocorreu um erro, por favor tente novamente")
                                     }
                                 }else if(data[0] == "sucesso"){
-                                    switch(data[1]){
-                                        case "criar sala":
-                                            console.log("caiu no criar sala")
-                                            setUsuarioLogado(true)
-                                            //ENVIAR PARA MODAL "CHAMANDO ATENDENTE....."
-                                            /*criarSala()*/
-                                            socket.emit("chamarAtendente", {idProfissional: idMeuAtendente, nomeCliente: usuario.nome, idCliente: usuario.id})
-                                            setLoading(true)
-                                            break
-                
-                                        case "sala existente":
-                                            console.log("caiu no sala existente")
-                                            setSalaAtual(Number(data[2]))
-                                            navigate("/Chat")
-                                            break
+                                            fetch("https://api.conexaoastralmistica.com.br/confereSalas", {
+                                                method: "POST",
+                                                headers: {"authorization": localStorage.getItem("authToken")? `Bearer ${localStorage.getItem("authToken")}` : "", "Content-Type": "application/json"},
+                                                body: JSON.stringify({
+                                                    idProfissional: idMeuAtendente
+                                                })
+                                            }).then(res => res.json()).then(data => {
+                                            if(data[0] == "erro"){
+                                                setTemAviso(true)
+                                                if(data[1]){
+                                                    setTextoAviso(data[1])
+                                                }else{
+                                                    setTextoAviso("Ocorreu um erro, por favor tente novamente")
+                                                }
+                                            }else if(data[0] == "sucesso"){
+                                                switch(data[1]){
+                                                    case "criar sala":
+                                                        console.log("caiu no criar sala")
+                                                        setUsuarioLogado(true)
+                                                        //ENVIAR PARA MODAL "CHAMANDO ATENDENTE....."
+                                                        /*criarSala()*/
+                                                        socket.emit("chamarAtendente", {idProfissional: idMeuAtendente, nomeCliente: usuario.nome, idCliente: usuario.id})
+                                                        setLoading(true)
+                                                        break
+                            
+                                                    case "sala existente":
+                                                        console.log("caiu no sala existente")
+                                                        setSalaAtual(Number(data[2]))
+                                                        navigate("/Chat")
+                                                        break
 
-                                        case "profissional ocupado":
-                                            console.log("profissional ocupado")
-                                            setTemAviso(true)
-                                            setTextoAviso("O profissional se encontra ocupado no momento. Por favor, tente novamente mais tarde.")
-                                            break
+                                                    case "profissional ocupado":
+                                                        console.log("profissional ocupado")
+                                                        setTemAviso(true)
+                                                        setTextoAviso("O profissional se encontra ocupado no momento. Por favor, tente novamente mais tarde.")
+                                                        break
 
-                                        case "profissional não disponível":
-                                            console.log("profissional não disponivel")
+                                                    case "profissional não disponível":
+                                                        console.log("profissional não disponivel")
+                                                        setTemAviso(true)
+                                                        setTextoAviso("O profissional não se encontra disponível. Por favor, tente novamente mais tarde.")
+                                                        break
+                                                }
+                                            }else{
+                                                setTemAviso(true)
+                                                setTextoAviso("Ocorreu um erro, por favor tente novamente")
+                                            }
+                                        }).catch(() => {
                                             setTemAviso(true)
-                                            setTextoAviso("O profissional não se encontra disponível. Por favor, tente novamente mais tarde.")
-                                            break
-                                    }
+                                            setTextoAviso("ocorreu algum erro, por favor, tente novamente")
+                                        })
                                 }else{
                                     setTemAviso(true)
                                     setTextoAviso("Ocorreu um erro, por favor tente novamente")
@@ -161,21 +183,27 @@ export default function ModalTempo({nomePro}: {nomePro: string}){
                                 setTemAviso(true)
                                 setTextoAviso("ocorreu algum erro, por favor, tente novamente")
                             })
-                    }else{
-                        setTemAviso(true)
-                        setTextoAviso("Ocorreu um erro, por favor tente novamente")
-                    }
-                }).catch(() => {
-                    setTemAviso(true)
-                    setTextoAviso("ocorreu algum erro, por favor, tente novamente")
-                })
 
-        }else{
-            //dar opção para ele adicionar saldo ou fazer a consultaVar com o tempo sugerido que ele consegue
-            setTemAviso(true)
-            setTextoAviso("Para iniciar consulta, seu saldo deve ser, no mínimo, 5 reais.")
-            setAbrirModalTempo(false)
-        }
+                    }else{
+                        //dar opção para ele adicionar saldo ou fazer a consultaVar com o tempo sugerido que ele consegue
+                        setTemAviso(true)
+                        setTextoAviso("Para iniciar consulta, seu saldo deve ser, no mínimo, 5 reais.")
+                        setAbrirModalTempo(false)
+                    }
+
+
+                }else{
+                    setTemAviso(true)
+                    setTextoAviso("Ocorreu um erro inesperado. Por favor, tente novamente")
+                }
+            }else{
+                setTemAviso(true)
+                setTextoAviso("Ocorreu um erro inesperado. Por favor, tente novamente")
+            }
+        })
+
+
+
     }
 
 
