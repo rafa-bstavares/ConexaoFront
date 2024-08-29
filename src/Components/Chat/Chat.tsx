@@ -22,7 +22,8 @@ type Props = {
   minutosAtendenteFn?: Dispatch<SetStateAction<number>>,
   segundosAtendenteFn?: Dispatch<SetStateAction<number>>,
   segundosAtendente?: number,
-  ganhosAtualFn?:  Dispatch<SetStateAction<number>>
+  ganhosAtualFn?:  Dispatch<SetStateAction<number>>,
+  setGanhosAtual: Dispatch<SetStateAction<number>>,
 }
 
 type TipoInfoSala = {
@@ -43,7 +44,7 @@ type objBaralho = {
   urls: string[]
 }
 
-export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, segundosAtendente, ganhosAtualFn}: Props){
+export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn, segundosAtendente, ganhosAtualFn, setGanhosAtual}: Props){
 
   const {infoSalas, setInfoSalas, abrirModalChamandoAtendente, setAbrirModalChamandoAtendente} = useContext(ContextoAtendimento)
   const {abrirPagamentoDentroConsulta, temQrCode} = useContext(ContextoPagamento)
@@ -673,6 +674,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             const minutosRestantes = Number(arrTempos[0])
             const segundosRestantes = Number(arrTempos[1])*60/100
             minutosAtendenteFn(minutosRestantes)
+            setGanhosAtual(((infoSalas[0].tempoConsulta - minutosRestantes) * perfilProAtual.valorMin) * (perfilProAtual.percentualPro / 100))
             if(segundosAtendente == Number(segundosRestantes.toFixed(0))){
               segundosAtendenteFn(Number(segundosRestantes.toFixed(0)) - 1)
             }else{
