@@ -243,7 +243,7 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             setTextoAviso("A sala foi encerrada")
           }
 
-          
+          window.location.reload()
           
         }else{
           if(!atendente){
