@@ -23,7 +23,7 @@ type Props = {
   segundosAtendenteFn?: Dispatch<SetStateAction<number>>,
   segundosAtendente?: number,
   ganhosAtualFn?:  Dispatch<SetStateAction<number>>,
-  setGanhosAtual: Dispatch<SetStateAction<number>>,
+  setGanhosAtual?: Dispatch<SetStateAction<number>>,
 }
 
 type TipoInfoSala = {
@@ -674,7 +674,9 @@ export default function Chat({atendente, minutosAtendenteFn, segundosAtendenteFn
             const minutosRestantes = Number(arrTempos[0])
             const segundosRestantes = Number(arrTempos[1])*60/100
             minutosAtendenteFn(minutosRestantes)
-            setGanhosAtual(((infoSalas[0].tempoConsulta - minutosRestantes) * perfilProAtual.valorMin) * (perfilProAtual.percentualPro / 100))
+            if(setGanhosAtual){
+              setGanhosAtual(((infoSalas[0].tempoConsulta - minutosRestantes) * perfilProAtual.valorMin) * (perfilProAtual.percentualPro / 100))
+            }
             if(segundosAtendente == Number(segundosRestantes.toFixed(0))){
               segundosAtendenteFn(Number(segundosRestantes.toFixed(0)) - 1)
             }else{
