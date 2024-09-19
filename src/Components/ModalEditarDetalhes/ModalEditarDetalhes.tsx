@@ -65,7 +65,7 @@ export default function ModalEditarDetalhes(){
     return (
         <div className="bg-roxoPrincipal flex flex-col items-center justify-center relative">
             <div onClick={() => setAbrirModalEditar(false)} className="flex items-center gap-2 cursor-pointer p-2">
-                <img src={seta} alt="seta voltar"/>
+                <img className="w-5 h-auto rotate-90" src={seta} alt="seta voltar"/>
                 <div>Voltar</div>
             </div>
             <div className="p-10 grid grid-cols-2 justify-evenly">
