@@ -84,7 +84,7 @@ export default function ControleAdm(){
                 {
                     profissionais.length > 0 &&
                     profissionais.map(item => (
-                        <ItemProfissionaisAdm totalArrecadado={item.totalArrecadado} img={item.foto} nomeProfissional={item.nome} idProfissional={item.id}/>
+                        <ItemProfissionaisAdm id={item.id} descricaoMaior={item.descricaoMaior} descricaoMenor={item.descricaoMenor} email={item.email} valorMin={item.valorMin} totalArrecadado={item.totalArrecadado} img={item.foto} nomeProfissional={item.nome} idProfissional={item.id}/>
                     ))
                 }
             </div>

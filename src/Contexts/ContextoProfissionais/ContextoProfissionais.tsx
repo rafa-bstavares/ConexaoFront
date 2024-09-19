@@ -66,7 +66,8 @@ type TiposContextoProfissionais = {
     abrirModalEditar: boolean,
     setAbrirModalEditar: Dispatch<SetStateAction<boolean>>,
     idProfissionalDetalhes: number,
-    setIdProfissionalDetalhes: Dispatch<SetStateAction<number>>
+    setIdProfissionalDetalhes: Dispatch<SetStateAction<number>>,
+    
 }
 
 export const ContextoProfissionais = createContext<TiposContextoProfissionais>({

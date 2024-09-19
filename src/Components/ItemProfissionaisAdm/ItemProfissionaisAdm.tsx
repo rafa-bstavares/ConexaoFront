@@ -6,15 +6,20 @@ type Props = {
     nomeProfissional: string,
     img: string,
     idProfissional: number,
-    totalArrecadado: number
+    totalArrecadado: number,
+    descricaoMenor: string,
+    descricaoMaior: string,
+    email: string,
+    valorMin: number,
+    id: number
 }
 
 
 
-export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissional, totalArrecadado}: Props){
+export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissional, totalArrecadado, descricaoMaior, descricaoMenor, email, valorMin, id}: Props){
 
     const { setTemAviso, setTextoAviso} = useContext(ContextoAviso)
-    const { setDetalhesProAdm, setAbrirModalDetalhes, setAbrirModalCertezaApagar, setIdProfissionalApagar, setIdProfissionalDetalhes} = useContext(ContextoProfissionais)
+    const { setDetalhesProAdm, setAbrirModalDetalhes, setAbrirModalCertezaApagar, setIdProfissionalApagar, setIdProfissionalDetalhes, setProfEditar, setAbrirModalEditar} = useContext(ContextoProfissionais)
 
     function maisDetalherProfissional(){
 
@@ -48,6 +53,24 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
         })
     }
 
+    function EditarProfissional(){
+
+        const objEditar = {
+            foto: img,
+            nome: nomeProfissional,
+            descricaoMenor,
+            descricaoMaior,
+            email,
+            valorMin,
+            id
+        }
+
+        setProfEditar(objEditar)
+
+        setAbrirModalEditar(true)
+        
+    }
+
 
     function modalApagar(){
         setAbrirModalCertezaApagar(true)
@@ -63,6 +86,9 @@ export default function ItemProfissionaisAdm({nomeProfissional, img, idProfissio
             <div className="text-xl">{nomeProfissional}</div>
             <div className="px-4 py-2 rounded-md bg-slate-500 cursor-pointer" onClick={maisDetalherProfissional}>
                 Mais Detalhes
+            </div>
+            <div className="px-4 py-2 rounded-md bg-slate-500 cursor-pointer" onClick={EditarProfissional}>
+                Editar
             </div>
             <div>Total a pagar: {(0.3 * totalArrecadado).toFixed(2)}</div>
             <button onClick={modalApagar} className="bg-red-600 rounded-md px-4 py-2">
