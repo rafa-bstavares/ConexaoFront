@@ -13,10 +13,10 @@ export default function Idealizadora(){
             <div className="lg:w-1/2 w-full flex flex-col gap-4 text-white justify-center">
                 <div className="lg:text-6xl text-4xl text-douradoPrincipal text-center self-center mb-2">Idealizadora</div>
                 <div className="text-lg">
-                    Conheça Adriana Querino, a fundadora da Conexão Mística, uma especialista em espiritualidade com vasta experiência e um profundo entendimento dos mistérios do universo. Combinando intuição, sabedoria ancestral e práticas espirituais.
+                    Conheça Adriana D'Oxum, a fundadora da Conexão Mística, uma especialista em espiritualidade com vasta experiência e um profundo entendimento dos mistérios do universo. Combinando intuição, sabedoria ancestral e práticas espirituais.
                 </div>
                 <div className="text-lg">
-                    Com sua experiência e sensibilidade, Adriana oferece leituras de oráculos profundas e esclarecedoras para ajudá-lo(a) a navegar pelas questões da vida e encontrar o caminho para o autoconhecimento e a realização pessoal. Além disso domina rituais para cura, equilíbrio dos chackras, abertura de caminhos, prosperidade e alinhamento de harmonização ( seja no amor ou ambiente de trabalho).
+                Com sua experiência e sensibilidade, Adriana D'Oxum oferece leituras de oráculos profundas e esclarecedoras para ajudá-lo(a) a navegar pelas questões da vida e encontrar o caminho para o autoconhecimento e a realização pessoal. Além disso domina rituais para cura, equilíbrio dos chackras, abertura de caminhos, prosperidade e alinhamento de harmonização ( seja no amor ou ambiente de trabalho).
                 </div>
                 <div className="text-lg">
                     Vamos guiá-lo em sua jornada de auto descoberta e crescimento espiritual.
